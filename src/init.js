@@ -21,7 +21,7 @@ const render = function () {
       <Application />
     </Provider>,
     document.getElementById('app')
-  )
+  );
 }
 
 const unsubscribe = store.subscribe(() => {

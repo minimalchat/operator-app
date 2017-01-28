@@ -4,7 +4,7 @@ let config = require('./package.json');
 const development = process.env.NODE_ENV !== 'production';
 
 const PATHS = {
-  BUILD: __dirname + '/includes',
+  BUILD: __dirname + '/assets',
   SRC: __dirname + '/src',
   MODULES: __dirname + '/node_modules',
 }
@@ -17,6 +17,7 @@ if (!development) {
 
 module.exports = function (env) {
   console.log('Environment:', process.env.NODE_ENV || 'development');
+
   return {
     context: __dirname,
     devtool: development ? 'source-map' : false,
