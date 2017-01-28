@@ -4,7 +4,7 @@ let config = require('./package.json');
 const development = process.env.NODE_ENV !== 'production';
 
 const PATHS = {
-  BUILD: __dirname + '/build',
+  BUILD: __dirname + '/includes',
   SRC: __dirname + '/src',
   MODULES: __dirname + '/node_modules',
 }
@@ -23,7 +23,7 @@ module.exports = function (env) {
     entry: PATHS.SRC + '/init.js',
     output: {
       filename: 'source.js',
-      path: PATHS.BUILD,
+      path: PATHS.BUILD + '/js',
     },
     module: {
       loaders: [

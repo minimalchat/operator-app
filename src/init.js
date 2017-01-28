@@ -7,11 +7,11 @@ import { Provider } from 'react-redux';
 import Application from './components/Application/Application.jsx';
 
 // Reducers
-import ui from './stores/UI/reducer.js';
+import chat from './store/Chat/reducer.js';
 
 const store = createStore(
   combineReducers({
-    ui: ui
+    chat: chat
   })
 );
 

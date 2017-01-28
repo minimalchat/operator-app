@@ -1,3 +1,9 @@
-build/
 node_modules/
 yarn.lock
+dist/*-linux-armv7l
+dist/*-win32-x64
+dist/*-mas-x64
+dist/*-linux-x64
+dist/*-darwin-x64
+dist/*-win32-ia32
+dist/*-linux-ia32
