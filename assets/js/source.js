@@ -15599,11 +15599,7 @@ function warning(message) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Application = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _class, _temp;
+exports.ApplicationComponent = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -15621,42 +15617,32 @@ var _MessageList2 = _interopRequireDefault(_MessageList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var ApplicationComponent = exports.ApplicationComponent = function ApplicationComponent(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'pt-app' },
+    _react2.default.createElement(_ConversationList2.default, null),
+    _react2.default.createElement(_MessageList2.default, null)
+  );
+};
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Application = exports.Application = (_temp = _class = function (_Component) {
-  _inherits(Application, _Component);
-
-  function Application(props) {
-    _classCallCheck(this, Application);
-
-    return _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this, props));
-  }
-
-  _createClass(Application, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'pt-app' },
-        _react2.default.createElement(_ConversationList2.default, null),
-        _react2.default.createElement(_MessageList2.default, null)
-      );
-    }
-  }]);
-
-  return Application;
-}(_react.Component), _class.propTypes = {
+ApplicationComponent.propTypes = {
   dispatch: _react.PropTypes.func
-}, _temp);
-exports.default = (0, _reactRedux.connect)(function (state) {
+};
+
+var mapStateToProps = function mapStateToProps(state) {
   return {};
-}, function (dispatch) {
-  return { dispatch: dispatch };
-})(Application);
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch
+  };
+};
+
+var Application = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ApplicationComponent);
+
+exports.default = Application;
 
 /***/ }),
 /* 142 */
@@ -18724,7 +18710,7 @@ exports.IconContents = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ConversationList = undefined;
+exports.ConversationListComponent = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18746,16 +18732,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ConversationList = exports.ConversationList = (_temp = _class = function (_Component) {
-  _inherits(ConversationList, _Component);
+var apiURI = 'http://localhost:8000';
 
-  function ConversationList(props) {
-    _classCallCheck(this, ConversationList);
+var ConversationListComponent = exports.ConversationListComponent = (_temp = _class = function (_Component) {
+  _inherits(ConversationListComponent, _Component);
 
-    return _possibleConstructorReturn(this, (ConversationList.__proto__ || Object.getPrototypeOf(ConversationList)).call(this, props));
+  function ConversationListComponent() {
+    _classCallCheck(this, ConversationListComponent);
+
+    return _possibleConstructorReturn(this, (ConversationListComponent.__proto__ || Object.getPrototypeOf(ConversationListComponent)).apply(this, arguments));
   }
 
-  _createClass(ConversationList, [{
+  _createClass(ConversationListComponent, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
     key: 'render',
     value: function render() {
       var menu = _react2.default.createElement(
@@ -18769,7 +18760,8 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
             { className: 'pt-minimal pt-round' },
             '0'
           ),
-          intent: _core.Intent.SUCCESS }),
+          intent: _core.Intent.SUCCESS
+        }),
         _react2.default.createElement(_core.MenuDivider, null),
         _react2.default.createElement(_core.MenuItem, {
           text: 'Unassigned',
@@ -18777,7 +18769,8 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
             _core.Tag,
             { className: 'pt-minimal pt-round' },
             '0'
-          ) }),
+          )
+        }),
         _react2.default.createElement(_core.MenuDivider, null),
         _react2.default.createElement(_core.MenuItem, {
           text: 'Open',
@@ -18786,21 +18779,24 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
             _core.Tag,
             { className: 'pt-minimal pt-round' },
             '0'
-          ) }),
+          )
+        }),
         _react2.default.createElement(_core.MenuItem, {
           text: 'Pending',
           label: _react2.default.createElement(
             _core.Tag,
             { className: 'pt-minimal pt-round' },
             '0'
-          ) }),
+          )
+        }),
         _react2.default.createElement(_core.MenuItem, {
           text: 'Closed',
           label: _react2.default.createElement(
             _core.Tag,
             { className: 'pt-minimal pt-round' },
             '0'
-          ) }),
+          )
+        }),
         _react2.default.createElement(_core.MenuDivider, null),
         _react2.default.createElement(_core.MenuItem, {
           text: 'All',
@@ -18808,7 +18804,8 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
             _core.Tag,
             { className: 'pt-minimal pt-round' },
             '0'
-          ) }),
+          )
+        }),
         _react2.default.createElement(_core.MenuDivider, null),
         _react2.default.createElement(_core.MenuItem, {
           iconName: 'filter-list',
@@ -18817,7 +18814,8 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
             'span',
             null,
             'Ctrl+Shift+F'
-          ) })
+          )
+        })
       );
 
       return _react2.default.createElement(
@@ -18832,7 +18830,8 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
             _react2.default.createElement(_core.InputGroup, {
               leftIconName: 'search',
               className: 'pt-minimal',
-              placeholder: 'Search Clients \u2026' })
+              placeholder: 'Search Clients \u2026'
+            })
           ),
           _react2.default.createElement(
             'div',
@@ -18843,7 +18842,8 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
               _react2.default.createElement(_core.Button, {
                 className: 'pt-minimal pt-ui-text',
                 rightIconName: 'chevron-down',
-                text: 'Open' })
+                text: 'Open'
+              })
             )
           )
         ),
@@ -18858,15 +18858,25 @@ var ConversationList = exports.ConversationList = (_temp = _class = function (_C
     }
   }]);
 
-  return ConversationList;
+  return ConversationListComponent;
 }(_react.Component), _class.propTypes = {
   dispatch: _react.PropTypes.func
 }, _temp);
-exports.default = (0, _reactRedux.connect)(function (state) {
+
+
+var mapStateToProps = function mapStateToProps(state) {
   return {};
-}, function (dispatch) {
-  return { dispatch: dispatch };
-})(ConversationList);
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch
+  };
+};
+
+var ConversationList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ConversationListComponent);
+
+exports.default = ConversationList;
 
 /***/ }),
 /* 173 */
@@ -18878,11 +18888,7 @@ exports.default = (0, _reactRedux.connect)(function (state) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MessageList = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _class, _temp;
+exports.MessageListComponent = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -18894,50 +18900,41 @@ var _core = __webpack_require__(96);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var MessageListComponent = exports.MessageListComponent = function MessageListComponent(props) {
+  var desc = _react2.default.createElement(
+    'span',
+    null,
+    'Womps! But we have so much to say!'
+  );
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+  return _react2.default.createElement(
+    'div',
+    { id: 'messages' },
+    _react2.default.createElement(_core.NonIdealState, {
+      title: 'No Conversations',
+      description: desc,
+      visual: 'chat'
+    })
+  );
+};
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MessageList = exports.MessageList = (_temp = _class = function (_Component) {
-  _inherits(MessageList, _Component);
-
-  function MessageList(props) {
-    _classCallCheck(this, MessageList);
-
-    return _possibleConstructorReturn(this, (MessageList.__proto__ || Object.getPrototypeOf(MessageList)).call(this, props));
-  }
-
-  _createClass(MessageList, [{
-    key: 'render',
-    value: function render() {
-      var desc = _react2.default.createElement(
-        'span',
-        null,
-        'Womps! But we have so much to say!'
-      );
-
-      return _react2.default.createElement(
-        'div',
-        { id: 'messages' },
-        _react2.default.createElement(_core.NonIdealState, {
-          title: 'No Conversations',
-          description: desc,
-          visual: 'chat' })
-      );
-    }
-  }]);
-
-  return MessageList;
-}(_react.Component), _class.propTypes = {
+MessageListComponent.propTypes = {
   dispatch: _react.PropTypes.func
-}, _temp);
-exports.default = (0, _reactRedux.connect)(function (state) {
+};
+
+var mapStateToProps = function mapStateToProps(state) {
   return {};
-}, function (dispatch) {
-  return { dispatch: dispatch };
-})(MessageList);
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch
+  };
+};
+
+var MessageList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MessageListComponent);
+
+exports.default = MessageList;
 
 /***/ }),
 /* 174 */
@@ -35669,7 +35666,7 @@ var store = (0, _redux.createStore)((0, _redux.combineReducers)({
 // Reducers
 
 
-var render = function render() {
+var render = function Render() {
   _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
     { store: store },
@@ -35677,7 +35674,7 @@ var render = function render() {
   ), document.getElementById('app'));
 };
 
-var unsubscribe = store.subscribe(function () {
+store.subscribe(function () {
   console.log('DEBUG', store.getState());
   render();
 });

@@ -21,7 +21,7 @@ module.exports = function (env) {
   return {
     context: __dirname,
     devtool: development ? 'source-map' : false,
-    entry: PATHS.SRC + '/init.js',
+    entry: PATHS.SRC + '/init.jsx',
     output: {
       filename: 'source.js',
       path: PATHS.BUILD + '/js',

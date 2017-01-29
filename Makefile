@@ -24,10 +24,10 @@ test:
 	$(NPM_CMD) test
 
 coverage:
-	@echo "\nTODO: Write coverage make command\n"
+	@echo 'TODO: Write coverage make command'
 
 clean:
-	rm -r $(DIST)
+	rm -r $(DIST) > /dev/null 2>&1
 
 compile:
 	$(NPM_CMD) run build
