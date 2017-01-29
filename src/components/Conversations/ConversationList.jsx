@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+// I dislike this imports name so hard :E
+import 'whatwg-fetch';
+
+// I also hate this
 import {
   Popover,
   Tag,
@@ -9,19 +13,73 @@ import {
   MenuItem,
   InputGroup,
   Button,
+  NonIdealState,
 
   Intent,
   Position,
 } from '@blueprintjs/core';
 
-const apiURI = 'http://localhost:8000';
+import ConversationCard from '../ConversationCard/ConversationCard.jsx';
+
+const API_URI = 'http://localhost:8000';
 
 export class ConversationListComponent extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
   }
 
-  componentDidMount () { }
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      chats: [],
+    };
+  }
+
+  componentDidMount () {
+    const route = `${API_URI}/api/chats`;
+
+    console.log(`XHR ${route}`);
+
+    fetch(route)
+      .then(this.apiWillMount)
+      .then(this.apiParse)
+      .then(this.apiDidMount.bind(this))
+      .catch(this.apiDidNotMount);
+  }
+
+  apiWillMount (response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response;
+    }
+
+    let error = new Error(response.statusText);
+    error.response = response;
+
+    throw error;
+  }
+
+  apiParse (response) {
+    return response.json();
+  }
+
+  apiDidMount (response) {
+    console.log('XHR SUCCESS', response);
+
+    this.setState({
+      chats: response.chats.map((chat, index) => {
+        let cleaned = { ...chat };
+
+        cleaned.client.socket = undefined;
+
+        return cleaned;
+      }),
+    });
+  }
+
+  apiDidNotMount (response) {
+    console.log('FAIL', response);
+  }
 
   render () {
     const menu = (
@@ -65,6 +123,26 @@ export class ConversationListComponent extends Component {
       </Menu>
     );
 
+    let desc = <span>Wait for clients to connect</span>;
+    let list = (
+      <NonIdealState
+        title="No Active Clients"
+        description={desc}
+        // visual="people"
+      />
+    );
+
+    if (this.state.chats.length > 0) {
+      list = this.state.chats.map((chat, index) => (
+        <ConversationCard
+          tabIndex={index}
+          key={chat.id}
+          client={chat.client}
+          updateTime={chat.update_time}
+        />
+      ));
+    }
+
     return (
       <div id="conversations">
         <nav className="pt-navbar pt-minimal">
@@ -86,9 +164,7 @@ export class ConversationListComponent extends Component {
           </div>
         </nav>
         <ul id="conversation-list">
-          <li className="pt-card pt-elevation-1" />
-          <li className="pt-card pt-elevation-1" />
-          <li className="pt-card pt-elevation-1" />
+          {list}
         </ul>
       </div>
     );

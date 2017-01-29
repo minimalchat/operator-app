@@ -8,11 +8,11 @@ SRC = $(PACKAGE)/src
 ASSETS = $(PACKAGE)/assets
 DIST = $(PACKAGE)/dist
 
+.PHONY: coverage test
+
 default: test coverage clean compile distribute
 
-build: lint test clean compile
-
-run: lint test start
+run: test lint build start
 
 dependencies:
 	$(NPM_CMD) install
@@ -29,9 +29,11 @@ coverage:
 clean:
 	rm -r $(DIST) > /dev/null 2>&1
 
-compile:
+build:
 	$(NPM_CMD) run build
 
+
+compile: build
 	@echo
 	@# SUPER HACKY
 	mkdir -p $(ASSETS)/css
