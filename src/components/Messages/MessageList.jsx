@@ -1,33 +1,37 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { NonIdealState } from '@blueprintjs/core';
 
-export class MessageList extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func,
-  }
+export const MessageListComponent = (props) => {
+  let desc = <span>Womps! But we have so much to say!</span>;
 
-  constructor (props) {
-    super(props);
+  return (
+    <div id="messages">
+      <NonIdealState
+        title="No Conversations"
+        description={desc}
+        visual="chat"
+      />
+    </div>
+  );
+};
 
-  }
+MessageListComponent.propTypes = {
+  dispatch: PropTypes.func,
+};
 
-  render() {
-    let desc = <span>Womps! But we have so much to say!</span>;
+const mapStateToProps = state => ({
 
-    return (
-      <div id="messages">
-        <NonIdealState
-          title="No Conversations"
-          description={desc}
-          visual="chat" />
-      </div>
-    );
-  }
-}
+});
 
-export default connect(
-  state => ({ }),
-  dispatch => ({ dispatch }),
-)(MessageList);
+const mapDispatchToProps = dispatch => ({
+  dispatch,
+});
+
+const MessageList = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MessageListComponent);
+
+export default MessageList;

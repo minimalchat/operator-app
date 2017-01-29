@@ -7,24 +7,24 @@ import { Provider } from 'react-redux';
 import Application from './components/Application/Application.jsx';
 
 // Reducers
-import chat from './store/Chat/reducer.js';
+import chat from './store/Chat/reducer';
 
 const store = createStore(
   combineReducers({
-    chat: chat
-  })
+    chat,
+  }),
 );
 
-const render = function () {
+const render = function Render () {
   ReactDOM.render(
     <Provider store={store}>
       <Application />
     </Provider>,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
-}
+};
 
-const unsubscribe = store.subscribe(() => {
+store.subscribe(() => {
   console.log('DEBUG', store.getState());
   render();
 });

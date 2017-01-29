@@ -8,58 +8,62 @@ import {
   MenuDivider,
   MenuItem,
   InputGroup,
-  Button
-} from '@blueprintjs/core';
+  Button,
 
-import {
   Intent,
-  Position
+  Position,
 } from '@blueprintjs/core';
 
-export class ConversationList extends Component {
+const apiURI = 'http://localhost:8000';
+
+export class ConversationListComponent extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
   }
 
-  constructor (props) {
-    super(props);
+  componentDidMount () { }
 
-  }
-
-  render() {
+  render () {
     const menu = (
       <Menu>
         <MenuItem
           iconName="user"
           text="Assigned to Me"
           label={<Tag className="pt-minimal pt-round">0</Tag>}
-          intent={Intent.SUCCESS} />
+          intent={Intent.SUCCESS}
+        />
         <MenuDivider />
         <MenuItem
           text="Unassigned"
-          label={<Tag className="pt-minimal pt-round">0</Tag>} />
+          label={<Tag className="pt-minimal pt-round">0</Tag>}
+        />
         <MenuDivider />
         <MenuItem
           text="Open"
-          disabled={true}
-          label={<Tag className="pt-minimal pt-round">0</Tag>} />
+          disabled
+          label={<Tag className="pt-minimal pt-round">0</Tag>}
+        />
         <MenuItem
           text="Pending"
-          label={<Tag className="pt-minimal pt-round">0</Tag>} />
+          label={<Tag className="pt-minimal pt-round">0</Tag>}
+        />
         <MenuItem
           text="Closed"
-          label={<Tag className="pt-minimal pt-round">0</Tag>} />
+          label={<Tag className="pt-minimal pt-round">0</Tag>}
+        />
         <MenuDivider />
         <MenuItem
           text="All"
-          label={<Tag className="pt-minimal pt-round">0</Tag>} />
+          label={<Tag className="pt-minimal pt-round">0</Tag>}
+        />
         <MenuDivider />
         <MenuItem
           iconName="filter-list"
           text="Custom Filter..."
-          label={<span>Ctrl+Shift+F</span>} />
+          label={<span>Ctrl+Shift+F</span>}
+        />
       </Menu>
-    )
+    );
 
     return (
       <div id="conversations">
@@ -68,28 +72,40 @@ export class ConversationList extends Component {
             <InputGroup
               leftIconName="search"
               className="pt-minimal"
-              placeholder="Search Clients &hellip;" />
+              placeholder="Search Clients &hellip;"
+            />
           </div>
           <div className="pt-navbar-group pt-align-right">
             <Popover content={menu} position={Position.BOTTOM_RIGHT}>
               <Button
                 className="pt-minimal pt-ui-text"
                 rightIconName="chevron-down"
-                text="Open" />
+                text="Open"
+              />
             </Popover>
           </div>
         </nav>
         <ul id="conversation-list">
-          <li className="pt-card pt-elevation-1"></li>
-          <li className="pt-card pt-elevation-1"></li>
-          <li className="pt-card pt-elevation-1"></li>
+          <li className="pt-card pt-elevation-1" />
+          <li className="pt-card pt-elevation-1" />
+          <li className="pt-card pt-elevation-1" />
         </ul>
       </div>
     );
   }
 }
 
-export default connect(
-  state => ({ }),
-  dispatch => ({ dispatch }),
-)(ConversationList);
+const mapStateToProps = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+  dispatch,
+});
+
+const ConversationList = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ConversationListComponent);
+
+export default ConversationList;
