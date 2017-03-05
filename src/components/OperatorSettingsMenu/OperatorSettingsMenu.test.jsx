@@ -2,7 +2,7 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import MessageList from './MessageList.jsx';
+import OperatorSettingsMenu from './OperatorSettingsMenu.jsx';
 
 const store = {
   subscribe: jest.fn(),
@@ -10,9 +10,9 @@ const store = {
   getState: jest.fn(() => ({ })),
 };
 
-describe('Chat', () => {
+describe('OperatorSettingsMenu', () => {
   it('matches snapshot', () => {
-    const component = shallow(<MessageList store={store} />);
+    const component = shallow(<OperatorSettingsMenu store={store} />);
 
     expect(component).toMatchSnapshot();
   });

@@ -1,0 +1,11 @@
+exports[`TitleBar matches snapshot 1`] = `
+<Connect(PanelBarComponent)
+  dispatch={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  } />
+`;

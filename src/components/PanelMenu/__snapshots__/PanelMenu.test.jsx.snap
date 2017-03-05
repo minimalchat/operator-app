@@ -1,0 +1,11 @@
+exports[`PanelMenu matches snapshot 1`] = `
+<PanelMenuComponent
+  dispatch={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  } />
+`;

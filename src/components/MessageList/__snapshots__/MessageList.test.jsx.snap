@@ -1,0 +1,11 @@
+exports[`MessageList matches snapshot 1`] = `
+<MessageListComponent
+  dispatch={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  } />
+`;

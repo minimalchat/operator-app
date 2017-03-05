@@ -21,9 +21,10 @@ import {
 
 import ConversationCard from '../ConversationCard/ConversationCard.jsx';
 
+// TODO: Move this to somewhere that makes sense
 const API_URI = 'http://localhost:8000';
 
-export class ConversationListComponent extends Component {
+export class ConversationPaneComponent extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
   }
@@ -59,21 +60,27 @@ export class ConversationListComponent extends Component {
     throw error;
   }
 
+  // TODO: I feel like this can be simplified and removed
   apiParse (response) {
     return response.json();
   }
 
   apiDidMount (response) {
+    const chats = response.chats.map((chat, index) => {
+      let cleaned = { ...chat };
+
+      cleaned.client.socket = undefined;
+
+      return cleaned;
+    });
+
     console.log('XHR SUCCESS', response);
 
+    // Update the Application state to have the conversations
+    // dispatch(updateConversations(chats));
+
     this.setState({
-      chats: response.chats.map((chat, index) => {
-        let cleaned = { ...chat };
-
-        cleaned.client.socket = undefined;
-
-        return cleaned;
-      }),
+      chats,
     });
   }
 
@@ -122,6 +129,7 @@ export class ConversationListComponent extends Component {
         />
       </Menu>
     );
+    const { chats } = this.state;
 
     let desc = <span>Wait for clients to connect</span>;
     let list = (
@@ -132,11 +140,14 @@ export class ConversationListComponent extends Component {
       />
     );
 
-    if (this.state.chats.length > 0) {
-      list = this.state.chats.map((chat, index) => (
+    console.log('RENDER', chats);
+
+    if (chats.length > 0) {
+      list = chats.map((chat, index) => (
         <ConversationCard
           tabIndex={index}
-          key={chat.id}
+          key={index}
+          chat={chat.id}
           client={chat.client}
           updateTime={chat.update_time}
         />
@@ -179,9 +190,9 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
-const ConversationList = connect(
+const ConversationPane = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ConversationListComponent);
+)(ConversationPaneComponent);
 
-export default ConversationList;
+export default ConversationPane;

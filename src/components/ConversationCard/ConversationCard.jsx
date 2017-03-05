@@ -10,6 +10,7 @@ export class ConversationCardComponent extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     client: PropTypes.objectOf(PropTypes.string),
+    chat: PropTypes.string,
     tabIndex: PropTypes.number,
     updateTime: PropTypes.string,
     key: PropTypes.string,
@@ -25,7 +26,7 @@ export class ConversationCardComponent extends Component {
   }
 
   render() {
-    const { dispatch, key, tabIndex } = this.props;
+    const { dispatch, chat, tabIndex } = this.props;
     let data = <Spinner className="pt-small" />;
 
     if (this.state.client) {
@@ -37,7 +38,7 @@ export class ConversationCardComponent extends Component {
         <button
           tabIndex={tabIndex}
           onClick={() => {
-            dispatch(openConversation(key));
+            dispatch(openConversation(chat));
           }}
         >
           <h4>{name}</h4>
@@ -47,7 +48,7 @@ export class ConversationCardComponent extends Component {
     }
 
     return (
-      <li id={key} className="pt-card pt-elevation-1">
+      <li id={chat} className="pt-card pt-elevation-1">
         {data}
       </li>
     );

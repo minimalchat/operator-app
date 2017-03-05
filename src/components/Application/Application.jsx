@@ -1,22 +1,28 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import ConversationList from '../Conversations/ConversationList.jsx';
-import MessageList from '../Messages/MessageList.jsx';
+import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
+import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
+import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 
-export const ApplicationComponent = props => (
-  <div className="pt-app">
-    <ConversationList />
-    <MessageList />
-  </div>
-);
+export class ApplicationComponent extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func,
+  };
 
-ApplicationComponent.propTypes = {
-  dispatch: PropTypes.func,
-};
+  render () {
+    return (
+      <div className="pt-app">
+        <OperatorPanel />
+        <ClientsPanel />
+        <MessagePanel />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
-
+  state
 });
 
 const mapDispatchToProps = dispatch => ({

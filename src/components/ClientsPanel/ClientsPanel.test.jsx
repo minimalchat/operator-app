@@ -2,7 +2,7 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import ConversationList from './ConversationList.jsx';
+import ClientsPanel from './ClientsPanel.jsx';
 
 const store = {
   subscribe: jest.fn(),
@@ -10,9 +10,9 @@ const store = {
   getState: jest.fn(() => ({ })),
 };
 
-describe('Chat', () => {
+describe('ClientsPanel', () => {
   it('matches snapshot', () => {
-    const component = shallow(<ConversationList store={store} />);
+    const component = shallow(<ClientsPanel store={store} />);
 
     expect(component).toMatchSnapshot();
   });

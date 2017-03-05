@@ -1,5 +1,5 @@
-exports[`Chat matches snapshot 1`] = `
-<ConversationListComponent
+exports[`PanelBar matches snapshot 1`] = `
+<PanelBarComponent
   dispatch={[Function]}
   store={
     Object {

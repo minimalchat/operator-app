@@ -1,0 +1,11 @@
+exports[`MessagePanel matches snapshot 1`] = `
+<Connect(PanelComponent)
+  dispatch={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  } />
+`;
