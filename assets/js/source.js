@@ -11379,7 +11379,7 @@ exports = module.exports = __webpack_require__(22)();
 
 
 // module
-exports.push([module.i, "#title {\n  background: #333333;\n}\n\n#title span {\n  display: block;\n  padding: 9px 0;\n  text-transform: uppercase;\n  text-align: center;\n  text-shadow: 0 0 2px #ffffff;\n  font-weight: 800;\n  font-size: 22px;\n  color: white;\n  letter-spacing: 1px;\n}", ""]);
+exports.push([module.i, "#title {\n  background: #666666;\n}\n\n#title span {\n  display: block;\n  padding: 9px 0;\n  text-transform: uppercase;\n  text-align: center;\n  /*text-shadow: 0 0 2px #aaaaaa;*/\n  font-weight: 800;\n  font-size: 22px;\n  color: white;\n}", ""]);
 
 // exports
 

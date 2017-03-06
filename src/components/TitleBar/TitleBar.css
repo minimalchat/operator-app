@@ -1,5 +1,5 @@
 #title {
-  background: #333333;
+  background: #666666;
 }
 
 #title span {
@@ -7,7 +7,7 @@
   padding: 9px 0;
   text-transform: uppercase;
   text-align: center;
-  text-shadow: 0 0 2px #dddddd;
+  /*text-shadow: 0 0 2px #aaaaaa;*/
   font-weight: 800;
   font-size: 22px;
   color: white;

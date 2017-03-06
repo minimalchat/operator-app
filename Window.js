@@ -82,6 +82,8 @@ module.exports = class Window {
 
     // Build out the application menu
     this.buildMenu();
+    this.window.setAutoHideMenuBar(true);
+    this.window.setMenuBarVisibility(false);
   }
 
   // Build out our window menu
