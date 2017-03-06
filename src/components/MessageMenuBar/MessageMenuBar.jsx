@@ -1,9 +1,15 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import PanelBar from '../PanelBar/PanelBar.jsx';
+// import PanelBar from '../PanelBar/PanelBar.jsx';
 
-export class MessageMenuBarComponent extends PanelBar {
+export class MessageMenuBarComponent extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {};
+  }
+
   render () {
     return (
       <div className="row bar">
@@ -18,7 +24,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+
 });
 
 const MessageMenuBar = connect(

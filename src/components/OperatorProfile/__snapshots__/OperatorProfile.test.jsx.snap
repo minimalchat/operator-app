@@ -1,6 +1,5 @@
 exports[`OperatorProfile matches snapshot 1`] = `
 <OperatorProfileComponent
-  dispatch={[Function]}
   store={
     Object {
       "dispatch": [Function],

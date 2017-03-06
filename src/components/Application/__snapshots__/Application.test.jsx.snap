@@ -1,6 +1,5 @@
 exports[`Chat matches snapshot 1`] = `
 <Component
-  dispatch={[Function]}
   store={
     Object {
       "dispatch": [Function],

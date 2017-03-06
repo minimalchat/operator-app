@@ -1,9 +1,15 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import PanelMenu from '../PanelMenu/PanelMenu.jsx';
+// import PanelMenu from '../PanelMenu/PanelMenu.jsx';
 
-export class OperatorClientMenuComponent extends PanelMenu {
+export class OperatorClientMenuComponent extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {};
+  }
+
   render () {
     return (
       <div className="row">
@@ -18,7 +24,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+
 });
 
 const OperatorClientMenu = connect(

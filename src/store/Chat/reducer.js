@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const reducer = function ChatReducer(state = initialState, action) {
-  console.log('CHAT', action); // commenting out temp to clean up test output
+  console.log('CHAT', action);
 
   switch (action.type) {
     case CHAT_OPEN_CONVERSATION:

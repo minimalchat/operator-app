@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import PanelBar from '../PanelBar/PanelBar.jsx';
+import './TitleBar.css';
 
-export class TitleBarComponent extends PanelBar {
+export class TitleBarComponent extends Component {
   constructor (props) {
     super(props);
 
@@ -15,11 +15,8 @@ export class TitleBarComponent extends PanelBar {
   render () {
     const { title } = this.state;
 
-    // console.log('STATE', this.props.state);
-    // console.log('CONTEXT', this.context);
-
     return (
-      <div className="row bar">
+      <div id="title" className="row bar">
         <span>{title}</span>
       </div>
     );
@@ -27,11 +24,11 @@ export class TitleBarComponent extends PanelBar {
 }
 
 const mapStateToProps = state => ({
-  state
+
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+
 });
 
 const TitleBar = connect(

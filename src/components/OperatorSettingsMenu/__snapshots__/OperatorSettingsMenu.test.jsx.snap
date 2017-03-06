@@ -1,6 +1,5 @@
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
-<Connect(PanelMenuComponent)
-  dispatch={[Function]}
+<OperatorSettingsMenuComponent
   store={
     Object {
       "dispatch": [Function],

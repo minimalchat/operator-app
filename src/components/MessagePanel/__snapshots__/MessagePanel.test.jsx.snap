@@ -1,6 +1,5 @@
 exports[`MessagePanel matches snapshot 1`] = `
-<Connect(PanelComponent)
-  dispatch={[Function]}
+<MessagePanelComponent
   store={
     Object {
       "dispatch": [Function],

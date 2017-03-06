@@ -1,13 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 export class PanelBarComponent extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func,
-  }
-
   constructor (props) {
     super(props);
+
+    this.state = {};
   }
 
   render () {
@@ -22,7 +20,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+
 });
 
 const PanelBar = connect(

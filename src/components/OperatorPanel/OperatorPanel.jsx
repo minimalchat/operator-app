@@ -1,22 +1,24 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Panel from '../Panel/Panel.jsx';
+// import Panel from '../Panel/Panel.jsx';
 import TitleBar from '../TitleBar/TitleBar.jsx';
 import OperatorProfile from '../OperatorProfile/OperatorProfile.jsx';
 import OperatorClientMenu from '../OperatorClientMenu/OperatorClientMenu.jsx';
 import OperatorSettingsMenu from '../OperatorSettingsMenu/OperatorSettingsMenu.jsx';
 
-export class OperatorPanelComponent extends Panel {
-  // constructor (props) {
-  //   super(props);
-  //
-  //   this.state = {};
-  // }
+import './OperatorPanel.css';
+
+export class OperatorPanelComponent extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {};
+  }
 
   render () {
     return (
-      <div className="panel">
+      <div id="operator-panel" className="panel">
         <div className="top container">
           <TitleBar />
           <OperatorProfile />
@@ -31,11 +33,11 @@ export class OperatorPanelComponent extends Panel {
 }
 
 const mapStateToProps = state => ({
-  state
+
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+
 });
 
 const OperatorPanel = connect(

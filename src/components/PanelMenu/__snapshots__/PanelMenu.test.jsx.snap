@@ -1,6 +1,5 @@
 exports[`PanelMenu matches snapshot 1`] = `
 <PanelMenuComponent
-  dispatch={[Function]}
   store={
     Object {
       "dispatch": [Function],

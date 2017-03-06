@@ -1,6 +1,5 @@
 exports[`InputBar matches snapshot 1`] = `
-<Connect(PanelBarComponent)
-  dispatch={[Function]}
+<InputBarComponent
   store={
     Object {
       "dispatch": [Function],

@@ -1,14 +1,22 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Panel from '../Panel/Panel.jsx';
+// import Panel from '../Panel/Panel.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import ClientList from '../ClientList/ClientList.jsx';
 
-export class ClientsPanelComponent extends Panel {
+import './ClientsPanel.css';
+
+export class ClientsPanelComponent extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {};
+  }
+
   render () {
     return (
-      <div className="panel">
+      <div id="clients-panel" className="panel">
         <div className="top container">
           <SearchBar />
           <ClientList />
@@ -23,7 +31,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+
 });
 
 const ClientsPanel = connect(

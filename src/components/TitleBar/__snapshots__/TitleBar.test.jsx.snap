@@ -1,6 +1,5 @@
 exports[`TitleBar matches snapshot 1`] = `
-<Connect(PanelBarComponent)
-  dispatch={[Function]}
+<TitleBarComponent
   store={
     Object {
       "dispatch": [Function],

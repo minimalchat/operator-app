@@ -42,6 +42,16 @@ module.exports = function (env) {
             plugins: ['transform-decorators-legacy'],
           },
         },
+        {
+          test: /\.css$/,
+          include: [
+            PATHS.SRC
+          ],
+          exclude: [
+            PATHS.MODULES
+          ],
+          loader: 'style-loader!css-loader'
+        },
       ]
     },
     plugins: plugins,

@@ -1,6 +1,5 @@
 exports[`ClientList matches snapshot 1`] = `
 <ClientListComponent
-  dispatch={[Function]}
   store={
     Object {
       "dispatch": [Function],

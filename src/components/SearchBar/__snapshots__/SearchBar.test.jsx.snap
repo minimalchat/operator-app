@@ -1,6 +1,5 @@
 exports[`SearchBar matches snapshot 1`] = `
-<Connect(PanelBarComponent)
-  dispatch={[Function]}
+<SearchBarComponent
   store={
     Object {
       "dispatch": [Function],

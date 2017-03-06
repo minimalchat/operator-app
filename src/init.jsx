@@ -26,7 +26,6 @@ const render = function Render () {
 
 store.subscribe(() => {
   console.log('DEBUG', store.getState());
-  render();
 });
 
 

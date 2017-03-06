@@ -1,6 +1,5 @@
 exports[`PanelBar matches snapshot 1`] = `
 <PanelBarComponent
-  dispatch={[Function]}
   store={
     Object {
       "dispatch": [Function],

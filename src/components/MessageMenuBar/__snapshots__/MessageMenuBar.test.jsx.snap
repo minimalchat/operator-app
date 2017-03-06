@@ -1,6 +1,5 @@
 exports[`MessageMenuBar matches snapshot 1`] = `
-<Connect(PanelBarComponent)
-  dispatch={[Function]}
+<MessageMenuBarComponent
   store={
     Object {
       "dispatch": [Function],
