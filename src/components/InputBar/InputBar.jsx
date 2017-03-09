@@ -12,7 +12,7 @@ export class InputBarComponent extends Component {
 
   render () {
     return (
-      <div className="row bar">
+      <div className="row">
         <textarea />
       </div>
     );

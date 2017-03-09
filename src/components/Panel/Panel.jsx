@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+
+// DEPRECATED: Composition over Inheritence
 export class PanelComponent extends Component {
   static propTypes = {
     children: PropTypes.node,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+// DEPRECATED: Composition over Inheritence
 export class PanelBarComponent extends Component {
   constructor (props) {
     super(props);
