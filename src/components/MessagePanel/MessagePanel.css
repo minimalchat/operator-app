@@ -1,3 +1,12 @@
-#message-panel {
+#MessagePanel {
+  display: flex;
+  flex-direction: column;
   flex-grow: 3;
 }
+
+.MessagePanel__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+

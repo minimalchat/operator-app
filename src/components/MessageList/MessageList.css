@@ -1,0 +1,26 @@
+.MessageList {
+  background: #e3eaf0;
+  flex-grow: 1;
+  align-content: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.MessageList__message-client {
+  color: white;
+  background: #3498db;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+.MessageList__message-operator {
+  color: white;
+  background: #e67e22;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 2px;
+  align-self: flex-end;
+}

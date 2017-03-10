@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './MessageList.css'
 
+/**
+ * @summary: responsible for handling the display of messages.
+ */
 export class MessageListComponent extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {};
-  }
 
   render () {
     return (
-      <div className="row">
+      <div className="MessageList">
         <ul className="menu" />
+
+        <span className="MessageList__message-client">I am a dummy client message</span>
+        <span className="MessageList__message-operator">I am a dummy operator message</span>
       </div>
     );
   }

@@ -13,8 +13,8 @@ export class MessagePanelComponent extends Component {
 
   render () {
     return (
-      <div id="message-panel" className="panel">
-        <div className="top container">
+      <div id="MessagePanel" className="panel">
+        <div className="MessagePanel__container">
           <MessageMenuBar />
           <MessageList />
         </div>

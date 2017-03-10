@@ -1,0 +1,10 @@
+.InputBar {
+  display: flex;
+}
+
+.InputBar textarea {
+  flex-grow: 1;
+  border: 1px solid #efefef;
+  outline: 0;
+  display: flex;
+}
