@@ -39,7 +39,7 @@ module.exports = function (env) {
           loader: 'babel-loader',
           options: {
             presets: ['es2015', 'stage-0', 'react'],
-            plugins: ['transform-decorators-legacy'],
+            plugins: ['transform-decorators-legacy', 'transform-class-properties'],
           },
         },
         {
