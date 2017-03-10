@@ -8,6 +8,8 @@ export class InputBarComponent extends Component {
     return (
       <div className="InputBar">
         <textarea placeholder="text here, dummy" />
+        {/*TODO: Convert this to a component*/}
+        <button className="InputBar_send">send</button>
       </div>
     );
   }

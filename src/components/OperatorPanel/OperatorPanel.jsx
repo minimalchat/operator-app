@@ -18,13 +18,13 @@ export class OperatorPanelComponent extends Component {
 
   render () {
     return (
-      <div id="operator-panel" className="panel">
-        <div className="top container">
-          <TitleBar />
+      <div id="OperatorPanel" className="panel">
+        <div className="Operator__top">
+          {/*<TitleBar />*/}
           <OperatorProfile />
           <OperatorClientMenu />
         </div>
-        <div className="bottom container">
+        <div className="Operator__bottom">
           <OperatorSettingsMenu />
         </div>
       </div>

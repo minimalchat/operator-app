@@ -8,7 +8,7 @@ import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import './Application.css';
 
 export const ApplicationComponent = () => (
-  <div>
+  <div className="App">
     <OperatorPanel />
     <ClientsPanel />
     <MessagePanel />

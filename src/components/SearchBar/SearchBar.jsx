@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import './SearchBar.css'
 // import PanelBar from '../PanelBar/PanelBar.jsx';
 
 export class SearchBarComponent extends Component {
@@ -12,8 +12,8 @@ export class SearchBarComponent extends Component {
 
   render () {
     return (
-      <div className="row bar">
-        <span>Search</span>
+      <div className="SearchBar">
+        <input type="text" placeholder="Search Chats..."/>
       </div>
     );
   }

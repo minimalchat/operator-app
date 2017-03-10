@@ -4,7 +4,26 @@
 
 .InputBar textarea {
   flex-grow: 1;
-  border: 1px solid #efefef;
   outline: 0;
   display: flex;
+  padding: 1rem;
+  resize: none;
+  border: none;
+}
+
+.InputBar_send {
+  background: #16a085;
+  border: none;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.InputBar_send:active {
+  background: #69a085;
+  border: none;
+  outline: none;
+
 }

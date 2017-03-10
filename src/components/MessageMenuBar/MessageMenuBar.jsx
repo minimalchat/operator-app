@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import './MessageMenuBar.css'
 // import PanelBar from '../PanelBar/PanelBar.jsx';
 
 export class MessageMenuBarComponent extends Component {
@@ -12,8 +12,9 @@ export class MessageMenuBarComponent extends Component {
 
   render () {
     return (
-      <div className="row bar">
-        <span>Menu</span>
+      <div className="MessageMenuBar">
+        <div>Assign to other </div>
+        <div>Mark as done </div>
       </div>
     );
   }
