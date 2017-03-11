@@ -1,13 +1,15 @@
-import {
-  CHAT_OPEN_CONVERSATION,
-} from './constants';
+import { CHAT_OPEN_CONVERSATION } from './constants';
+import {d_users, d_operator} from "../dummy";
+
+
+console.log(d_users, d_operator)
 
 const initialState = {
   active: null,
 };
 
 const reducer = function ChatReducer(state = initialState, action) {
-  console.log('CHAT', action);
+  /* console.log('CHAT', action);*/
 
   switch (action.type) {
     case CHAT_OPEN_CONVERSATION:

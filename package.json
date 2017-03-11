@@ -81,6 +81,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
+    "faker": "^4.1.0",
     "jest": "^18.1.0",
     "jest-cli": "^17.0.3",
     "jest-enzyme": "^2.1.0",
