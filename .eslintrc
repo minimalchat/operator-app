@@ -21,5 +21,6 @@
     "no-use-before-define": ["warn"],
     "react/no-multi-comp": ["warn"],
     "react/jsx-no-bind": ["warn"],
+    "react/forbid-prop-types": ["warn"]
   },
 }

@@ -1,28 +1,31 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 const ClientList = (props) => {
-  console.log(props)
+  const chatItems = props.chats.map(chat => (
+    <li key={chat.id}>{`${chat.client.first_name} ${chat.client.last_name}`}</li>
+  ));
 
-  return(
+  return (
     <div className="row">
-      <ul className="menu">
-      {props.chats.map(chat => {
-         console.log(chat)
-         return <li key={chat.id}>{chat.client.first_name}</li>
-       })}
-      </ul>
+      <ul className="menu">{chatItems}</ul>
     </div>
-  )
-}
+  );
+};
 
+ClientList.propTypes = {
+  chats: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
 
 export default connect(
-  (state) => ({
-    chats: state.chat.chats
-  }),
-  (dispatch) => ({
-  }),
-)(ClientList)
-
-
+  mapStateToProps,
+  mapDispatchToProps,
+)(ClientList);

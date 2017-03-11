@@ -7,12 +7,14 @@ import ClientsPanel from './ClientsPanel.jsx';
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
-  getState: jest.fn(() => ({ })),
+  getState: jest.fn(() => ({
+    chat: { chats: [] },
+  })),
 };
 
 describe('ClientsPanel', () => {
   it('matches snapshot', () => {
-    const component = shallow(<ClientsPanel store={store} />);
+    const component = shallow(<ClientsPanel chats={[]} store={store} />);
 
     expect(component).toMatchSnapshot();
   });

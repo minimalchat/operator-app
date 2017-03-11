@@ -12,7 +12,11 @@ const store = {
 
 describe('ClientList', () => {
   it('matches snapshot', () => {
-    const component = shallow(<ClientList store={store} />);
+    const chats = [
+      { client: { first_name: 'Robert', last_name: 'waffle' } },
+      { client: { first_name: 'Lisa', last_name: 'pancake' } },
+    ];
+    const component = shallow(<ClientList chats={chats} store={store} />);
 
     expect(component).toMatchSnapshot();
   });

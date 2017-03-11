@@ -1,5 +1,7 @@
 exports[`SearchBar matches snapshot 1`] = `
-<SearchBarComponent
+<SearchBar
+  onQueryChange={[Function]}
+  query=""
   store={
     Object {
       "dispatch": [Function],
