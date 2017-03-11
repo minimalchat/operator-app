@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './InputBar.css'
+import './InputBar.css';
+import Button from '../Button/Button.jsx';
 // import PanelBar from '../PanelBar/PanelBar.jsx';
 
 export class InputBarComponent extends Component {
@@ -8,8 +9,7 @@ export class InputBarComponent extends Component {
     return (
       <div className="InputBar">
         <textarea placeholder="text here, dummy" />
-        {/*TODO: Convert this to a component*/}
-        <button className="InputBar_send">send</button>
+        <Button variant="send" onClick={() => {}}>Send</Button>
       </div>
     );
   }
