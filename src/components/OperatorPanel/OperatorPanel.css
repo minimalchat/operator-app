@@ -1,8 +1,22 @@
-#operator-panel {
-  max-width: 320px;
+#OperatorPanel {
+  max-width: 300px;
   min-width: 200px;
-
-  background: #ffffff;
-
+  background: #fdfdfd;
   flex-grow: 1;
+  z-index: 4;
+  box-shadow: 1px 0 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.Operator__top {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.Operator__bottom {
+  display: flex;
+  margin-bottom: 0.5rem;
+  align-self: stretch;
 }

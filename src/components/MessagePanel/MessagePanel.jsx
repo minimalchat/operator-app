@@ -9,16 +9,12 @@ import InputBar from '../InputBar/InputBar.jsx';
 import './MessagePanel.css';
 
 export class MessagePanelComponent extends Component {
-  constructor (props) {
-    super(props);
 
-    this.state = {};
-  }
 
   render () {
     return (
-      <div id="message-panel" className="panel">
-        <div className="top container">
+      <div id="MessagePanel" className="panel">
+        <div className="MessagePanel__container">
           <MessageMenuBar />
           <MessageList />
         </div>

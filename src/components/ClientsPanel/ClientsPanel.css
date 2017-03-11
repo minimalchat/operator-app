@@ -1,8 +1,6 @@
 #clients-panel {
-  max-width: 640px;
-  min-width: 400px;
-
-  background: #ffffff;
-
+  min-width: 200px;
+  background: #F7F8FA;
   flex-grow: 2;
+  z-index: 1;
 }

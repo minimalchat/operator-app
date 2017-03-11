@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './OperatorSettingsStyles.css'
 
 // import PanelMenu from '../PanelMenu/PanelMenu.jsx';
 
 export class OperatorSettingsMenuComponent extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {};
-  }
-
   render () {
     return (
-      <div className="row">
-        <ul className="menu" />
-      </div>
+      <section className="SettingsMenu">
+        <div className="Settings__box">
+          <img className="Settings__avatar" src="http://www.fillmurray.com/50/50" />
+          <span>Operator: Steve</span>
+        </div>
+        <div className="Settings__footer"> Made with lurv by hoomans</div>
+      </section>
     );
   }
 }

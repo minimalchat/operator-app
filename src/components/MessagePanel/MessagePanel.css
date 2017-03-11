@@ -1,3 +1,14 @@
-#message-panel {
+#MessagePanel {
+  display: flex;
+  flex-direction: column;
   flex-grow: 3;
 }
+
+.MessagePanel__container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border: 0;
+  box-shadow: inset 10px 0 50px -15px #efefef;
+}
+

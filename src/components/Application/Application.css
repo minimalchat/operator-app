@@ -1,21 +1,3 @@
-#app > div {
+.App {
   display: flex;
-}
-
-#app .panel {
-  border-right: 1px solid #efefef;
-}
-
-#app .panel:last-child {
-  border: 0;
-  box-shadow: inset 10px 0 50px -15px #efefef;
-}
-
-#app .bar {
-  height: 50px;
-  width: 100%;
-}
-
-#app .panel > .top.container .bar {
-  border-bottom: 1px solid #e0e0e0;
 }

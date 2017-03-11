@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import './InputBar.css'
 // import PanelBar from '../PanelBar/PanelBar.jsx';
 
 export class InputBarComponent extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {};
-  }
-
   render () {
     return (
-      <div className="row">
-        <textarea />
+      <div className="InputBar">
+        <textarea placeholder="text here, dummy" />
+        {/*TODO: Convert this to a component*/}
+        <button className="InputBar_send">send</button>
       </div>
     );
   }

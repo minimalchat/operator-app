@@ -15,6 +15,9 @@ const store = createStore(
   }),
 );
 
+// just for debugging 
+window.store = store.getState()
+
 const render = function Render () {
   ReactDOM.render(
     <Provider store={store}>
