@@ -1,8 +1,6 @@
 import { CHAT_OPEN_CONVERSATION } from './constants';
-import {d_users, d_operator} from "../dummy";
+import makeDummy from "../dummy";
 
-
-console.log(d_users, d_operator)
 
 const initialState = {
   active: null,
