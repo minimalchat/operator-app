@@ -2,6 +2,9 @@ import { CHAT_OPEN_CONVERSATION } from './constants';
 import makeDummy from "../dummy";
 
 
+let biz = makeDummy(6, 50);
+console.log(biz)
+
 const initialState = {
   active: null,
 };

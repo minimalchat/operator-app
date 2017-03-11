@@ -9,9 +9,9 @@ class Message {
   content = faker.lorem.sentence()
   timestamp = faker.date.recent()
 
-  constructor(chatSessionID, chatSessionId) {
-    this.author = `client.${clientId}`
-    this.chat = chatSessionId 
+  constructor(chatSessionId, clientId) {
+    this.author = `client.${chatSessionId}`
+    this.chat = clientId 
   }
 }
 
@@ -24,13 +24,14 @@ class Chat {
     id: null,
   }
   creation_time = faker.date.recent()
-  id = null,
+  id = null
   operator = null
   update_time = null
 
   // pass in uuid for id's
-  constructor(uuid, operator){
-    this.client.id = uuid
+  constructor(chatSessionId, clientId, operator){
+    this.id = chatSessionId
+    this.client.id = clientId
     this.operator = operator
   }
 
@@ -40,6 +41,7 @@ class Chat {
 export default function makeDummy(numDummy, numMessages) {
   let chatSessions = []
   let messages = []
+  let rndNumMessages =  Math.floor(Math.random() * (numMessages - 0 + 1)) + 1;
 
   for (let i = 0; i < numDummy; i++) {
     let chatSessionId = faker.random.uuid()
@@ -48,12 +50,12 @@ export default function makeDummy(numDummy, numMessages) {
     chatSessions.push(new Chat(chatSessionId, clientId, 'Joe' ))
 
     // create the messages unique to the above created session.
-    for (let i = 0; i < numMessages; i++) {
+    for (let i = 0; i < rndNumMessages; i++) {
       messages.push(new Message(clientId, chatSessionId))
     }
   }
 
-  return {chatSession, chatMessages}
+  return {chatSessions, messages}
 
 }
 
