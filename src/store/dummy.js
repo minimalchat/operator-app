@@ -1,7 +1,14 @@
+/**
+ * This file generates dummy data for the chats array and messages array
+ * to be used in the chat reducer.
+ * makeDummy is the main function that returns `x` chats and `y` messages in a single object
+ * TODO: create the operator class and output it in the makeDummy fn.
+*/
+
 import faker from 'faker/locale/en'
 
-
 class Operator {}
+
 
 class Message {
   author = null
@@ -11,7 +18,7 @@ class Message {
 
   constructor(chatSessionId, clientId) {
     this.author = `client.${chatSessionId}`
-    this.chat = clientId 
+    this.chat = chatSessionId 
   }
 }
 

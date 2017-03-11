@@ -1,33 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-export class ClientListComponent extends Component {
-  constructor (props) {
-    super(props);
+const ClientList = (props) => {
+  console.log(props)
 
-    this.state = {};
-  }
-
-  render () {
-    return (
-      <div className="row">
-        <ul className="menu" />
-      </div>
-    );
-  }
+  return(
+    <div className="row">
+      <ul className="menu">
+      {props.chats.map(chat => {
+         console.log(chat)
+         return <li key={chat.id}>{chat.client.first_name}</li>
+       })}
+      </ul>
+    </div>
+  )
 }
 
-const mapStateToProps = state => ({
 
-});
+export default connect(
+  (state) => ({
+    chats: state.chat.chats
+  }),
+  (dispatch) => ({
+  }),
+)(ClientList)
 
-const mapDispatchToProps = dispatch => ({
 
-});
-
-const ClientList = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ClientListComponent);
-
-export default ClientList;

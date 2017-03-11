@@ -1,25 +1,25 @@
+/**
+ * This panel displays a list of chat sessions.
+ * TODO: receives data from chat reducer and iterates over it.
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import Panel from '../Panel/Panel.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import ClientList from '../ClientList/ClientList.jsx';
 
 import './ClientsPanel.css';
 
 export class ClientsPanelComponent extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {};
-  }
-
   render () {
+    let {chats} = this.props
+
     return (
       <div id="clients-panel" className="panel">
         <div className="top container">
           <SearchBar />
-          <ClientList />
+          <ClientList/>
         </div>
       </div>
     );
@@ -27,8 +27,8 @@ export class ClientsPanelComponent extends Component {
 }
 
 const mapStateToProps = state => ({
-
-});
+  chats: state.chat.chats,
+})
 
 const mapDispatchToProps = dispatch => ({
 
