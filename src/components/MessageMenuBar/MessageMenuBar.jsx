@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './MessageMenuBar.css'
+import './MessageMenuBar.css';
+import Button from '../Button/Button.jsx';
 // import PanelBar from '../PanelBar/PanelBar.jsx';
 
 export class MessageMenuBarComponent extends Component {
@@ -13,8 +14,8 @@ export class MessageMenuBarComponent extends Component {
   render () {
     return (
       <div className="MessageMenuBar">
-        <div>Assign to other </div>
-        <div>Mark as done </div>
+        <Button onClick={() => {}}>Assign to other</Button>
+        <Button onClick={() => {}}>Mark as done</Button>
       </div>
     );
   }

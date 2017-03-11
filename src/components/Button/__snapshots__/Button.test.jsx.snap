@@ -1,0 +1,63 @@
+exports[`Button matches basic button snapshot 1`] = `
+<button
+  className="Button "
+  disabled={false}
+  onClick={[Function]}
+  type="button">
+  Click
+</button>
+`;
+
+exports[`Button matches disabled button snapshot 1`] = `
+<button
+  className="Button "
+  disabled={true}
+  onClick={[Function]}
+  type="button" />
+`;
+
+exports[`Button matches explicit icon button snapshot 1`] = `
+<button
+  className="Button Button--icon"
+  disabled={false}
+  onClick={[Function]}
+  type="button">
+  <span
+    className="pt-icon-caret" />
+</button>
+`;
+
+exports[`Button matches icon button snapshot 1`] = `
+<button
+  className="Button Button--icon"
+  disabled={false}
+  onClick={[Function]}
+  type="button">
+  <span
+    className="pt-icon-caret" />
+</button>
+`;
+
+exports[`Button matches send button snapshot 1`] = `
+<button
+  className="Button Button--send"
+  disabled={false}
+  onClick={[Function]}
+  type="button" />
+`;
+
+exports[`Button matches submit button snapshot 1`] = `
+<button
+  className="Button "
+  disabled={false}
+  onClick={[Function]}
+  type="submit" />
+`;
+
+exports[`Button matches transparent button snapshot 1`] = `
+<button
+  className="Button Button--transparent"
+  disabled={false}
+  onClick={[Function]}
+  type="button" />
+`;

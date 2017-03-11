@@ -2,5 +2,14 @@
   display: flex;
   height: 50px; /* TODO: Inherit the height of this component so it matches the siblings.*/
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
+}
+
+.MessageMenuBar .Button {
+  flex: 1;
+  margin: 4px;
+}
+
+.MessageMenuBar .Button + .Button {
+  margin-left: 0;
 }

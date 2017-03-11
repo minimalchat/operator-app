@@ -1,3 +1,7 @@
+:focus {
+  outline-offset: 0;
+}
+
 .App {
   display: flex;
 }

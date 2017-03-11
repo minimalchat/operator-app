@@ -1,5 +1,6 @@
 .InputBar {
   display: flex;
+  background: #fff;
 }
 
 .InputBar textarea {
@@ -11,19 +12,6 @@
   border: none;
 }
 
-.InputBar_send {
-  background: #16a085;
-  border: none;
-  outline: none;
-  color: white;
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-
-.InputBar_send:active {
-  background: #69a085;
-  border: none;
-  outline: none;
-
+.InputBar .Button--send {
+  margin: 4px;
 }
