@@ -12,7 +12,7 @@ const initialState = {
   messages: DUMMY_DATA ? dummy.messages : [],
 };
 
-const reducer = function ChatReducer(state = initialState, action) {
+const reducer = function ChatReducer (state = initialState, action) {
   /* console.log('CHAT', action);*/
 
   switch (action.type) {

@@ -3,14 +3,14 @@ import {
   CHAT_TAG_CLIENT,
 } from './constants';
 
-export function openConversation(payload) {
+export function openConversation (payload) {
   return {
     type: CHAT_OPEN_CONVERSATION,
     payload,
   };
 }
 
-export function tagClient(payload) {
+export function tagClient (payload) {
   return {
     type: CHAT_TAG_CLIENT,
     payload,
