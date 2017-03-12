@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import Panel from '../Panel/Panel.jsx';
-import TitleBar from '../TitleBar/TitleBar.jsx';
+/* import Panel from '../Panel/Panel.jsx'; */
+/* import TitleBar from '../TitleBar/TitleBar.jsx'; */
 import OperatorProfile from '../OperatorProfile/OperatorProfile.jsx';
 import OperatorClientMenu from '../OperatorClientMenu/OperatorClientMenu.jsx';
 import OperatorSettingsMenu from '../OperatorSettingsMenu/OperatorSettingsMenu.jsx';
@@ -20,7 +20,7 @@ export class OperatorPanelComponent extends Component {
     return (
       <div id="OperatorPanel" className="panel">
         <div className="Operator__top">
-          {/*<TitleBar />*/}
+          {/* <TitleBar /> */}
           <OperatorProfile />
           <OperatorClientMenu />
         </div>

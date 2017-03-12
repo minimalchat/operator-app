@@ -8,23 +8,17 @@ import InputBar from '../InputBar/InputBar.jsx';
 
 import './MessagePanel.css';
 
-export class MessagePanelComponent extends Component {
-
-
-  render () {
-    return (
-      <div id="MessagePanel" className="panel">
-        <div className="MessagePanel__container">
-          <MessageMenuBar />
-          <MessageList />
-        </div>
-        <div className="bottom container">
-          <InputBar />
-        </div>
-      </div>
-    );
-  }
-}
+const MessagePanel = () => (
+  <div id="MessagePanel" className="panel">
+    <div className="MessagePanel__container">
+      <MessageMenuBar />
+      <MessageList />
+    </div>
+    <div className="bottom container">
+      <InputBar />
+    </div>
+  </div>
+);
 
 const mapStateToProps = state => ({
 
@@ -34,9 +28,8 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-const MessagePanel = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MessagePanelComponent);
+)(MessagePanel);
 
-export default MessagePanel;
