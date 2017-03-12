@@ -2,11 +2,14 @@ import { CHAT_OPEN_CONVERSATION } from './constants';
 import makeDummy from "../dummy";
 
 
-let biz = makeDummy(6, 50);
-console.log(biz)
+// flag to enable putting dummy data into redux
+const DUMMY_DATA = true;
+const dummy = makeDummy(6, 50);
 
 const initialState = {
   active: null,
+  chats: DUMMY_DATA ? dummy.chatSessions : [],
+  messages: DUMMY_DATA ? dummy.messages : [],
 };
 
 const reducer = function ChatReducer(state = initialState, action) {

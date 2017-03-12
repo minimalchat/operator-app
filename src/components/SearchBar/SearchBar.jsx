@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import './SearchBar.css'
+import './SearchBar.css';
 // import PanelBar from '../PanelBar/PanelBar.jsx';
 
-export class SearchBarComponent extends Component {
-  constructor (props) {
-    super(props);
+const SearchBar = props => (
+  <div className="SearchBar">
+    <input
+      type="text"
+      placeholder="Search Chats..."
+      value={props.query}
+      onChange={props.onQueryChange}
+    />
+  </div>
+);
 
-    this.state = {};
-  }
-
-  render () {
-    return (
-      <div className="SearchBar">
-        <input type="text" placeholder="Search Chats..."/>
-      </div>
-    );
-  }
-}
+SearchBar.propTypes = {
+  query: PropTypes.string.isRequired,
+  onQueryChange: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
 
@@ -27,9 +27,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-const SearchBar = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SearchBarComponent);
-
-export default SearchBar;
+)(SearchBar);

@@ -1,5 +1,21 @@
 exports[`ClientList matches snapshot 1`] = `
-<ClientListComponent
+<ClientList
+  chats={
+    Array [
+      Object {
+        "client": Object {
+          "first_name": "Robert",
+          "last_name": "waffle",
+        },
+      },
+      Object {
+        "client": Object {
+          "first_name": "Lisa",
+          "last_name": "pancake",
+        },
+      },
+    ]
+  }
   store={
     Object {
       "dispatch": [Function],

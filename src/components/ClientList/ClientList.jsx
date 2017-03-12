@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-export class ClientListComponent extends Component {
-  constructor (props) {
-    super(props);
+const ClientList = (props) => {
+  const chatItems = props.chats.map(chat => (
+    <li key={chat.id}>{`${chat.client.first_name} ${chat.client.last_name}`}</li>
+  ));
 
-    this.state = {};
-  }
+  return (
+    <div className="row">
+      <ul className="menu">{chatItems}</ul>
+    </div>
+  );
+};
 
-  render () {
-    return (
-      <div className="row">
-        <ul className="menu" />
-      </div>
-    );
-  }
-}
+ClientList.propTypes = {
+  chats: PropTypes.array.isRequired,
+};
 
 const mapStateToProps = state => ({
 
@@ -25,9 +25,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-const ClientList = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ClientListComponent);
-
-export default ClientList;
+)(ClientList);
