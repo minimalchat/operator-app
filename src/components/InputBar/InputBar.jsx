@@ -4,16 +4,13 @@ import './InputBar.css';
 import Button from '../Button/Button.jsx';
 // import PanelBar from '../PanelBar/PanelBar.jsx';
 
-export class InputBarComponent extends Component {
-  render () {
-    return (
-      <div className="InputBar">
-        <textarea placeholder="text here, dummy" />
-        <Button variant="send" onClick={() => {}}>Send</Button>
-      </div>
-    );
-  }
-}
+const InputBar = props => (
+  <div className="InputBar">
+    <textarea placeholder="text here, dummy" />
+    <Button variant="send" onClick={() => {}}>Send</Button>
+  </div>
+);
+
 
 const mapStateToProps = state => ({
 
@@ -23,9 +20,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-const InputBar = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(InputBarComponent);
-
-export default InputBar;
+)(InputBar);

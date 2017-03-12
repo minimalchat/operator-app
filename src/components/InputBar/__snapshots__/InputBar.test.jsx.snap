@@ -1,5 +1,5 @@
 exports[`InputBar matches snapshot 1`] = `
-<InputBarComponent
+<InputBar
   store={
     Object {
       "dispatch": [Function],

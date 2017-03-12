@@ -5,10 +5,7 @@
  * TODO: create the operator class and output it in the makeDummy fn.
 */
 
-import faker from 'faker/locale/en'
-
-class Operator {}
-
+import faker from 'faker/locale/en';
 
 class Message {
   author = null
@@ -16,9 +13,9 @@ class Message {
   content = faker.lorem.sentence()
   timestamp = faker.date.recent()
 
-  constructor(chatSessionId, clientId) {
-    this.author = `client.${chatSessionId}`
-    this.chat = chatSessionId 
+  constructor(chatSessionId) {
+    this.author = `client.${chatSessionId}`;
+    this.chat = chatSessionId;
   }
 }
 
@@ -27,43 +24,42 @@ class Chat {
   client = {
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
-    name: "site visitor",
+    name: 'site visitor',
     id: null,
   }
-  creation_time = faker.date.recent()
+  creationTime = faker.date.recent()
   id = null
   operator = null
-  update_time = null
+  updateTime = null
 
   // pass in uuid for id's
-  constructor(chatSessionId, clientId, operator){
-    this.id = chatSessionId
-    this.client.id = clientId
-    this.operator = operator
+  constructor(chatSessionId, clientId, operator) {
+    this.id = chatSessionId;
+    this.client.id = clientId;
+    this.operator = operator;
   }
 
 }
 
 // creates one chatSession and multiple messages for that session
 export default function makeDummy(numDummy, numMessages) {
-  let chatSessions = []
-  let messages = []
-  let rndNumMessages =  Math.floor(Math.random() * (numMessages - 0 + 1)) + 1;
+  const chatSessions = [];
+  const messages = [];
+  const rndNumMessages = Math.floor(Math.random() * (numMessages - (0 + 1))) + 1;
 
-  for (let i = 0; i < numDummy; i++) {
-    let chatSessionId = faker.random.uuid()
-    let clientId = faker.random.uuid()
+  for (let i = 0; i < numDummy; i += 1) {
+    const chatSessionId = faker.random.uuid();
+    const clientId = faker.random.uuid();
 
-    chatSessions.push(new Chat(chatSessionId, clientId, 'Joe' ))
+    chatSessions.push(new Chat(chatSessionId, clientId, 'Joe'));
 
     // create the messages unique to the above created session.
-    for (let i = 0; i < rndNumMessages; i++) {
-      messages.push(new Message(clientId, chatSessionId))
+    for (let j = 0; j < rndNumMessages; j += 1) {
+      messages.push(new Message(clientId, chatSessionId));
     }
   }
 
-  return {chatSessions, messages}
-
+  return { chatSessions, messages };
 }
 
 

@@ -1,5 +1,5 @@
 import { CHAT_OPEN_CONVERSATION } from './constants';
-import makeDummy from "../dummy";
+import makeDummy from '../dummy';
 
 
 // flag to enable putting dummy data into redux

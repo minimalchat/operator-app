@@ -1,5 +1,5 @@
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
-<OperatorSettingsMenuComponent
+<OperatorSettingsMenu
   store={
     Object {
       "dispatch": [Function],

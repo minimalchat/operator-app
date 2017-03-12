@@ -10,3 +10,4 @@ dist/*-linux-ia32
 
 
 assets/js/**
+.DS_Store
