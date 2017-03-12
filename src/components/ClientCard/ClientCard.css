@@ -1,0 +1,7 @@
+.ClientCard {
+  display: flex;
+  height: 3rem;
+  padding: 1rem;
+  border-bottom: 1px solid #999;
+  cursor: pointer;  
+}
