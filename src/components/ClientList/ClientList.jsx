@@ -5,7 +5,10 @@ import './ClientList.css'
 
 const ClientList = (props) => {
   const chatItems = props.chats.map(chat => (
-    <ClientCard key={chat.id}>{`${chat.client.first_name} ${chat.client.last_name}`}</ClientCard>
+    <ClientCard
+      key={chat.id}
+      chatId={chat.id}
+    >{`${chat.client.first_name} ${chat.client.last_name}`}</ClientCard>
   ));
   return (
     <div className="ClientList row">
