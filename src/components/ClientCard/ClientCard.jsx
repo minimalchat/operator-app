@@ -1,30 +1,32 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { setActiveChat } from '../../store/Chat/actions';
-import './ClientCard.css'
+import './ClientCard.css';
 
-const ClientCard = props => {
-  return (
-    <li className="ClientCard" onClick={() => props.setActiveChat(props.chatId)}>
+const ClientCard = props => (
+  <li className="ClientCard" >
+    <button onClick={() => props.setActiveChat(props.chatId)}>
       {props.children}
-    </li>
-  );
-};
-
-ClientCard.propTypes = {
-  chatId: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
+    </button>
+  </li>
+);
 
 const mapStateToProps = state => ({
 
 });
 
 const mapDispatchToProps = dispatch => ({
-  setActiveChat: (chatId) => dispatch(setActiveChat(chatId)),
+  setActiveChat: chatId => dispatch(setActiveChat(chatId)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(ClientCard);
+
+
+ClientCard.propTypes = {
+  chatId: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  setActiveChat: PropTypes.func.isRequired,
+};

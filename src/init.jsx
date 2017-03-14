@@ -19,7 +19,7 @@ const store = createStore(
     chat,
   }),
 
-  applyMiddleware(logger)             // NOTE: `logger` must come last
+  applyMiddleware(logger),             // NOTE: `logger` must come last
 );
 
 // Debugging Tooling

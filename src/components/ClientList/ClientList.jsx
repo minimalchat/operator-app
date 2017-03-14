@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import ClientCard from '../ClientCard/ClientCard.jsx'
-import './ClientList.css'
+import ClientCard from '../ClientCard/ClientCard.jsx';
+import './ClientList.css';
 
 const ClientList = (props) => {
   const chatItems = props.chats.map(chat => (

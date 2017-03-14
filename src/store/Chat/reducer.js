@@ -12,15 +12,13 @@ const initialState = {
 };
 
 function ChatReducer (state = initialState, action) {
-  /* console.log('CHAT', action);*/
-
   switch (action.type) {
     case CHAT_SET_ACTIVE:
-      return {...state, active: action.payload};
+      return { ...state, active: action.payload };
 
     default:
       return state;
   }
-};
+}
 
 export default ChatReducer;
