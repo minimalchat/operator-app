@@ -28,9 +28,9 @@ class Chat {
     id: null,
   }
   creationTime = faker.date.recent()
+  'updated_time' = faker.date.recent().toISOString()
   id = null
   operator = null
-  updateTime = null
 
   // pass in uuid for id's
   constructor (chatSessionId, clientId, operator) {
@@ -61,5 +61,3 @@ export default function makeDummy (numDummy, numMessages) {
 
   return { chatSessions, messages };
 }
-
-

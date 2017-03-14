@@ -50,12 +50,13 @@
     "testRegex": "((test|spec))\\.(js|jsx)$"
   },
   "dependencies": {
+    "faker": "^4.1.0",
     "moment": "^2.17.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
-    "faker": "^4.1.0",
+    "redux-logger": "^2.8.2",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
