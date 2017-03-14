@@ -1,5 +1,4 @@
 import {
-  CHAT_OPEN_CONVERSATION,
   CHAT_TAG_CLIENT,
   CHAT_SET_ACTIVE,
 } from './constants';
