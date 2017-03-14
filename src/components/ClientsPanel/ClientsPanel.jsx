@@ -48,7 +48,9 @@ export class ClientsPanelComponent extends Component {
 }
 
 const mapStateToProps = state => ({
-  chats: state.chat.chats,
+  chats: state.chat.chats.sort((curr, next) => (
+    new Date(next.updated_time) - new Date(curr.updated_time)
+  )),
 });
 
 const mapDispatchToProps = dispatch => ({
