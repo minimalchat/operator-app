@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import createLogger from 'redux-logger';
 
 import Application from './components/Application/Application.jsx';
-
 // Reducers
 import chat from './store/Chat/reducer';
 
@@ -21,9 +19,8 @@ const store = createStore(
     chat,
   }),
 
-  applyMiddleware(logger)             // NOTE: `logger` must come last
+  applyMiddleware(logger),             // NOTE: `logger` must come last
 );
-
 
 // Debugging Tooling
 store.subscribe(() => console.log('DEBUG', store.getState()));

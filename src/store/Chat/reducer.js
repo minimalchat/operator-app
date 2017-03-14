@@ -1,6 +1,5 @@
-import { CHAT_OPEN_CONVERSATION } from './constants';
+import { CHAT_SET_ACTIVE } from './constants';
 import makeDummy from '../dummy';
-
 
 // flag to enable putting dummy data into redux
 const DUMMY_DATA = true;
@@ -12,18 +11,14 @@ const initialState = {
   messages: DUMMY_DATA ? dummy.messages : [],
 };
 
-const reducer = function ChatReducer (state = initialState, action) {
-  /* console.log('CHAT', action);*/
-
+function ChatReducer (state = initialState, action) {
   switch (action.type) {
-    case CHAT_OPEN_CONVERSATION:
-      return Object.assign({}, state, {
-        active: action.payload,
-      });
+    case CHAT_SET_ACTIVE:
+      return { ...state, active: action.payload };
 
     default:
       return state;
   }
-};
+}
 
-export default reducer;
+export default ChatReducer;
