@@ -1,0 +1,24 @@
+.Message__client {
+  color: white;
+  background: #3498db;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 2px;
+  align-self: flex-end;
+  font-size: 12px;
+  max-width: 45%;
+  letter-spacing: 1px;
+}
+
+
+.Message__operator {
+  color: white;
+  font-size: 12px;
+  background: rgb(230, 126, 34);
+  letter-spacing: 1px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 2px;
+  align-self: flex-start;
+  max-width: 45%;
+}

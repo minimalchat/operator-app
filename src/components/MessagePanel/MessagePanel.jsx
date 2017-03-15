@@ -10,13 +10,9 @@ import './MessagePanel.css';
 
 const MessagePanel = () => (
   <div id="MessagePanel" className="panel">
-    <div className="MessagePanel__container">
-      <MessageMenuBar />
-      <MessageList />
-    </div>
-    <div className="bottom container">
-      <InputBar />
-    </div>
+    <MessageMenuBar />
+    <MessageList />
+    <InputBar />
   </div>
 );
 
@@ -32,4 +28,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(MessagePanel);
-

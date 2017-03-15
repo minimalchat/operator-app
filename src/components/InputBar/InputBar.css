@@ -1,6 +1,7 @@
 .InputBar {
   display: flex;
   background: #fff;
+  min-height: 50px;
 }
 
 .InputBar textarea {

@@ -1,6 +1,6 @@
 .MessageMenuBar {
   display: flex;
-  height: 50px; /* TODO: Inherit the height of this component so it matches the siblings.*/
+  min-height: 50px; /* TODO: Inherit the height of this component so it matches the siblings.*/
   justify-content: space-around;
   align-items: stretch;
 }
