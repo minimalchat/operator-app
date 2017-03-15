@@ -10,7 +10,7 @@ import './MessagePanel.css';
 
 const MessagePanel = () => (
   <div id="MessagePanel" className="panel">
-    <MessageMenuBar />
+    {/* <MessageMenuBar /> */} {/* TODO: Add back in for 0.2 */}
     <MessageList />
     <InputBar />
   </div>
