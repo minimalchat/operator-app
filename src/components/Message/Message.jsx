@@ -11,7 +11,7 @@ const Message = props => {
     props.type === 'operator' ? 'Message__operator' : 'Message__client'
   );
 
-  return <div className={msgClass()}>dklfj{props.children}</div>
+  return <div className={msgClass()}>{props.children}</div>
 };
 
 
