@@ -14,7 +14,7 @@ export class MessageMenuBarComponent extends Component {
   render () {
     return (
       <div className="MessageMenuBar">
-        <Button onClick={() => {}}>Assign to other</Button>
+        {/* <Button onClick={() => {}}>Assign to other</Button> */} {/* TODO: 0.2*/ }
         <Button onClick={() => {}}>Mark as done</Button>
       </div>
     );
