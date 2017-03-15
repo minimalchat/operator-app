@@ -13,18 +13,21 @@
   border-radius: 3px;
 }
 
-.Button:not(:disabled):hover,
-.Button:not(:disabled):focus,
-.Button:not(:disabled):active {
+.Button:disabled {
+  cursor: default;
+  color: #bbb;
+}
+
+.Button:not(:disabled):hover{
   color: #222;
   border: 1px solid #c7cedc;
   background: #f6f7fa;
 }
 
-.Button:disabled {
-  cursor: default;
-  color: #bbb;
+.Button:not(:disabled):active {
+  background: #e5e6ea;
 }
+
 
 .Button--icon {
   background: transparent;
@@ -36,7 +39,6 @@
   padding: 0;
 }
 .Button--icon:not(:disabled):hover,
-.Button--icon:not(:disabled):focus,
 .Button--icon:not(:disabled):active {
   color: #222;
   border: none;
@@ -48,7 +50,6 @@
   color: #fff;
 }
 .Button--send:not(:disabled):hover,
-.Button--send:not(:disabled):focus,
 .Button--send:not(:disabled):active {
   background: #229955;
   color: #fff;
@@ -58,7 +59,6 @@
   /* TODO */
 }
 .Button--primary:not(:disabled):hover,
-.Button--primary:not(:disabled):focus,
 .Button--primary:not(:disabled):active {
   /* TODO */
 }
@@ -69,7 +69,6 @@
   color: #2980b9;
 }
 .Button--transparent:not(:disabled):hover,
-.Button--transparent:not(:disabled):focus,
 .Button--transparent:not(:disabled):active {
   border-color: transparent;
   background: transparent;
