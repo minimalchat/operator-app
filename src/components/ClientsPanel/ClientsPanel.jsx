@@ -37,11 +37,9 @@ export class ClientsPanelComponent extends Component {
     const chats = query.length > 0 ? filteredChats : this.props.chats;
 
     return (
-      <div id="clients-panel" className="panel">
-        <div className="top container">
-          <SearchBar query={this.state.query} onQueryChange={this.onQueryChange} />
-          <ClientList chats={chats} />
-        </div>
+      <div className="ClientsPanel">
+        <SearchBar query={this.state.query} onQueryChange={this.onQueryChange} />
+        <ClientList chats={chats} />
       </div>
     );
   }

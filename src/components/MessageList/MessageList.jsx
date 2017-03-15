@@ -13,19 +13,17 @@ const MessageList = (props) => {
      msg.chat === active
   ));
 
-  const messageDisplay = activeMsgs.map(msg => (
-    <div>{msg.content}</div>
-  ));
 
-
-  if (!active) return <div> no chats </div>;
+  const renderView = () => {
+    if (!active) return (<div className="MessageList__empty"> No chat selected </div>);
+    return activeMsgs.map(msg => (<div className="ML-m-client">{msg.content}</div>));
+  };
 
   return (
     <div className="MessageList">
-      <ul className="menu" />
-      <span className="MessageList__message-client">I am a dummy client message</span>
-      <span className="MessageList__message-operator">I am a dummy operator message</span>
-      { messageDisplay }
+      <ul className="MessageList__box">
+        { renderView() }
+      </ul>
     </div>
   );
 };
