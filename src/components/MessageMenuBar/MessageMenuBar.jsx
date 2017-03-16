@@ -1,37 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './MessageMenuBar.css';
 import Button from '../Button/Button.jsx';
-// import PanelBar from '../PanelBar/PanelBar.jsx';
+import { toggleChatOpen } from '../../store/Chat/actions'
+import './MessageMenuBar.css';
 
-export class MessageMenuBarComponent extends Component {
-  constructor (props) {
-    super(props);
 
-    this.state = {};
-  }
+const MessageMenuBar = (props) => {
+  const {activeChat, toggleOpen} = props;
 
-  render () {
-    return (
-      <div className="MessageMenuBar">
-        {/* <Button onClick={() => {}}>Assign to other</Button> */} {/* TODO: 0.2*/ }
-        <Button onClick={() => {}}>Mark as done</Button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="MessageMenuBar">
+      {/* <Button onClick={() => {}}>Assign to other</Button> */} {/* TODO: 0.2*/ }
+      <Button onClick={() => toggleOpen(activeChat)}>Mark as done</Button>
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
-
+  activeChat: state.chat.active,
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  toggleOpen: chatId => dispatch(toggleChatOpen(chatId)),
 });
 
-const MessageMenuBar = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MessageMenuBarComponent);
-
-export default MessageMenuBar;
+)(MessageMenuBar);

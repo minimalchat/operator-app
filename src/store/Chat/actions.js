@@ -1,6 +1,7 @@
 import {
   CHAT_TAG_CLIENT,
   CHAT_SET_ACTIVE,
+  CHAT_TOGGLE_OPEN,
   OPERATOR_SET_FILTER,
 } from './constants';
 
@@ -22,6 +23,13 @@ export function setActiveChat (payload) {
 export function setOperatorFilter (payload) {
   return {
     type: OPERATOR_SET_FILTER,
+    payload,
+  };
+}
+
+export function toggleChatOpen (payload) {
+  return {
+    type: CHAT_TOGGLE_OPEN,
     payload,
   };
 }

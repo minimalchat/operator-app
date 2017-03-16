@@ -1,6 +1,7 @@
 import {
   CHAT_SET_ACTIVE,
   OPERATOR_SET_FILTER,
+  CHAT_TOGGLE_OPEN,
 } from './constants';
 
 import makeDummy from '../dummy';
@@ -25,8 +26,24 @@ function ChatReducer (state = initialState, action) {
     case CHAT_SET_ACTIVE:
       return { ...state, active: action.payload };
 
+
     case OPERATOR_SET_FILTER:
       return { ...state, operatorFilter: action.payload };
+
+
+    case CHAT_TOGGLE_OPEN: {
+      const newchats = state.chats.map((chat) => {
+        if (chat.id === action.payload) {
+          const toggledChat = chat;
+          toggledChat.open = !toggledChat.open;
+          return toggledChat;
+        }
+        return chat;
+      });
+
+      return { ...state, newchats };
+    }
+
 
     default:
       return state;
