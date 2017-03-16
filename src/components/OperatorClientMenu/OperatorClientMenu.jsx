@@ -10,12 +10,12 @@ import './OperatorClientMenu.css';
 import { setOperatorFilter } from '../../store/Chat/actions';
 
 const OperatorClientMenu = (props) => {
-  const { setFilter, operatorFilter } = props;
+  const { setFilter, operatorFilter, openChats } = props;
 
   const menuItems = [
     /* { name: 'Assigned to Me', id: 'assigned_to_me' },*/ // 0.2
     { name: 'All', id: 'all' },
-    { name: 'Open', id: 'open' },
+    { name: `Open (${openChats})`, id: 'open' },
     { name: 'Closed', id: 'closed' },
   ];
 
@@ -46,6 +46,7 @@ const OperatorClientMenu = (props) => {
 
 const mapStateToProps = state => ({
   operatorFilter: state.chat.operatorFilter,
+  openChats: state.chat.chats.filter(chat => chat.open).length,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -62,4 +63,5 @@ export default connect(
 OperatorClientMenu.propTypes = {
   setFilter: PropTypes.func.isRequired,
   operatorFilter: PropTypes.string,
+  openChats: PropTypes.number,
 };
