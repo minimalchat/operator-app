@@ -1,5 +1,7 @@
 exports[`OperatorClientMenu matches snapshot 1`] = `
-<OperatorClientMenuComponent
+<OperatorClientMenu
+  operatorFilter="all"
+  setFilter={[Function]}
   store={
     Object {
       "dispatch": [Function],

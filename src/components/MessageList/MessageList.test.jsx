@@ -9,13 +9,12 @@ const store = {
   getState: jest.fn(() => ({
     chat: { messages: [] },
   })),
-
 };
 
 
 describe('MessageList', () => {
   it('matches snapshot', () => {
-    const component = shallow(<MessageList store={store} />,);
+    const component = shallow(<MessageList store={store} />);
     expect(component).toMatchSnapshot();
   });
 });
