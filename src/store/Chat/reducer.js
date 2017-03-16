@@ -41,7 +41,7 @@ function ChatReducer (state = initialState, action) {
         return chat;
       });
 
-      return { ...state, chats };
+      return { ...state, chats, active: '' };
     }
 
 
