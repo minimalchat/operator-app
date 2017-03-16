@@ -1,0 +1,38 @@
+.OperatorClientMenu{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+}
+
+
+.OperatorClient__Menu__item {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.OperatorClient__selectedFilter {
+  display: flex;
+  background: #fafafa;
+  border: none;
+  outline: 0;
+  height: 100%;
+  width: 100%;
+  padding: 15px 15px 15px 15px;
+  border-left: 3px solid rgb(231, 76, 60);
+
+}
+
+
+.OperatorClient__filter {
+  display: flex;
+  background: #fdfdfd;
+  border: none;
+  outline: 0;
+  padding: 15px 15px 15px 18px; /*must offset border-left for selected filter*/
+  height: 100%;
+  width: 100%;
+}

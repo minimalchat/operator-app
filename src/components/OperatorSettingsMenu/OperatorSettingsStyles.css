@@ -4,7 +4,7 @@
 
 .Settings__box {
   display: flex;
-  background:  #F7F8FA;  
+  background:  #F7F8FA;
   border-top: 1px solid  #E8ECEE;
   border-bottom: 1px solid  #E8ECEE;
   justify-content: center;
@@ -20,11 +20,4 @@
   border-radius: 50%;
   border: 3px solid white;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-}
-
-.Settings__footer {
-  font-size: 10px;
-  color: #777;
-  text-align: center;
-  padding: 1rem;
 }

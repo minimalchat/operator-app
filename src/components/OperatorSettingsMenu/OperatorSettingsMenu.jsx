@@ -10,7 +10,6 @@ const OperatorSettingsMenu = () => (
       <img className="Settings__avatar" alt="billmurray" src="http://www.fillmurray.com/50/50" />
       <span>Operator: Steve</span>
     </div>
-    <div className="Settings__footer"> Made with lurv by hoomans</div>
   </section>
 );
 
@@ -26,4 +25,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(OperatorSettingsMenu);
-
