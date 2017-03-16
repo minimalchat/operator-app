@@ -1,5 +1,6 @@
 exports[`OperatorClientMenu matches snapshot 1`] = `
 <OperatorClientMenu
+  openChats={0}
   operatorFilter="all"
   setFilter={[Function]}
   store={

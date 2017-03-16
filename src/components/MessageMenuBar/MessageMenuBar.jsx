@@ -7,12 +7,16 @@ import './MessageMenuBar.css';
 
 const MessageMenuBar = (props) => {
   const { activeChatId, activeChatIsOpen, toggleOpen } = props;
-  const buttonMessage = () => activeChatIsOpen ? 'Mark as Done' : 'Unarchive message?';
+  const renderBtnMsg = () => {
+    if (!activeChatId) return 'Select a chat';
+    if (activeChatId && activeChatIsOpen) return 'Mark as Done';
+    return 'Unarchive Chat';
+  };
 
   return (
     <div className="MessageMenuBar">
       {/* <Button onClick={() => {}}>Assign to other</Button> */} {/* TODO: 0.2*/ }
-      <Button onClick={() => toggleOpen(activeChatId)}>{buttonMessage()}</Button>
+      <Button onClick={() => toggleOpen(activeChatId)}>{renderBtnMsg()}</Button>
     </div>
   );
 };
