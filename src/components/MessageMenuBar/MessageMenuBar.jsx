@@ -17,7 +17,7 @@ const MessageMenuBar = (props) => {
 };
 
 const mapStateToProps = state => ({
-  activeChat: state.chat.active,
+  activeChat: state.chat.activeId,
 });
 
 const mapDispatchToProps = dispatch => ({
