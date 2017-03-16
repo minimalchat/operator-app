@@ -6,18 +6,20 @@ import './MessageMenuBar.css';
 
 
 const MessageMenuBar = (props) => {
-  const { activeChat, toggleOpen } = props;
+  const { activeChatId, activeChatIsOpen, toggleOpen } = props;
+  const buttonMessage = () => activeChatIsOpen ? 'Mark as Done' : 'Unarchive message?';
 
   return (
     <div className="MessageMenuBar">
       {/* <Button onClick={() => {}}>Assign to other</Button> */} {/* TODO: 0.2*/ }
-      <Button onClick={() => toggleOpen(activeChat)}>Mark as done</Button>
+      <Button onClick={() => toggleOpen(activeChatId)}>{buttonMessage()}</Button>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  activeChat: state.chat.activeId,
+  activeChatId: state.chat.activeId,
+  activeChatIsOpen: state.chat.activeIsOpen,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,6 +33,7 @@ export default connect(
 
 
 MessageMenuBar.propTypes = {
-  activeChat: PropTypes.string.isRequired,
+  activeChatId: PropTypes.string.isRequired,
+  activeChatIsOpen: PropTypes.bool,
   toggleOpen: PropTypes.func.isRequired,
 };

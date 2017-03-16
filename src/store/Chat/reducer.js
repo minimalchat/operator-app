@@ -14,6 +14,7 @@ const dummy = makeDummy(6, 50);
 
 const initialState = {
   activeId: '',
+  activeIsOpen: null,
   chats: DUMMY_DATA ? dummy.chatSessions : [],
   messages: DUMMY_DATA ? dummy.messages : [],
   operatorFilter: 'all',
@@ -24,7 +25,11 @@ function ChatReducer (state = initialState, action) {
   switch (action.type) {
 
     case CHAT_SET_ACTIVE:
-      return { ...state, activeId: action.payload };
+      return {
+        ...state,
+        activeId: action.payload.id,
+        activeIsOpen: action.payload.open,
+      };
 
 
     case OPERATOR_SET_FILTER:

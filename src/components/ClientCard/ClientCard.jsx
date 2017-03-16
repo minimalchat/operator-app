@@ -13,7 +13,7 @@ const ClientCard = props => (
   <li className="ClientCard" >
     <button
       className="ClientCard__btn"
-      onClick={() => props.setActiveChat(props.chatId)}
+      onClick={() => props.setActiveChat(props.chat)}
     >
       {props.children}
     </button>

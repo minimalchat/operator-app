@@ -28,7 +28,7 @@ const ClientList = (props) => {
     });
 
     return filteredChats.map(chat => (
-      <ClientCard key={chat.id} chatId={chat.id}>
+      <ClientCard key={chat.id} chat={chat} chatId={chat.id}>
         {`${chat.client.first_name} ${chat.client.last_name}`}
       </ClientCard>
     ));
