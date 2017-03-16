@@ -3,19 +3,30 @@ import { connect } from 'react-redux';
 import ClientCard from '../ClientCard/ClientCard.jsx';
 import './ClientList.css';
 
+// Helpers | TODO: Write tests, maybe move to helpers file?
+function filterByQuery (chats = [], query = '') {
+  if (query === '') return chats;
+  const lowerQuery = query.trim().toLowerCase();
 
+  return chats.filter(chat => (
+    `${chat.client.first_name.toLowerCase()} ${chat.client.last_name.toLowerCase()}`.includes(lowerQuery)
+  ));
+}
+
+
+// Component
 const ClientList = (props) => {
-  const { operatorFilter, chats } = props;
+  const { operatorFilter, chats, query } = props;
 
-  // filters by operator filter + maps to html
+  // filters chats (by operator filter or searchbar) => maps to html
   function getChats () {
-    const filtered = chats.filter((chat) => {
+    const filteredChats = filterByQuery(chats, query).filter((chat) => {
       if (operatorFilter === 'open') return chat.open;
       if (operatorFilter === 'closed') return !chat.open;
       return chat;
     });
 
-    return filtered.map(chat => (
+    return filteredChats.map(chat => (
       <ClientCard key={chat.id} chatId={chat.id}>
         {`${chat.client.first_name} ${chat.client.last_name}`}
       </ClientCard>
@@ -27,11 +38,12 @@ const ClientList = (props) => {
 };
 
 const mapStateToProps = state => ({
+
   operatorFilter: state.chat.operatorFilter,
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  dispatch,
 });
 
 export default connect(
@@ -43,4 +55,5 @@ export default connect(
 ClientList.propTypes = {
   chats: PropTypes.array.isRequired,
   operatorFilter: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
 };
