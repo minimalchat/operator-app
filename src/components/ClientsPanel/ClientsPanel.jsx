@@ -15,8 +15,6 @@ function filterChats (chats = [], query = '') {
 }
 
 export class ClientsPanelComponent extends Component {
-  static propTypes = { chats: PropTypes.array.isRequired }
-
   state = { query: '' }
 
   onQueryChange = (event) => {
@@ -30,16 +28,13 @@ export class ClientsPanelComponent extends Component {
     return (
       <div className="ClientsPanel">
         <SearchBar query={query} onQueryChange={this.onQueryChange} />
-        <ClientList query={query} chats={this.props.chats} />
+        <ClientList query={query} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  chats: state.chat.chats.sort((curr, next) => (
-    new Date(next.updated_time) - new Date(curr.updated_time)
-  )),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ClientCard from '../ClientCard/ClientCard.jsx';
 import './ClientList.css';
 
+
 // Helpers | TODO: Write tests, maybe move to helpers file?
 function filterByQuery (chats = [], query = '') {
   if (query === '') return chats;
@@ -33,13 +34,15 @@ const ClientList = (props) => {
     ));
   }
 
-
   return <ul className="ClientList__list">{ getChats() }</ul>;
 };
 
 const mapStateToProps = state => ({
-
   operatorFilter: state.chat.operatorFilter,
+  chats: state.chat.chats.sort((curr, next) => (
+    new Date(next.updated_time) - new Date(curr.updated_time)
+  )),
+
 });
 
 const mapDispatchToProps = dispatch => ({

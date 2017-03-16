@@ -13,7 +13,7 @@ const dummy = makeDummy(6, 50);
 
 
 const initialState = {
-  active: null,
+  active: '',
   chats: DUMMY_DATA ? dummy.chatSessions : [],
   messages: DUMMY_DATA ? dummy.messages : [],
   operatorFilter: 'all',
@@ -32,7 +32,7 @@ function ChatReducer (state = initialState, action) {
 
 
     case CHAT_TOGGLE_OPEN: {
-      const newchats = state.chats.map((chat) => {
+      const chats = state.chats.map((chat) => {
         if (chat.id === action.payload) {
           const toggledChat = chat;
           toggledChat.open = !toggledChat.open;
@@ -41,7 +41,7 @@ function ChatReducer (state = initialState, action) {
         return chat;
       });
 
-      return { ...state, newchats };
+      return { ...state, chats };
     }
 
 

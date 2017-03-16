@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Button from '../Button/Button.jsx';
-import { toggleChatOpen } from '../../store/Chat/actions'
+import { toggleChatOpen } from '../../store/Chat/actions';
 import './MessageMenuBar.css';
 
 
 const MessageMenuBar = (props) => {
-  const {activeChat, toggleOpen} = props;
+  const { activeChat, toggleOpen } = props;
 
   return (
     <div className="MessageMenuBar">
@@ -28,3 +28,9 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(MessageMenuBar);
+
+
+MessageMenuBar.propTypes = {
+  activeChat: PropTypes.string.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
+};
