@@ -2,11 +2,14 @@ import {
   CHAT_SET_ACTIVE,
   OPERATOR_SET_FILTER,
 } from './constants';
+
 import makeDummy from '../dummy';
+
 
 // flag to enable putting dummy data into redux
 const DUMMY_DATA = true;
 const dummy = makeDummy(6, 50);
+
 
 const initialState = {
   active: null,
@@ -14,6 +17,7 @@ const initialState = {
   messages: DUMMY_DATA ? dummy.messages : [],
   operatorFilter: 'all',
 };
+
 
 function ChatReducer (state = initialState, action) {
   switch (action.type) {

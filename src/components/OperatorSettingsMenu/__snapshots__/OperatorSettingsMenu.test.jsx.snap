@@ -1,10 +1,15 @@
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
-<OperatorSettingsMenu
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
-    }
-  } />
+<section
+  className="SettingsMenu">
+  <div
+    className="Settings__box">
+    <img
+      alt="billmurray"
+      className="Settings__avatar"
+      src="http://www.fillmurray.com/50/50" />
+    <span>
+      Operator: Steve
+    </span>
+  </div>
+</section>
 `;

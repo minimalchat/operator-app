@@ -1,3 +1,9 @@
+/** OperatorClientMenu
+  * Responsible for displaying all menu related things to an operator.
+  * Filters chats by type (open, closed, all).
+  * TODO: implement 'Assigned To Me' functionality (0.2)
+*/
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import './OperatorClientMenu.css';
@@ -7,13 +13,13 @@ const OperatorClientMenu = (props) => {
   const { setFilter, operatorFilter } = props;
 
   const menuItems = [
+    /* { name: 'Assigned to Me', id: 'assigned_to_me' },*/ // 0.2
     { name: 'All', id: 'all' },
-    { name: 'Assigned to Me', id: 'assigned_to_me' },
     { name: 'Open', id: 'open' },
     { name: 'Closed', id: 'closed' },
   ];
 
-
+  // toss the above array into a list with dynamic classes.
   const renderMenuItems = () => (
     menuItems.map((i) => {
       const classes = i.id === operatorFilter

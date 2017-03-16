@@ -6,7 +6,6 @@
   margin: 0;
 }
 
-
 .OperatorClient__Menu__item {
   padding: 0;
   margin: 0;
@@ -23,9 +22,7 @@
   width: 100%;
   padding: 15px 15px 15px 15px;
   border-left: 3px solid rgb(231, 76, 60);
-
 }
-
 
 .OperatorClient__filter {
   display: flex;

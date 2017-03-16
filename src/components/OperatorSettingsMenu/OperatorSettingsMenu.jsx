@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+/** OperatorSettingsMenu
+  * Displays informaiton about the operator.
+  * Might eventually hold a menu settings button?
+*/
+
+import React from 'react';
 import './OperatorSettingsStyles.css';
 
-// import PanelMenu from '../PanelMenu/PanelMenu.jsx';
 
 const OperatorSettingsMenu = () => (
   <section className="SettingsMenu">
@@ -13,15 +16,5 @@ const OperatorSettingsMenu = () => (
   </section>
 );
 
-const mapStateToProps = state => ({
 
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(OperatorSettingsMenu);
+export default OperatorSettingsMenu;

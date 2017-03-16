@@ -33,7 +33,7 @@ class Chat {
   updatedTime = faker.date.recent().toISOString()
   id = null
   operator = null
-
+  open = Math.random() >= 0.5
   constructor (chatSessionId, clientId, operator) {
     this.id = chatSessionId;
     this.client.id = clientId;
