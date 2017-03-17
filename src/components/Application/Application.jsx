@@ -7,14 +7,24 @@ import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import Settings from '../Settings/Settings.jsx';
 import './Application.css';
 
-const Application = props => (
-  <div className="App">
-    {props.settingsOpen ? <Settings /> : ''}
-    <OperatorPanel />
-    <ClientsPanel />
-    <MessagePanel />
-  </div>
-);
+const Application = (props) => {
+  const renderMainView = () => {
+    return props.settingsOpen ? <Settings /> :
+
+    <div className="App__mainview">
+      <ClientsPanel />
+      <MessagePanel />
+    </div>;
+  };
+
+  return (
+    <div className="App">
+      <OperatorPanel />
+      { renderMainView() }
+    </div>
+  );
+};
+
 
 
 const mapStateToProps = state => ({

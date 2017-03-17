@@ -14,8 +14,8 @@ const OperatorSettingsMenu = props => (
   <section className="SettingsMenu">
     <div className="Settings__box">
       <img className="Settings__avatar" alt="billmurray" src="http://www.fillmurray.com/50/50" />
-      <span>Operator: Steve</span>
-      <button onClick={() => props.toggleSettings()}>settings</button>
+      <span>Steve</span>
+      <button onClick={() => props.toggleSettings()}>menu</button>
     </div>
   </section>
 );
