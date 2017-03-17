@@ -13,7 +13,7 @@ const ClientCard = props => (
   <li className="ClientCard" >
     <button
       className="ClientCard__btn"
-      onClick={() => props.setActiveChat(props.chatId)}
+      onClick={() => props.setActiveChat(props.chat)}
     >
       {props.children}
     </button>
@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  setActiveChat: chatId => dispatch(setActiveChat(chatId)),
+  setActiveChat: chat => dispatch(setActiveChat(chat)),
 });
 
 
@@ -37,7 +37,7 @@ export default connect(
 
 
 ClientCard.propTypes = {
-  chatId: PropTypes.string.isRequired,
+  chat: PropTypes.object,
   children: PropTypes.node.isRequired,
   setActiveChat: PropTypes.func.isRequired,
 };

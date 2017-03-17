@@ -10,19 +10,19 @@ const store = {
   getState: jest.fn(() => ({
     chat: {
       operatorFilter: 'all',
+      chats: [
+        { client: { first_name: 'Robert', last_name: 'waffle' } },
+        { client: { first_name: 'Lisa', last_name: 'pancake' } },
+      ],
     },
   })),
 };
 
 
 describe('ClientList', () => {
-  const chats = [
-    { client: { first_name: 'Robert', last_name: 'waffle' } },
-    { client: { first_name: 'Lisa', last_name: 'pancake' } },
-  ];
-
+  const query = '';
   it('matches snapshot', () => {
-    const component = shallow(<ClientList chats={chats}store={store} />);
+    const component = shallow(<ClientList query={query} store={store} />);
     expect(component).toMatchSnapshot();
   });
 });

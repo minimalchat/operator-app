@@ -9,6 +9,7 @@ const store = {
   dispatch: jest.fn(),
   getState: jest.fn(() => ({
     chat: {
+      chats: [],
       operatorFilter: 'all',
     },
   })),

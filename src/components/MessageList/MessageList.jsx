@@ -8,13 +8,13 @@ import Message from '../Message/Message.jsx';
  */
 
 const MessageList = (props) => {
-  const { messages, active } = props;
-  const activeMsgs = messages.filter(msg => msg.chat === active);
+  const { messages, activeId } = props;
+  const activeMsgs = messages.filter(msg => msg.chat === activeId);
 
 
   // render a map of <Message> components with their contents.
   const renderView = () => {
-    if (!active) return (<div className="MessageList__empty"> No chat selected </div>);
+    if (!activeId) return (<div className="MessageList__empty"> No chat selected </div>);
     return activeMsgs.map(msg => (<Message type={msg.author}>{msg.content}</Message>));
   };
 
@@ -31,7 +31,7 @@ const MessageList = (props) => {
 
 const mapStateToProps = state => ({
   messages: state.chat.messages,
-  active: state.chat.active,
+  activeId: state.chat.activeId,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -50,5 +50,5 @@ export default connect(
 // Prop Validation
 MessageList.propTypes = {
   messages: PropTypes.array.isRequired,
-  active: PropTypes.string,
+  activeId: PropTypes.string,
 };
