@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Button from '../Button/Button.jsx';
 import './InputBar.css';
 
