@@ -7,6 +7,7 @@ import Application from './components/Application/Application.jsx';
 
 // Reducers
 import chat from './store/Chat/reducer';
+import ui from './store/Ui/';
 
 // middleware
 const logger = createLogger();        // TODO: make DEV only.
@@ -16,6 +17,7 @@ const logger = createLogger();        // TODO: make DEV only.
 const store = createStore(
   combineReducers({
     chat,
+    ui,
   }),
 
   applyMiddleware(logger),             // NOTE: `logger` must come last
