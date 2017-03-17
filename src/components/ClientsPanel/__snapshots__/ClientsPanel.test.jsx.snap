@@ -1,11 +1,10 @@
 exports[`ClientsPanel matches snapshot 1`] = `
-<ClientsPanelComponent
-  chats={Array []}
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
-    }
-  } />
+<div
+  className="ClientsPanel">
+  <SearchBar
+    onQueryChange={[Function]}
+    query="" />
+  <Connect(ClientList)
+    query="" />
+</div>
 `;
