@@ -3,18 +3,35 @@
   * Might eventually hold a menu settings button?
 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { toggleSettings } from '../../store/Ui/';
+
 import './OperatorSettingsStyles.css';
 
 
-const OperatorSettingsMenu = () => (
+const OperatorSettingsMenu = props => (
   <section className="SettingsMenu">
     <div className="Settings__box">
       <img className="Settings__avatar" alt="billmurray" src="http://www.fillmurray.com/50/50" />
       <span>Operator: Steve</span>
+      <button onClick={() => props.toggleSettings()}>settings</button>
     </div>
   </section>
 );
 
 
-export default OperatorSettingsMenu;
+OperatorSettingsMenu.propTypes = {
+  toggleSettings: PropTypes.func.isRequired,
+};
+
+
+const mapDispatchToProps = dispatch => ({
+  toggleSettings: () => dispatch(toggleSettings()),
+});
+
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(OperatorSettingsMenu);
