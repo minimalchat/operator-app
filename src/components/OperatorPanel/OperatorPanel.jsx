@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 /* import TitleBar from '../TitleBar/TitleBar.jsx'; */
 import OperatorClientMenu from '../OperatorClientMenu/OperatorClientMenu.jsx';
@@ -15,15 +14,4 @@ const OperatorPanel = () => (
   </div>
 );
 
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(OperatorPanel);
+export default OperatorPanel

@@ -8,6 +8,20 @@
 import faker from 'faker/locale/en';
 
 
+// get a random author type for generating operator and client message types
+function generateUserType (chatSessionId) {
+  const rnd = Math.floor(Math.random() * 2) + 1;
+  switch (rnd) {
+    case 1:
+      return 'operator';
+    case 2:
+      return `client.${chatSessionId}`;
+    default:
+      return `client.${chatSessionId}`;
+  }
+}
+
+
 class Message {
   author = null
   chat = null
@@ -41,18 +55,6 @@ class Chat {
   }
 }
 
-// get a random author type for generating operator and client message types
-function generateUserType (chatSessionId) {
-  const rnd = Math.floor(Math.random() * 2) + 1;
-  switch (rnd) {
-    case 1:
-      return 'operator';
-    case 2:
-      return `client.${chatSessionId}`;
-    default:
-      return `client.${chatSessionId}`;
-  }
-}
 
 
 // creates one chatSession and multiple messages for that session
