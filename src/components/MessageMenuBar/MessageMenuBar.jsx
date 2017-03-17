@@ -21,6 +21,14 @@ const MessageMenuBar = (props) => {
   );
 };
 
+
+MessageMenuBar.propTypes = {
+  activeChatId: PropTypes.string.isRequired,
+  activeChatIsOpen: PropTypes.bool,
+  toggleOpen: PropTypes.func.isRequired,
+};
+
+
 const mapStateToProps = state => ({
   activeChatId: state.chat.activeId,
   activeChatIsOpen: state.chat.activeIsOpen,
@@ -30,14 +38,8 @@ const mapDispatchToProps = dispatch => ({
   toggleOpen: chatId => dispatch(toggleChatOpen(chatId)),
 });
 
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(MessageMenuBar);
-
-
-MessageMenuBar.propTypes = {
-  activeChatId: PropTypes.string.isRequired,
-  activeChatIsOpen: PropTypes.bool,
-  toggleOpen: PropTypes.func.isRequired,
-};
