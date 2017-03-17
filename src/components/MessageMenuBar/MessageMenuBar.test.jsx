@@ -7,7 +7,9 @@ import MessageMenuBar from './MessageMenuBar.jsx';
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
-  getState: jest.fn(() => ({ })),
+  getState: jest.fn(() => ({
+    chat: { activeId: '3r23fweefl' },
+  })),
 };
 
 describe('MessageMenuBar', () => {

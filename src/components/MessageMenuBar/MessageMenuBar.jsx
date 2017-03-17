@@ -1,37 +1,45 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import './MessageMenuBar.css';
 import Button from '../Button/Button.jsx';
-// import PanelBar from '../PanelBar/PanelBar.jsx';
+import { toggleChatOpen } from '../../store/Chat/actions';
+import './MessageMenuBar.css';
 
-export class MessageMenuBarComponent extends Component {
-  constructor (props) {
-    super(props);
 
-    this.state = {};
-  }
+const MessageMenuBar = (props) => {
+  const { activeChatId, activeChatIsOpen, toggleOpen } = props;
+  const renderBtnMsg = () => {
+    if (!activeChatId) return 'Select a chat';
+    if (activeChatId && activeChatIsOpen) return 'Mark as Done';
+    return 'Unarchive Chat';
+  };
 
-  render () {
-    return (
-      <div className="MessageMenuBar">
-        <Button onClick={() => {}}>Assign to other</Button>
-        <Button onClick={() => {}}>Mark as done</Button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="MessageMenuBar">
+      {/* <Button onClick={() => {}}>Assign to other</Button> */} {/* TODO: 0.2*/ }
+      <Button onClick={() => toggleOpen(activeChatId)}>{renderBtnMsg()}</Button>
+    </div>
+  );
+};
+
+
+MessageMenuBar.propTypes = {
+  activeChatId: PropTypes.string.isRequired,
+  activeChatIsOpen: PropTypes.bool,
+  toggleOpen: PropTypes.func.isRequired,
+};
+
 
 const mapStateToProps = state => ({
-
+  activeChatId: state.chat.activeId,
+  activeChatIsOpen: state.chat.activeIsOpen,
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  toggleOpen: chatId => dispatch(toggleChatOpen(chatId)),
 });
 
-const MessageMenuBar = connect(
+
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MessageMenuBarComponent);
-
-export default MessageMenuBar;
+)(MessageMenuBar);

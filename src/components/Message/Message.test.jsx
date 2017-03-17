@@ -1,20 +1,19 @@
+
 import React from 'react';
 import { shallow } from 'enzyme';
-import MessageList from './MessageList.jsx';
+import Message from './Message.jsx';
 
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
+  getState: jest.fn(() => ({})),
 
-  getState: jest.fn(() => ({
-    chat: { messages: [] },
-  })),
 };
 
 
 describe('MessageList', () => {
   it('matches snapshot', () => {
-    const component = shallow(<MessageList store={store} />);
+    const component = shallow(<Message type="operator">test message</Message>);
     expect(component).toMatchSnapshot();
   });
 });

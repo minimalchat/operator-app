@@ -1,5 +1,5 @@
 exports[`OperatorPanel matches snapshot 1`] = `
-<OperatorPanelComponent
+<OperatorPanel
   store={
     Object {
       "dispatch": [Function],

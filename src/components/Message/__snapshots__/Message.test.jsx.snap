@@ -1,0 +1,6 @@
+exports[`MessageList matches snapshot 1`] = `
+<div
+  className="Message__operator">
+  test message
+</div>
+`;

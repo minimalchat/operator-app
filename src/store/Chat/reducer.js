@@ -1,4 +1,9 @@
-import { CHAT_OPEN_CONVERSATION } from './constants';
+import {
+  CHAT_SET_ACTIVE,
+  OPERATOR_SET_FILTER,
+  CHAT_TOGGLE_OPEN,
+} from './constants';
+
 import makeDummy from '../dummy';
 
 
@@ -6,24 +11,48 @@ import makeDummy from '../dummy';
 const DUMMY_DATA = true;
 const dummy = makeDummy(6, 50);
 
+
 const initialState = {
-  active: null,
+  activeId: '',
+  activeIsOpen: null,
   chats: DUMMY_DATA ? dummy.chatSessions : [],
   messages: DUMMY_DATA ? dummy.messages : [],
+  operatorFilter: 'all',
 };
 
-const reducer = function ChatReducer (state = initialState, action) {
-  /* console.log('CHAT', action);*/
 
+function ChatReducer (state = initialState, action) {
   switch (action.type) {
-    case CHAT_OPEN_CONVERSATION:
-      return Object.assign({}, state, {
-        active: action.payload,
+
+    case CHAT_SET_ACTIVE:
+      return {
+        ...state,
+        activeId: action.payload.id,
+        activeIsOpen: action.payload.open,
+      };
+
+
+    case OPERATOR_SET_FILTER:
+      return { ...state, operatorFilter: action.payload };
+
+
+    case CHAT_TOGGLE_OPEN: {
+      const chats = state.chats.map((chat) => {
+        if (chat.id === action.payload) {
+          const toggledChat = chat;
+          toggledChat.open = !toggledChat.open;
+          return toggledChat;
+        }
+        return chat;
       });
+
+      return { ...state, chats, activeId: '' };
+    }
+
 
     default:
       return state;
   }
-};
+}
 
-export default reducer;
+export default ChatReducer;

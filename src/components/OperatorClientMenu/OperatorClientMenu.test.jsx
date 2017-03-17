@@ -7,7 +7,12 @@ import OperatorClientMenu from './OperatorClientMenu.jsx';
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
-  getState: jest.fn(() => ({ })),
+  getState: jest.fn(() => ({
+    chat: {
+      chats: [],
+      operatorFilter: 'all',
+    },
+  })),
 };
 
 describe('OperatorClientMenu', () => {

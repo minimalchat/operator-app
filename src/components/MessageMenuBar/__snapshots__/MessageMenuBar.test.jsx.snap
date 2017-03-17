@@ -1,10 +1,12 @@
 exports[`MessageMenuBar matches snapshot 1`] = `
-<MessageMenuBarComponent
+<MessageMenuBar
+  activeChatId="3r23fweefl"
   store={
     Object {
       "dispatch": [Function],
       "getState": [Function],
       "subscribe": [Function],
     }
-  } />
+  }
+  toggleOpen={[Function]} />
 `;

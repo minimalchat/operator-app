@@ -16,6 +16,9 @@ exports[`ClientList matches snapshot 1`] = `
       },
     ]
   }
+  dispatch={[Function]}
+  operatorFilter="all"
+  query=""
   store={
     Object {
       "dispatch": [Function],

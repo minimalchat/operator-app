@@ -7,17 +7,22 @@ import ClientList from './ClientList.jsx';
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
-  getState: jest.fn(() => ({ })),
+  getState: jest.fn(() => ({
+    chat: {
+      operatorFilter: 'all',
+      chats: [
+        { client: { first_name: 'Robert', last_name: 'waffle' } },
+        { client: { first_name: 'Lisa', last_name: 'pancake' } },
+      ],
+    },
+  })),
 };
 
-describe('ClientList', () => {
-  it('matches snapshot', () => {
-    const chats = [
-      { client: { first_name: 'Robert', last_name: 'waffle' } },
-      { client: { first_name: 'Lisa', last_name: 'pancake' } },
-    ];
-    const component = shallow(<ClientList chats={chats} store={store} />);
 
+describe('ClientList', () => {
+  const query = '';
+  it('matches snapshot', () => {
+    const component = shallow(<ClientList query={query} store={store} />);
     expect(component).toMatchSnapshot();
   });
 });
