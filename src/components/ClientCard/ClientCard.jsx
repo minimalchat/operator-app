@@ -20,10 +20,6 @@ const ClientCard = props => (
   </li>
 );
 
-const mapStateToProps = state => ({
-
-});
-
 
 const mapDispatchToProps = dispatch => ({
   setActiveChat: chatId => dispatch(setActiveChat(chatId)),
@@ -31,13 +27,13 @@ const mapDispatchToProps = dispatch => ({
 
 
 export default connect(
-  mapStateToProps,
+  () => ({}),
   mapDispatchToProps,
 )(ClientCard);
 
 
 ClientCard.propTypes = {
-  chatId: PropTypes.string.isRequired,
+  chat: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   setActiveChat: PropTypes.func.isRequired,
 };

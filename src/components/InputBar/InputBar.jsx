@@ -1,26 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './InputBar.css';
+import React from 'react';
 import Button from '../Button/Button.jsx';
-// import PanelBar from '../PanelBar/PanelBar.jsx';
+import './InputBar.css';
 
-const InputBar = props => (
+const InputBar = () => (
   <div className="InputBar">
     <textarea placeholder="text here, dummy" />
     <Button variant="send" onClick={() => {}}>Send</Button>
   </div>
 );
 
-
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(InputBar);
+export default InputBar;

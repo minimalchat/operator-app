@@ -14,4 +14,4 @@ const OperatorPanel = () => (
   </div>
 );
 
-export default OperatorPanel
+export default OperatorPanel;

@@ -1,20 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import ClientList from '../ClientList/ClientList.jsx';
 import './ClientsPanel.css';
 
-// TODO: write a test for this
-function filterChats (chats = [], query = '') {
-  const lowerQuery = query.trim().toLowerCase();
 
-  return chats.filter(chat => (
-    `${chat.client.first_name.toLowerCase()} ${chat.client.last_name.toLowerCase()}`.includes(lowerQuery)
-  ));
-}
-
-export class ClientsPanelComponent extends Component {
+class ClientsPanel extends Component {
   state = { query: '' }
 
   onQueryChange = (event) => {
@@ -33,17 +24,5 @@ export class ClientsPanelComponent extends Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
-
-const ClientsPanel = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ClientsPanelComponent);
 
 export default ClientsPanel;
