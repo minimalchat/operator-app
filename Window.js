@@ -6,8 +6,12 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const MenuItem = electron.MenuItem;
 
+const fs = require('fs');
 const path = require('path');
 const url = require('url');
+
+const WINDOW_HEIGHT = 900;
+const WINDOW_WIDTH = 1440;
 
 let defaultURL = url.format({
   pathname: path.join(__dirname, 'index.html'),
@@ -63,21 +67,48 @@ module.exports = class Window {
 
   // Convenience function for electron's 'ready' event
   static onReady() {
-    return new Window();
+    return Window.create();
   }
 
   // Shortcut function to create an instance of Window
-  static create (url = defaultURL, width = 800, height = 600) {
+  static create (url = defaultURL, width = WINDOW_WIDTH, height = WINDOW_HEIGHT) {
     return new Window(url, width, height);
   }
 
-  constructor (url = defaultURL, width = 800, height = 600) {
+  constructor (url = defaultURL, width = WINDOW_WIDTH, height = WINDOW_HEIGHT) {
     // Keep a global reference of the window object, if you don't, the window will
     // be closed automatically when the JavaScript object is garbage collected.
-    // let mainWindow;
-    this.window = windowObject = new BrowserWindow({ width: width, height: height });
+
+    if (fs.existsSync('config.json')) {
+      let config = require(path.join(__dirname, 'config.json'));
+      let configParams = ['?'];
+
+      if (config.hasOwnProperty('apiServer')) {
+        configParams.push('apiServer=', config.apiServer, '&');
+      }
+
+      if (config.hasOwnProperty('operator')) {
+        configParams.push('operator=', config.operator);
+      }
+
+      url = url + configParams.join('');
+    }
+
+    this.window = windowObject = new BrowserWindow({
+      width: width,
+      height: height,
+      // webProperties: {
+      //   webgl: false,
+      //   webaudio: false,
+      //   sandbox: true,
+      // },
+    });
+
     this.window.loadURL(url);
+
+    // TODO: Only use this when built using DEV environment
     this.window.webContents.openDevTools();
+
     this.window.on('closed', this.onClosed);
 
     // Build out the application menu

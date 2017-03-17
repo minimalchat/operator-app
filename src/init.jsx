@@ -10,6 +10,27 @@ import Application from './components/Application/Application.jsx';
 // Reducers
 import chat from './store/Chat/reducer';
 
+const parseSearch = function parseSearchStringConfig (string) {
+  let buffer = string.replace(/\?/, '');
+  let result = {};
+
+  console.log('STRING', buffer.length, JSON.stringify(buffer));
+  if (buffer.length === 0) {
+    return result;
+  }
+
+  buffer = buffer.split('&');
+
+  for (let i = 0; i < buffer.length; i += 1) {
+    if (Object.prototype.hasOwnProperty.call(buffer, i)) {
+      const values = buffer[i].split('=');
+      result[values[0]] = values[1];
+    }
+  }
+
+  return result;
+};
+
 
 // middleware
 const logger = createLogger();        // TODO: make DEV only.
@@ -21,18 +42,21 @@ const store = createStore(
     chat,
   }),
 
-  applyMiddleware(logger)             // NOTE: `logger` must come last
+  applyMiddleware(logger),            // NOTE: `logger` must come last
 );
 
 
 // Debugging Tooling
 store.subscribe(() => console.log('DEBUG', store.getState()));
-window.store = store.getState();
 
+window.store = store.getState();
+window.config = parseSearch(window.location.search);
+
+console.log('CONFIG', window.config);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Application />
+    <Application apiServer={window.config.apiServer} operator={window.config.operator} />
   </Provider>,
   document.getElementById('app'),
 );
