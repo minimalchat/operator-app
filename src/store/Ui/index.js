@@ -9,11 +9,8 @@ const UI_TOGGLE_SETTINGS = 'UI_TOGGLE_SETTINGS';
 // --- Actions
 //
 
-export function toggleSettings (payload) {
-  return {
-    type: UI_TOGGLE_SETTINGS,
-    payload,
-  };
+export function toggleSettings () {
+  return { type: UI_TOGGLE_SETTINGS };
 }
 
 
