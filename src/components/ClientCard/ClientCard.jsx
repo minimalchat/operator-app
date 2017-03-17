@@ -22,7 +22,7 @@ const ClientCard = props => (
 
 
 const mapDispatchToProps = dispatch => ({
-  setActiveChat: chatId => dispatch(setActiveChat(chatId)),
+  setActiveChat: chat => dispatch(setActiveChat(chat)),
 });
 
 
