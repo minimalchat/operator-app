@@ -11,11 +11,13 @@ const MessageList = (props) => {
   const { messages, activeId } = props;
   const activeMsgs = messages.filter(msg => msg.chat === activeId);
 
-
   // render a map of <Message> components with their contents.
   const renderView = () => {
     if (!activeId) return (<div className="MessageList__empty"> No chat selected </div>);
-    return activeMsgs.map(msg => (<Message type={msg.author}>{msg.content}</Message>));
+    return activeMsgs.map((msg, index) => {
+      const key = `${index}_${msg.chat}`;
+      return <Message key={key} type={msg.author}>{msg.content}</Message>;
+    });
   };
 
 

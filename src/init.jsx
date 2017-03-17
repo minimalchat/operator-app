@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import createLogger from 'redux-logger';
-
 import Application from './components/Application/Application.jsx';
+
 // Reducers
 import chat from './store/Chat/reducer';
 
@@ -29,7 +29,6 @@ const parseSearch = function parseSearchStringConfig (string) {
   return result;
 };
 
-
 // middleware
 const logger = createLogger();        // TODO: make DEV only.
 
@@ -44,10 +43,6 @@ const store = createStore(
   applyMiddleware(logger),             // NOTE: `logger` must come last
 );
 
-// Debugging Tooling
-store.subscribe(() => console.log('DEBUG', store.getState()));
-
-window.store = store.getState();
 window.config = parseSearch(window.location.search);
 
 console.log('CONFIG', window.config);

@@ -1,10 +1,9 @@
 exports[`TitleBar matches snapshot 1`] = `
-<TitleBarComponent
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
-    }
-  } />
+<div
+  className="row bar"
+  id="title">
+  <span>
+    Operator
+  </span>
+</div>
 `;

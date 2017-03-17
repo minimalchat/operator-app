@@ -1,10 +1,8 @@
 exports[`Chat matches snapshot 1`] = `
-<Component
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
-    }
-  } />
+<div
+  className="App">
+  <OperatorPanel />
+  <ClientsPanel />
+  <MessagePanel />
+</div>
 `;

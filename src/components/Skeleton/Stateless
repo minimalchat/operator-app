@@ -1,0 +1,17 @@
+import React from 'react';
+import { connect } from 'react-redux';
+
+
+const Skeleton = props => (
+  <div className="Skeleton"/>
+);
+
+
+const mapStateToProps = state => ({
+});
+
+const mapDispatchToProps = dispatch => ({
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Skeleton);
