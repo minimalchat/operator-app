@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
@@ -8,14 +8,14 @@ import Settings from '../Settings/Settings.jsx';
 import './Application.css';
 
 const Application = (props) => {
-  const renderMainView = () => {
-    return props.settingsOpen ? <Settings /> :
+  const renderMainView = () => (
+    props.settingsOpen ? <Settings /> :
 
     <div className="App__mainview">
       <ClientsPanel />
       <MessagePanel />
-    </div>;
-  };
+    </div>
+  );
 
   return (
     <div className="App">
@@ -25,6 +25,10 @@ const Application = (props) => {
   );
 };
 
+
+Application.propTypes = {
+  settingsOpen: PropTypes.bool.isRequired,
+};
 
 
 const mapStateToProps = state => ({

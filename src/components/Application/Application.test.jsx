@@ -7,7 +7,9 @@ import Application from './Application.jsx';
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
-  getState: jest.fn(() => ({ })),
+  getState: jest.fn(() => ({
+    ui: { settingsOpen: false },
+  })),
 };
 
 describe('Chat', () => {
