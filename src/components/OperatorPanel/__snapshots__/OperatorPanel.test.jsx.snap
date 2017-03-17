@@ -1,10 +1,16 @@
 exports[`OperatorPanel matches snapshot 1`] = `
-<OperatorPanel
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
-    }
-  } />
+<div
+  className="panel"
+  id="OperatorPanel">
+  <header
+    className="OperatorPanel__header">
+    minimal chat
+  </header>
+  <OperatorSettingsMenu />
+  <Connect(OperatorClientMenu) />
+  <footer
+    className="OperatorPanel__footer">
+     Made with lurv by hoomans
+  </footer>
+</div>
 `;

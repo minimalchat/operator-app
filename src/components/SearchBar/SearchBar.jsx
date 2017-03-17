@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import './SearchBar.css';
-// import PanelBar from '../PanelBar/PanelBar.jsx';
 
 const SearchBar = props => (
   <div className="SearchBar">
@@ -19,15 +17,4 @@ SearchBar.propTypes = {
   onQueryChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SearchBar);
+export default SearchBar;

@@ -1,12 +1,10 @@
 exports[`SearchBar matches snapshot 1`] = `
-<SearchBar
-  onQueryChange={[Function]}
-  query=""
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
-    }
-  } />
+<div
+  className="SearchBar">
+  <input
+    onChange={[Function]}
+    placeholder="Search Chats..."
+    type="text"
+    value="" />
+</div>
 `;
