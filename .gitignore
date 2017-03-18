@@ -8,6 +8,7 @@ dist/*-darwin-x64
 dist/*-win32-ia32
 dist/*-linux-ia32
 
-
 assets/js/**
 .DS_Store
+
+config.json

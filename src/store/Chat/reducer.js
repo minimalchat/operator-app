@@ -1,13 +1,14 @@
 import {
+  CHAT_SET_CONFIG,
   CHAT_SET_ACTIVE,
-  OPERATOR_SET_FILTER,
   CHAT_TOGGLE_OPEN,
+  OPERATOR_SET_FILTER,
 } from './constants';
 
 import makeDummy from '../dummy';
 
 
-// flag to enable putting dummy data into redux
+// Flag to enable putting dummy data into redux
 const DUMMY_DATA = true;
 const dummy = makeDummy(6, 50);
 
@@ -18,11 +19,18 @@ const initialState = {
   chats: DUMMY_DATA ? dummy.chatSessions : [],
   messages: DUMMY_DATA ? dummy.messages : [],
   operatorFilter: 'all',
+  config: {},
 };
 
 
 function ChatReducer (state = initialState, action) {
   switch (action.type) {
+
+    case CHAT_SET_CONFIG:
+      return {
+        ...state,
+        config: action.payload,
+      };
 
     case CHAT_SET_ACTIVE:
       return {
@@ -33,14 +41,19 @@ function ChatReducer (state = initialState, action) {
 
 
     case OPERATOR_SET_FILTER:
-      return { ...state, operatorFilter: action.payload };
+      return {
+        ...state,
+        operatorFilter: action.payload,
+      };
 
 
     case CHAT_TOGGLE_OPEN: {
       const chats = state.chats.map((chat) => {
         if (chat.id === action.payload) {
           const toggledChat = chat;
+
           toggledChat.open = !toggledChat.open;
+
           return toggledChat;
         }
         return chat;
