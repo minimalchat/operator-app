@@ -1,29 +1,76 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
+
+import { ipcRenderer } from 'electron';
 
 import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
+import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
 
-import { setApiServer, setOperator } from '../../store/Chat/actions.js';
+import { setConfig } from '../../store/Chat/actions.js';
 
 import './Application.css';
 
-const Application = () => {
-  if (!props.hasOwnProperty('apiServer')) {
-    console.warn('WARNING: Missing apiServer (Have you created a config.json?)', props.apiServer);
+class Application extends Component {
+  constructor (props) {
+    super(props);
+
+    // Setup our IPC listener
+    ipcRenderer.on('config', this.updateConfig());
+    ipcRenderer.send('init-config');
   }
 
-  return (
-    <div className="App">
-      <OperatorPanel />
+  updateConfig () {
+    const { updateConfig } = this.props;
+
+    return function (event, config) {
+      // Send config to Redux state
+      updateConfig(config);
+    };
+  }
+
+  renderSettingsView = () => (
+    <div className="App_settingsview">
+      <SettingsPanel />
+    </div>
+  )
+
+  renderMainView = () => (
+    <div className="App__mainview">
       <ClientsPanel />
       <MessagePanel />
     </div>
-  );
+  )
+
+  render () {
+    let { settingsOpen } = this.props;
+
+    return (
+      <div className="App">
+        <OperatorPanel />
+        { settingsOpen ? this.renderSettingsView() : this.renderMainView() }
+      </div>
+    );
+  }
 }
 
-ApplicationComponent.propTypes = {
-  apiServer: PropTypes.string,
+Application.propTypes = {
+  updateConfig: PropTypes.func.isRequired,
+  settingsOpen: PropTypes.bool.isRequired,
 };
 
-export default Application;
+
+const mapStateToProps = state => ({
+  settingsOpen: state.ui.settingsOpen,
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateConfig: config => dispatch(setConfig(config)),
+});
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Application);

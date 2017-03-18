@@ -1,6 +1,6 @@
 const electron = require('electron');
 // Module to control application life.
-const app = electron.app;
+const { app, ipcMain } = electron;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
@@ -79,21 +79,6 @@ module.exports = class Window {
     // Keep a global reference of the window object, if you don't, the window will
     // be closed automatically when the JavaScript object is garbage collected.
 
-    if (fs.existsSync('config.json')) {
-      let config = require(path.join(__dirname, 'config.json'));
-      let configParams = ['?'];
-
-      if (config.hasOwnProperty('apiServer')) {
-        configParams.push('apiServer=', config.apiServer, '&');
-      }
-
-      if (config.hasOwnProperty('operator')) {
-        configParams.push('operator=', config.operator);
-      }
-
-      url = url + configParams.join('');
-    }
-
     this.window = windowObject = new BrowserWindow({
       width: width,
       height: height,
@@ -110,6 +95,9 @@ module.exports = class Window {
     this.window.webContents.openDevTools();
 
     this.window.on('closed', this.onClosed);
+
+    // Setup IPC handling
+    this.configureIpc();
 
     // Build out the application menu
     this.buildMenu();
@@ -167,8 +155,13 @@ module.exports = class Window {
     Menu.setApplicationMenu(Menu.buildFromTemplate(template));
   }
 
-  // Menu click events
+  configureIpc () {
+    // IPC event handlers
+    ipcMain.on('init-config', this.onSendConfig);
+  }
 
+  // Menu click events
+  // TODO: Fill these out
   // onPreferencesClick () { }
   // onCloseConversationClick () { }
   // onCloseWindowClick () { }
@@ -179,6 +172,29 @@ module.exports = class Window {
 
 
   // Window events
+
+  onSendConfig (event) {
+    // Config file read/create
+    let config = null;
+    let configPath = path.join(__dirname, 'config.json');
+
+    // TODO: Make all this nice without needing to sync
+    if (!fs.existsSync('config.json')) {
+        const stream = fs.createWriteStream(configPath);
+        const initialConfig = {
+          "apiServer": "",
+          "operator": "",
+        };
+
+        fs.writeSync(stream, JSON.stringify(initialConfig, null, '  '), 0, 'utf8');
+
+        fs.closeSync(stream);
+    }
+
+    config = require(configPath);
+
+    event.sender.send('config', config);
+  }
 
   onClosed () {
     // Dereference the window object, usually you would store windows

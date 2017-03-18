@@ -6,3 +6,10 @@
   display: flex;
   font-family: Arial, Sans-serif;
 }
+
+.App__mainview {
+  display: flex;
+  flex-grow: 2;
+
+
+}

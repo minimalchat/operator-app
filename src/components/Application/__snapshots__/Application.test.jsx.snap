@@ -1,8 +1,12 @@
 exports[`Chat matches snapshot 1`] = `
-<div
-  className="App">
-  <OperatorPanel />
-  <ClientsPanel />
-  <MessagePanel />
-</div>
+<Application
+  settingsOpen={false}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  }
+  updateConfig={[Function]} />
 `;

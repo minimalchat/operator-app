@@ -34,7 +34,9 @@ module.exports = function (env) {
             PATHS.SRC
           ],
           exclude: [
-            PATHS.MODULES
+            PATHS.MODULES,
+            __dirname + '/Window.js',
+            __dirname + '/main.js'
           ],
           loader: 'babel-loader',
           options: {
@@ -54,6 +56,7 @@ module.exports = function (env) {
         },
       ]
     },
+    target: 'electron-renderer',
     plugins: plugins,
   };
 }

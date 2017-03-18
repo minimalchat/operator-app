@@ -30,6 +30,11 @@ const MessageList = (props) => {
   );
 };
 
+MessageList.propTypes = {
+  messages: PropTypes.array.isRequired,
+  activeId: PropTypes.string,
+};
+
 
 const mapStateToProps = state => ({
   messages: state.chat.messages,
@@ -41,16 +46,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-// hook into redux
+// Hook into redux
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(MessageList);
 
-
-
-// Prop Validation
-MessageList.propTypes = {
-  messages: PropTypes.array.isRequired,
-  activeId: PropTypes.string,
-};

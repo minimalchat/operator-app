@@ -8,7 +8,7 @@ exports[`OperatorSettingsMenu matches snapshot 1`] = `
       className="Settings__avatar"
       src="http://www.fillmurray.com/50/50" />
     <span>
-      Operator: Steve
+      Steve
     </span>
   </div>
 </section>
