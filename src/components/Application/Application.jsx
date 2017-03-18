@@ -17,17 +17,8 @@ class Application extends Component {
     super(props);
 
     // Setup our IPC listener
-    ipcRenderer.on('config', this.updateConfig());
+    ipcRenderer.on('config', props.updateConfig);
     ipcRenderer.send('init-config');
-  }
-
-  updateConfig () {
-    const { updateConfig } = this.props;
-
-    return function (event, config) {
-      // Send config to Redux state
-      updateConfig(config);
-    };
   }
 
   renderSettingsView = () => (
@@ -66,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateConfig: config => dispatch(setConfig(config)),
+  updateConfig: (event, config) => dispatch(setConfig(config)),
 });
 
 
