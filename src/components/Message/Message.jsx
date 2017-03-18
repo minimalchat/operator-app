@@ -13,12 +13,11 @@ const Message = (props) => {
   return <div className={msgClass()}>{props.children}</div>;
 };
 
-
-
-export default Message;
-
-
 Message.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string.isRequired,
 };
+
+
+export default Message;
+

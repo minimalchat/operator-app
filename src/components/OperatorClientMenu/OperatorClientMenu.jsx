@@ -43,6 +43,12 @@ const OperatorClientMenu = (props) => {
   );
 };
 
+OperatorClientMenu.propTypes = {
+  setFilter: PropTypes.func.isRequired,
+  operatorFilter: PropTypes.string,
+  openChats: PropTypes.number,
+};
+
 
 const mapStateToProps = state => ({
   operatorFilter: state.chat.operatorFilter,
@@ -58,10 +64,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(OperatorClientMenu);
-
-
-OperatorClientMenu.propTypes = {
-  setFilter: PropTypes.func.isRequired,
-  operatorFilter: PropTypes.string,
-  openChats: PropTypes.number,
-};
