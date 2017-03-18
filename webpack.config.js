@@ -6,6 +6,8 @@ const development = process.env.NODE_ENV !== 'production';
 const PATHS = {
   BUILD: __dirname + '/assets',
   SRC: __dirname + '/src',
+  ELECTRON_MAIN: __dirname + '/main.js',
+  ELECTRON_WINDOW: __dirname + '/Window.js',
   MODULES: __dirname + '/node_modules',
 }
 
@@ -31,10 +33,12 @@ module.exports = function (env) {
         {
           test: /\.jsx?$/,
           include: [
-            PATHS.SRC
+            PATHS.SRC,
           ],
           exclude: [
-            PATHS.MODULES
+            PATHS.MODULES,
+            PATHS.ELECTRON_MAIN,
+            PATHS.ELECTRON_WINDOW,
           ],
           loader: 'babel-loader',
           options: {
@@ -45,15 +49,16 @@ module.exports = function (env) {
         {
           test: /\.css$/,
           include: [
-            PATHS.SRC
+            PATHS.SRC,
           ],
           exclude: [
-            PATHS.MODULES
+            PATHS.MODULES,
           ],
-          loader: 'style-loader!css-loader'
+          loader: 'style-loader!css-loader',
         },
       ]
     },
+    target: 'electron-renderer',
     plugins: plugins,
   };
 }

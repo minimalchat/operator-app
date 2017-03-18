@@ -1,13 +1,17 @@
 const electron = require('electron');
 // Module to control application life.
-const app = electron.app;
+const { app, ipcMain } = electron;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const MenuItem = electron.MenuItem;
 
+const fs = require('fs');
 const path = require('path');
 const url = require('url');
+
+const WINDOW_HEIGHT = 900;
+const WINDOW_WIDTH = 1440;
 
 let defaultURL = url.format({
   pathname: path.join(__dirname, 'index.html'),
@@ -63,22 +67,37 @@ module.exports = class Window {
 
   // Convenience function for electron's 'ready' event
   static onReady() {
-    return new Window();
+    return Window.create();
   }
 
   // Shortcut function to create an instance of Window
-  static create (url = defaultURL, width = 800, height = 600) {
+  static create (url = defaultURL, width = WINDOW_WIDTH, height = WINDOW_HEIGHT) {
     return new Window(url, width, height);
   }
 
-  constructor (url = defaultURL, width = 800, height = 600) {
+  constructor (url = defaultURL, width = WINDOW_WIDTH, height = WINDOW_HEIGHT) {
     // Keep a global reference of the window object, if you don't, the window will
     // be closed automatically when the JavaScript object is garbage collected.
-    // let mainWindow;
-    this.window = windowObject = new BrowserWindow({ width: width, height: height });
+
+    this.window = windowObject = new BrowserWindow({
+      width: width,
+      height: height,
+      // webProperties: {
+      //   webgl: false,
+      //   webaudio: false,
+      //   sandbox: true,
+      // },
+    });
+
     this.window.loadURL(url);
+
+    // TODO: Only use this when built using DEV environment
     this.window.webContents.openDevTools();
+
     this.window.on('closed', this.onClosed);
+
+    // Setup IPC handling
+    this.configureIpc();
 
     // Build out the application menu
     this.buildMenu();
@@ -136,8 +155,13 @@ module.exports = class Window {
     Menu.setApplicationMenu(Menu.buildFromTemplate(template));
   }
 
-  // Menu click events
+  configureIpc () {
+    // IPC event handlers
+    ipcMain.on('init-config', this.onSendConfig);
+  }
 
+  // Menu click events
+  // TODO: Fill these out
   // onPreferencesClick () { }
   // onCloseConversationClick () { }
   // onCloseWindowClick () { }
@@ -148,6 +172,29 @@ module.exports = class Window {
 
 
   // Window events
+
+  onSendConfig (event) {
+    // Config file read/create
+    let config = null;
+    let configPath = path.join(__dirname, 'config.json');
+
+    // TODO: Make all this nice without needing to sync
+    if (!fs.existsSync('config.json')) {
+        const fd = fs.openSync(configPath, 'w');
+        const initialConfig = {
+          "apiServer": "",
+          "operator": "",
+        };
+
+        fs.writeSync(fd, JSON.stringify(initialConfig, null, '  '), 0, 'utf8');
+
+        fs.closeSync(fd);
+    }
+
+    config = require(configPath);
+
+    event.sender.send('config', config);
+  }
 
   onClosed () {
     // Dereference the window object, usually you would store windows

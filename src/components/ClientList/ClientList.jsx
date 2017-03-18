@@ -37,6 +37,13 @@ const ClientList = (props) => {
   return <ul className="ClientList__list">{ getChats() }</ul>;
 };
 
+ClientList.propTypes = {
+  chats: PropTypes.array.isRequired,
+  operatorFilter: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
+};
+
+
 const mapStateToProps = state => ({
   operatorFilter: state.chat.operatorFilter,
   chats: state.chat.chats.sort((curr, next) => (
@@ -49,14 +56,9 @@ const mapDispatchToProps = dispatch => ({
   dispatch,
 });
 
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(ClientList);
 
-
-ClientList.propTypes = {
-  chats: PropTypes.array.isRequired,
-  operatorFilter: PropTypes.string.isRequired,
-  query: PropTypes.string.isRequired,
-};

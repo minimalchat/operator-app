@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import createLogger from 'redux-logger';
+
 import Application from './components/Application/Application.jsx';
 
 // Reducers
 import chat from './store/Chat/reducer';
 import ui from './store/Ui/';
 
-// middleware
+// Middleware
 const logger = createLogger();        // TODO: make DEV only.
-
 
 // Create redux store
 const store = createStore(
@@ -19,7 +19,6 @@ const store = createStore(
     chat,
     ui,
   }),
-
   applyMiddleware(logger),             // NOTE: `logger` must come last
 );
 

@@ -1,6 +1,5 @@
 exports[`Chat matches snapshot 1`] = `
 <Application
-  dispatch={[Function]}
   settingsOpen={false}
   store={
     Object {
@@ -8,5 +7,6 @@ exports[`Chat matches snapshot 1`] = `
       "getState": [Function],
       "subscribe": [Function],
     }
-  } />
+  }
+  updateConfig={[Function]} />
 `;
