@@ -180,15 +180,15 @@ module.exports = class Window {
 
     // TODO: Make all this nice without needing to sync
     if (!fs.existsSync('config.json')) {
-        const stream = fs.createWriteStream(configPath);
+        const fd = fs.openSync(configPath, 'w');
         const initialConfig = {
           "apiServer": "",
           "operator": "",
         };
 
-        fs.writeSync(stream, JSON.stringify(initialConfig, null, '  '), 0, 'utf8');
+        fs.writeSync(fd, JSON.stringify(initialConfig, null, '  '), 0, 'utf8');
 
-        fs.closeSync(stream);
+        fs.closeSync(fd);
     }
 
     config = require(configPath);
