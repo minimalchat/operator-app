@@ -9,8 +9,10 @@ class InputBar extends Component {
     chatText: '',
   }
 
+  // dummy function to stub out sending message via socket
+  // this will eventually happen via redux actions.
   sendChat = () => {
-    console.log('aldkfjalkd');
+    console.log('dispatch action for sending chat message here')
   }
 
   handleChange = (e) => {
@@ -23,17 +25,11 @@ class InputBar extends Component {
     return (
       <div className="InputBar">
         <textarea onChange={this.handleChange} name="chatText" placeholder="text here, dummy" />
-        <Button variant="send" onClick={() => {}}>Send</Button>
+        <Button variant="send" onClick={this.sendChat} >Send</Button>
       </div>
     );
   }
 }
 
-/* const InputBar = () => (
- *   <div className="InputBar">
- *     <textarea placeholder="text here, dummy" />
- *     <Button variant="send" onClick={() => {}}>Send</Button>
- *   </div>
- * );
- * */
+
 export default InputBar;
