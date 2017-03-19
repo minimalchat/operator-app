@@ -19,12 +19,13 @@ export default function (store) {
   ));
 
 
-   /* TODO (the corresponding action creators don't exist yet either */
 
-   // 'connect_error'
-   // 'connect_timeout'
-   // 'reconnect'
-   // 'reconnecting'
-   // 'reconnect_failed'
-   // 'reconnect_timeout'
+  // TODO: Write the rest of the socket dispatches as necessary
+
+  // 'connect_error'
+  // 'connect_timeout'
+  // 'reconnect'
+  // 'reconnecting'
+  // 'reconnect_failed'
+  // 'reconnect_timeout'
 }
