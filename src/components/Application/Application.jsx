@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
 
 import { ipcRenderer } from 'electron';
 
@@ -12,7 +11,6 @@ import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
 import { setConfig } from '../../store/Chat/actions.js';
 import './Application.css';
 
-const socketPath = 'http://localhost:8000';
 
 class Application extends Component {
   constructor (props) {
@@ -21,12 +19,6 @@ class Application extends Component {
     // Setup our IPC listener
     ipcRenderer.on('config', props.updateConfig);
     ipcRenderer.send('init-config');
-
-    this.socket = io.connect(socketPath, {
-      reconnectionAttempts: 10,
-    });
-
-    initSockets(this.socket);
   }
 
 
