@@ -59,7 +59,7 @@ export function socketDisconnected () {
   };
 }
 
-// TODO write action creators for all other socket messages. (reconnect...timeout etc)
+// TODO write action creators for all other socket messages.
 // connected, disconnected are prop the most essential for now.
 
 

@@ -6,7 +6,6 @@ import { ipcRenderer } from 'electron';
 import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
-import initSockets from './Sockets.js';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
 import { setConfig } from '../../store/Chat/actions.js';
 import './Application.css';
