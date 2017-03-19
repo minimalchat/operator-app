@@ -14,14 +14,17 @@ export default function (store) {
     dispatch(actions.socketConnected())
   ));
 
-  // dispatch different actions on different socket events
-  /* socket.on('connect', onSocketConnected);
-   * socket.on('connect_error', onSocketConnectionError);
-   * socket.on('connect_timeout', onSocketTimeout);
-   * socket.on('disconnect', onSocketDisconnected);
-   * socket.on('reconnect', onSocketReconnected);
-   * socket.on('reconnecting', onSocketReconnecting);
-   * // socket.on('reconnect_error', socketConnectionError);
-   * socket.on('reconnect_failed', onSocketReconnectionFailed);
-   * socket.on('reconnect_timeout', onSocketTimeout);*/
+  socket.on('disconnect', () => (
+    dispatch(actions.socketDisconnected())
+  ));
+
+
+   /* TODO (the corresponding action creators don't exist yet either */
+
+   // 'connect_error'
+   // 'connect_timeout'
+   // 'reconnect'
+   // 'reconnecting'
+   // 'reconnect_failed'
+   // 'reconnect_timeout'
 }

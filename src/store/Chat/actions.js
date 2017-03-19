@@ -7,13 +7,13 @@ import {
 
   SOCKET_CONNECTED,
   SOCKET_DISCONNECTED,
-  SOCKET_CONNECTION_ERROR,
-  SOCKET_CONNECTION_TIMEOUT,
-  SOCKET_CONNECTION_RECONNECTING,
-  SOCKET_CONNECTION_RECONNECTED,
-  SOCKET_RECONNECT_ERROR,
-  SOCKET_RECONNECT_FAILED,
-  SOCKET_RECONNECT_TIMEOUT,
+  /* SOCKET_CONNECTION_ERROR,
+   * SOCKET_CONNECTION_TIMEOUT,
+   * SOCKET_CONNECTION_RECONNECTING,
+   * SOCKET_CONNECTION_RECONNECTED,
+   * SOCKET_RECONNECT_ERROR,
+   * SOCKET_RECONNECT_FAILED,
+   * SOCKET_RECONNECT_TIMEOUT,*/
 } from './constants';
 
 
@@ -46,6 +46,7 @@ export function toggleChatOpen (payload) {
 }
 
 // socket related actions
+
 export function socketConnected () {
   return {
     type: SOCKET_CONNECTED,
@@ -58,8 +59,12 @@ export function socketDisconnected () {
   };
 }
 
+// TODO write action creators for all other socket messages. (reconnect...timeout etc)
+// connected, disconnected are prop the most essential for now.
+
 
 // message related actions
+
 export function addMessage (payload) {
   return {
     type: CHAT_ADD_MESSAGE,
