@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
 
 import { ipcRenderer } from 'electron';
 
@@ -8,10 +7,9 @@ import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
-
 import { setConfig } from '../../store/Chat/actions.js';
-
 import './Application.css';
+
 
 class Application extends Component {
   constructor (props) {
@@ -21,6 +19,7 @@ class Application extends Component {
     ipcRenderer.on('config', props.updateConfig);
     ipcRenderer.send('init-config');
   }
+
 
   renderSettingsView = () => (
     <div className="App_settingsview">
@@ -36,7 +35,7 @@ class Application extends Component {
   )
 
   render () {
-    let { settingsOpen } = this.props;
+    const { settingsOpen } = this.props;
 
     return (
       <div className="App">
