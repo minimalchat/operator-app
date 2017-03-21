@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { loadMessages } from '../../store/Chat/actions';
+
 import './MessageList.css';
 import Message from '../Message/Message.jsx';
 
@@ -8,9 +10,10 @@ import Message from '../Message/Message.jsx';
  */
 
 const MessageList = (props) => {
-  const { messages, activeId } = props;
+  const { messages, activeId, dispatch } = props;
   const activeMsgs = messages.filter(msg => msg.chat === activeId);
 
+  loadMessages(dispatch, activeId);
   // render a map of <Message> components with their contents.
   const renderView = () => {
     if (!activeId) return (<div className="MessageList__empty"> No chat selected </div>);
