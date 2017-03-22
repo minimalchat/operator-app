@@ -36,6 +36,7 @@ const MessageList = (props) => {
 MessageList.propTypes = {
   messages: PropTypes.array.isRequired,
   activeId: PropTypes.string,
+  dispatch: PropTypes.func,
 };
 
 
