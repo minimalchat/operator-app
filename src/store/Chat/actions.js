@@ -1,4 +1,6 @@
 import {
+  LOAD_CHATS_SUCCESS,
+  LOAD_CHATS_FAILURE,
   CHAT_SET_CONFIG,
   CHAT_ADD_MESSAGE,
   CHAT_SET_ACTIVE,
@@ -16,6 +18,21 @@ import {
   SOCKET_RECONNECT_TIMEOUT,
 } from './constants';
 
+import API from '../endpoints';
+
+export function loadChats (dispatch, config) {
+  // TODO: get API base url from config
+  return fetch(`http://localhost:8000${API.chats}`)
+    .then(res => res.json())
+    .then(data => dispatch({
+      type: LOAD_CHATS_SUCCESS,
+      data: data.chats || [],
+    }))
+    .catch(error => dispatch({
+      type: LOAD_CHATS_FAILURE,
+      error,
+    }));
+}
 
 export function setConfig (payload) {
   return {
