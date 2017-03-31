@@ -15,6 +15,7 @@ const store = {
         { client: { first_name: 'Robert', last_name: 'waffle' } },
         { client: { first_name: 'Lisa', last_name: 'pancake' } },
       ],
+      config: {},
     },
   })),
 };

@@ -9,7 +9,7 @@ import OperatorSettingsMenu from '../OperatorSettingsMenu/OperatorSettingsMenu.j
 import './OperatorPanel.css';
 
 const OperatorPanel = props => (
-  <div id="OperatorPanel" className="panel">
+  <div className="OperatorPanel panel">
     <header className="OperatorPanel__header">minimal chat</header>
     <OperatorSettingsMenu />
     <OperatorClientMenu />

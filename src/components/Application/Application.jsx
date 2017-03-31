@@ -23,7 +23,7 @@ class Application extends Component {
 
 
   renderSettingsView = () => (
-    <div className="App_settingsview">
+    <div className="App__settingsview">
       <SettingsPanel />
     </div>
   )
