@@ -34,4 +34,5 @@ const mapDispatchToProps = dispatch => ({
   toggleSettings: () => dispatch(toggleSettings()),
 });
 
+
 export default connect(null, mapDispatchToProps)(OperatorPanel);
