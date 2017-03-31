@@ -21,7 +21,10 @@ const initialState = {
   chats: DUMMY_DATA ? dummy.chatSessions : [],
   messages: DUMMY_DATA ? dummy.messages : [],
   operatorFilter: 'all',
-  config: {},
+  config: {
+    apiServer: null,
+    operator: null,
+  },
 };
 
 function ChatReducer (state = initialState, action) {
