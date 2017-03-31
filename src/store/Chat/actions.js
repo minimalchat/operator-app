@@ -7,6 +7,11 @@ import {
   CHAT_TOGGLE_OPEN,
   OPERATOR_SET_FILTER,
 
+  // NETWORK
+  LOAD_MESSAGES_SUCCESS,
+  LOAD_MESSAGES_FAILURE,
+
+  // SOCKETS
   SOCKET_CONNECTED,
   SOCKET_DISCONNECTED,
   SOCKET_CONNECTION_ERROR,
@@ -126,4 +131,18 @@ export function addMessage (payload) {
     type: CHAT_ADD_MESSAGE,
     payload,
   };
+}
+
+export function loadMessages (dispatch, chatSession) {
+  const url = `http://localhost:8000/api/chat/:${chatSession}/messages`;
+  return fetch(url)
+    .then(res => res.json())
+    .then(payload => dispatch({
+      type: LOAD_MESSAGES_SUCCESS,
+      payload,
+    }))
+    .catch(err => dispatch({
+      type: LOAD_MESSAGES_FAILURE,
+      err,
+    }));
 }

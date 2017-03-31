@@ -12,7 +12,7 @@ class InputBar extends Component {
   // dummy function to stub out sending message via socket
   // this will eventually happen via redux actions.
   sendChat = () => {
-    console.log('dispatch action for sending chat message here')
+    console.log('dispatch action for sending chat message here');
   }
 
   handleChange = (e) => {
