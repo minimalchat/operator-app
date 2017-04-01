@@ -34,43 +34,51 @@ export default function (store) {
   });
 
   socket.on('connect', () => (
+    console.debug('CONNECT');
+
     dispatch(actions.socketConnected())
   ));
 
   socket.on('disconnect', () => (
+    console.debug('DISCONNECT');
+
     dispatch(actions.socketDisconnected())
   ));
 
   socket.on('connect_error', () => (
-    console.log('CONNECT ERROR')
+    console.debug('CONNECT ERROR');
+
+    // TODO: Dispatch event and alert Operator of connection issue
   ));
 
   socket.on('connect_timeout', () => (
-    console.log('CONNECT TIMEOUT')
+    console.debug('CONNECT TIMEOUT');
+
+    // TODO: Dispatch event and alert Operator of connection issue
   ));
 
   socket.on('reconnect', () => (
-    console.log('RECONNECT')
+    console.debug('RECONNECTED');
+
+    // TODO: Dispatch event and alert Operator of successful reconnection
   ));
 
   socket.on('reconnecting', () => (
-    console.log('RECONNECTING')
+    console.debug('RECONNECTING');
+
+    // TODO: Dispatch event and alert Operator of reconnection
   ));
 
   socket.on('reconnect_failed', () => (
-    console.log('RECONNECT FAILED')
+    console.debug('RECONNECT FAILED');
+
+    // TODO: Dispatch event and alert Operator of reconnection issue
   ));
 
   socket.on('reconnect_timeout', () => (
-    console.log('RECONNECT TIMEOUT')
+    console.debug('RECONNECT TIMEOUT');
+
+    // TODO: Dispatch event and alert Operator of reconnection issue
   ));
 
-  // TODO: Write the rest of the socket dispatches as necessary
-
-  // 'connect_error'
-  // 'connect_timeout'
-  // 'reconnect'
-  // 'reconnecting'
-  // 'reconnect_failed'
-  // 'reconnect_timeout'
 }

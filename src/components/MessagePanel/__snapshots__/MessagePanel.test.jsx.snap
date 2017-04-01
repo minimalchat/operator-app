@@ -1,7 +1,6 @@
 exports[`MessagePanel matches snapshot 1`] = `
 <div
-  className="panel"
-  id="MessagePanel">
+  className="MessagePanel panel">
   <Connect(MessageMenuBar) />
   <Connect(MessageList) />
   <InputBar />

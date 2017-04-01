@@ -5,7 +5,7 @@ import InputBar from '../InputBar/InputBar.jsx';
 import './MessagePanel.css';
 
 const MessagePanel = () => (
-  <div class="MessagePanel panel">
+  <div className="MessagePanel panel">
     <MessageMenuBar />
     <MessageList />
     <InputBar />
