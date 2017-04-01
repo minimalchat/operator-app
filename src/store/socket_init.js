@@ -34,13 +34,13 @@ export default function (store) {
   });
 
   socket.on('connect', () => (
-    console.debug('CONNECT');
+    console.debug('CONNECTED');
 
     dispatch(actions.socketConnected())
   ));
 
   socket.on('disconnect', () => (
-    console.debug('DISCONNECT');
+    console.debug('DISCONNECTED');
 
     dispatch(actions.socketDisconnected())
   ));
