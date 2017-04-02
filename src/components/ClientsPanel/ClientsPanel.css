@@ -1,5 +1,6 @@
 .ClientsPanel {
   background: #F7F8FA;
+  box-shadow: 1px 0 1px rgba(0,0,0,0.1);
   flex-grow: 2;
   z-index: 1;
 }
