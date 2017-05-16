@@ -7,14 +7,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setActiveChat } from '../../store/Chat/actions';
+import { setActiveChat, loadMessages } from '../../store/Chat';
 import './ClientCard.css';
 
 const ClientCard = props => (
   <li className="ClientCard" >
     <button
       className="ClientCard__btn"
-      onClick={() => props.setActiveChat(props.chat)}
+      onClick={() => {
+        props.setActiveChat(props.chat);
+
+        props.loadMessages(props.config, props.chat.id);
+      }}
     >
       {props.children}
     </button>
@@ -23,17 +27,20 @@ const ClientCard = props => (
 
 ClientCard.propTypes = {
   chat: PropTypes.object.isRequired,
+  config: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired,
   setActiveChat: PropTypes.func.isRequired,
+  loadMessages: PropTypes.func.isRequired,
 };
 
 
-const mapStateToProps = (/* state */) => ({
-
+const mapStateToProps = state => ({
+  config: state.chat.config,
 });
 
 const mapDispatchToProps = dispatch => ({
   setActiveChat: chat => dispatch(setActiveChat(chat)),
+  loadMessages: (config, id) => loadMessages(dispatch, config, id),
 });
 
 

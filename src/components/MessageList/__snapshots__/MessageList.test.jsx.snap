@@ -1,5 +1,6 @@
 exports[`MessageList matches snapshot 1`] = `
 <MessageList
+  config={Object {}}
   dispatch={[Function]}
   messages={Array []}
   store={

@@ -1,8 +1,11 @@
 exports[`MessagePanel matches snapshot 1`] = `
-<div
-  className="MessagePanel panel">
-  <Connect(MessageMenuBar) />
-  <Connect(MessageList) />
-  <InputBar />
-</div>
+<MessagePanel
+  dispatch={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  } />
 `;

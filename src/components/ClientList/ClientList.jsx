@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadChats } from '../../store/Chat/actions';
+import { loadChats } from '../../store/Chat';
 import ClientCard from '../ClientCard/ClientCard.jsx';
 import './ClientList.css';
 
@@ -15,7 +15,9 @@ class ClientList extends Component {
   }
 
   componentWillMount () {
-    loadChats(this.props.dispatch, this.props.config);
+    if (this.props.config.apiServer) {
+      loadChats(this.props.dispatch, this.props.config);
+    }
   }
 
   getChats = () => {

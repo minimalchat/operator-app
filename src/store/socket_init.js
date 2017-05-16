@@ -1,7 +1,22 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import io from 'socket.io-client';
-import * as actions from './Chat/actions.js';
-// import actions that have anything to do with sockets.
+import {
+  socketConnected,
+  socketDisconnected,
+  socketConnectionError,
+  socketConnectionTimeout,
+  socketReconnecting,
+  socketReconnected,
+  socketReconnectError,
+  socketReconnectFailed,
+  socketReconnectTimeout,
+} from './Socket';
+
+import {
+  addChat,
+  addMessage,
+} from './Chat';
+
 
 export default function (store) {
   const { dispatch } = store;
@@ -12,73 +27,51 @@ export default function (store) {
     console.error('ERROR: No API Server defined', config);
   }
 
-  console.log('CONNECTING SOCKET');
+  console.debug('CONNECTING SOCKET');
 
+  // Make connection
   const socket = io.connect(socketPath, {
     reconnectionAttempts: 10,
     query: 'type=operator',
   });
 
-  let onevent = socket.onevent;
-  socket.onevent = function (packet) {
-    let args = packet.data || [];
+  // Listen for anything, useful in debugging
+  const onevent = socket.onevent;
+  socket.onevent = function onEvent (packet) {
+    const args = packet.data || [];
     onevent.call(this, packet);    // original call
     packet.data = ['*'].concat(args);
     onevent.call(this, packet);      // additional call to catch-all
   };
-  socket.on('*', (...args) => console.log('SOCKET', args));
+  socket.on('*', (...args) => console.debug('SOCKET', args));
 
 
-  socket.on('client:message', (data) => {
-    console.log('DEBUG', 'RECIEVING MESSAGE ...', data);
-  });
+  // Client events
+  socket.on('client:message', data => dispatch(addMessage(data ? JSON.parse(data) : [])));
 
-  socket.on('connect', () => (
-    console.debug('CONNECTED');
+  socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));
 
-    dispatch(actions.socketConnected())
-  ));
 
-  socket.on('disconnect', () => (
-    console.debug('DISCONNECTED');
+  // Connection events
+  socket.on('connect', () => dispatch(socketConnected()));
 
-    dispatch(actions.socketDisconnected())
-  ));
+  socket.on('disconnect', () => dispatch(socketDisconnected()));
 
-  socket.on('connect_error', () => (
-    console.debug('CONNECT ERROR');
+  socket.on('connect_error', error => dispatch(socketConnectionError(error)));
 
-    // TODO: Dispatch event and alert Operator of connection issue
-  ));
+  socket.on('connect_timeout', () => dispatch(socketConnectionTimeout()));
 
-  socket.on('connect_timeout', () => (
-    console.debug('CONNECT TIMEOUT');
+  socket.on('reconnect', attempt => dispatch(socketReconnected(attempt)));
 
-    // TODO: Dispatch event and alert Operator of connection issue
-  ));
+  socket.on('reconnecting', attempt => dispatch(socketReconnecting(attempt)));
 
-  socket.on('reconnect', () => (
-    console.debug('RECONNECTED');
+  socket.on('reconnect_error', error => dispatch(socketReconnectError(error)));
 
-    // TODO: Dispatch event and alert Operator of successful reconnection
-  ));
+  socket.on('reconnect_failed', () => dispatch(socketReconnectFailed()));
 
-  socket.on('reconnecting', () => (
-    console.debug('RECONNECTING');
+  socket.on('reconnect_timeout', () => dispatch(socketReconnectTimeout()));
 
-    // TODO: Dispatch event and alert Operator of reconnection
-  ));
+  socket.on('ping', () => console.debug('PING'));
 
-  socket.on('reconnect_failed', () => (
-    console.debug('RECONNECT FAILED');
-
-    // TODO: Dispatch event and alert Operator of reconnection issue
-  ));
-
-  socket.on('reconnect_timeout', () => (
-    console.debug('RECONNECT TIMEOUT');
-
-    // TODO: Dispatch event and alert Operator of reconnection issue
-  ));
-
+  socket.on('pong', latency => console.debug('PONG', latency, 'ms'));
 }

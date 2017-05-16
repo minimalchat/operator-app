@@ -1,28 +1,29 @@
+const initialState = {
+  settingsOpen: false,
+};
+
 // Constants
 //
 
-const UI_TOGGLE_SETTINGS = 'UI_TOGGLE_SETTINGS';
+const TOGGLE_SETTINGS = 'UI_TOGGLE_SETTINGS';
 
 
 // Actions
 //
 
 export function toggleSettings () {
-  return { type: UI_TOGGLE_SETTINGS };
+  return { type: TOGGLE_SETTINGS };
 }
 
 
 // Reducer
 //
 
-const initialState = {
-  settingsOpen: false,
-};
 
 function UIReducer (state = initialState, action) {
   switch (action.type) {
 
-    case UI_TOGGLE_SETTINGS:
+    case TOGGLE_SETTINGS:
       return { ...state, settingsOpen: !state.settingsOpen };
 
     default:

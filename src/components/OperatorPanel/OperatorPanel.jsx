@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleSettings } from '../../store/Ui/';
+import { toggleSettings } from '../../store/UI';
 
 import OperatorClientMenu from '../OperatorClientMenu/OperatorClientMenu.jsx';
 import OperatorSettingsMenu from '../OperatorSettingsMenu/OperatorSettingsMenu.jsx';

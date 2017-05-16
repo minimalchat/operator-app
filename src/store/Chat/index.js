@@ -2,47 +2,51 @@ import API from '../endpoints';
 import makeDummy from '../dummy';
 
 // Flag to enable putting dummy data into redux
-const DUMMY_DATA = process.env.NODE_ENV !== 'production';
-const dummy = makeDummy(6, 50);
+// const DUMMY_DATA = process.env.NODE_ENV !== 'production';
+// const dummy = makeDummy(6, 50);
 
 const initialState = {
   activeId: '',
   activeIsOpen: null,
-  chats: DUMMY_DATA ? dummy.chatSessions : [],
-  messages: DUMMY_DATA ? dummy.messages : [],
+  chats: [], // DUMMY_DATA ? dummy.chatSessions : [],
+  messages: [], // DUMMY_DATA ? dummy.messages : [],
   operatorFilter: 'all',
   config: {
     apiServer: null,
     operator: null,
-  } ,
-}; 
+  },
+};
 
 
 // Constants
 //
 
-export const LOAD_CHATS_SUCCESS = 'LOAD_CHATS_SUCCESS';
-export const LOAD_CHATS_FAILURE = 'LOAD_CHATS_FAILURE';
+export const LOAD_CHATS_SUCCESS = 'CHAT_LOAD_CHATS_SUCCESS';
+export const LOAD_CHATS_FAILURE = 'CHAT_LOAD_CHATS_FAILURE';
+export const LOAD_MESSAGES_SUCCESS = 'CHAT_LOAD_MESSAGES_SUCCESS';
+export const LOAD_MESSAGES_FAILURE = 'CHAT_LOAD_MESSAGES_FAILURE';
 
-export const CHAT_SET_CONFIG = 'CHAT_SET_CONFIG';
-export const CHAT_SET_APISERVER = 'CHAT_SET_APISERVER';
-export const CHAT_SET_OPERATOR = 'CHAT_SET_OPERATOR';
-export const CHAT_SET_ACTIVE = 'CHAT_SET_ACTIVE';
-export const CHAT_TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
-export const OPERATOR_SET_FILTER = 'OPERATOR_SET_FILTER';
-export const CHAT_ADD_MESSAGE = 'CHAT_ADD_MESSAGE';
+export const SET_CONFIG = 'CHAT_SET_CONFIG';
+export const SET_APISERVER = 'CHAT_SET_APISERVER';
+export const SET_OPERATOR = 'CHAT_SET_OPERATOR';
+export const SET_OPERATOR_FILTER = 'CHAT_SETOPERATOR_FILTER';
+export const SET_ACTIVE_CHAT = 'CHAT_SET_ACTIVE_CHAT';
+
+export const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
+
+export const ADD_MESSAGE = 'CHAT_ADD_MESSAGE';
+export const ADD_CHAT = 'CHAT_ADD_CHAT';
 
 
 // Actions
 //
 
 export function loadChats (dispatch, config) {
-  // TODO: get API base url from config
-  return fetch(`http://localhost:8000${API.chats}`)
+  return fetch(`${config.apiServer}${API.chats}`)
     .then(res => res.json())
     .then(data => dispatch({
       type: LOAD_CHATS_SUCCESS,
-      data: data.chats || [],
+      payload: data.chats || [],
     }))
     .catch(error => dispatch({
       type: LOAD_CHATS_FAILURE,
@@ -50,38 +54,59 @@ export function loadChats (dispatch, config) {
     }));
 }
 
+export function loadMessages (dispatch, config, activeId) {
+  return fetch(`${config.apiServer}${API.chat}/${activeId}/messages`)
+    .then(res => res.json())
+    .then(data => dispatch({
+      type: LOAD_MESSAGES_SUCCESS,
+      payload: data.messages || [],
+    }))
+    .catch(error => dispatch({
+      type: LOAD_MESSAGES_FAILURE,
+      error,
+    }));
+}
+
 export function setConfig (payload) {
   return {
-    type: CHAT_SET_CONFIG,
+    type: SET_CONFIG,
     payload,
   };
 }
 
 export function setActiveChat (payload) {
   return {
-    type: CHAT_SET_ACTIVE,
+    type: SET_ACTIVE_CHAT,
     payload,
   };
 }
 
 export function setOperatorFilter (payload) {
   return {
-    type: OPERATOR_SET_FILTER,
+    type: SET_OPERATOR_FILTER,
     payload,
   };
 }
+
 
 export function toggleChatOpen (payload) {
   return {
-    type: CHAT_TOGGLE_OPEN,
+    type: TOGGLE_OPEN,
     payload,
   };
 }
 
-// Message related actions
+
+export function addChat (payload) {
+  return {
+    type: ADD_CHAT,
+    payload,
+  };
+}
+
 export function addMessage (payload) {
   return {
-    type: CHAT_ADD_MESSAGE,
+    type: ADD_MESSAGE,
     payload,
   };
 }
@@ -91,24 +116,68 @@ export function addMessage (payload) {
 //
 
 function ChatReducer (state = initialState, action) {
-   switch (action.type) {
+  switch (action.type) {
     case LOAD_CHATS_SUCCESS:
       return {
         ...state,
-        chats: action.data,
+        chats: action.payload,
       };
 
     case LOAD_CHATS_FAILURE:
-      // TODO: handle error
+      // TODO: Handle error
       return state;
 
-    case CHAT_SET_CONFIG:
+    case LOAD_MESSAGES_SUCCESS: {
+      // let currentMessages = state.messages;
+      //
+      // const newMessageIds = action.payload.map(message => [
+      //   message.chat,
+      //   '.',
+      //   new Date(message.timestamp).getTime(),
+      // ].join(''));
+      //
+      // if (state.messages.length > 0) {
+      //   currentMessages = state.messages.reduce((messages, message) => {
+      //     const messageId = [
+      //       message.chat,
+      //       '.',
+      //       new Date(message.timestamp).getTime(),
+      //     ].join('');
+      //
+      //     console.log(
+      //       'CHECKING',
+      //       messageId,
+      //       'IN',
+      //       newMessageIds,
+      //       '(',
+      //       messageId in newMessageIds,
+      //       ')'
+      //     );
+      //     if (messageId in newMessageIds) {
+      //       return messages;
+      //     }
+      //
+      //     return [...messages, message];
+      //   });
+      // }
+
+      return {
+        ...state,
+        messages: [...action.payload],
+      };
+    }
+
+    case LOAD_MESSAGES_FAILURE:
+      // TODO: Handle error
+      return state;
+
+    case SET_CONFIG:
       return {
         ...state,
         config: action.payload,
       };
 
-    case CHAT_SET_ACTIVE:
+    case SET_ACTIVE_CHAT:
       return {
         ...state,
         activeId: action.payload.id,
@@ -116,14 +185,14 @@ function ChatReducer (state = initialState, action) {
       };
 
 
-    case OPERATOR_SET_FILTER:
+    case SET_OPERATOR_FILTER:
       return {
         ...state,
         operatorFilter: action.payload,
       };
 
 
-    case CHAT_TOGGLE_OPEN: {
+    case TOGGLE_OPEN: {
       const chats = state.chats.map((chat) => {
         if (chat.id === action.payload) {
           const toggledChat = chat;
@@ -135,9 +204,25 @@ function ChatReducer (state = initialState, action) {
         return chat;
       });
 
-      return { ...state, chats, activeId: '' };
+      return {
+        ...state,
+        chats,
+        activeId: '',
+      };
     }
 
+
+    case ADD_CHAT:
+      return {
+        ...state,
+        chats: [...state.chats, action.payload],
+      };
+
+    case ADD_MESSAGE:
+      return {
+        ...state,
+        messages: [...state.messages, action.payload],
+      };
 
     default:
       return state;

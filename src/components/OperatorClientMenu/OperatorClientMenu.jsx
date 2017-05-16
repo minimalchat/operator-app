@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './OperatorClientMenu.css';
-import { setOperatorFilter } from '../../store/Chat/actions';
+import { setOperatorFilter } from '../../store/Chat';
 
 const OperatorClientMenu = (props) => {
   const { setFilter, operatorFilter, openChats } = props;
