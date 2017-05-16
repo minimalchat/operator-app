@@ -2,6 +2,8 @@ exports[`InputBar matches snapshot 1`] = `
 <div
   className="InputBar">
   <textarea
+    name="chatText"
+    onChange={[Function]}
     placeholder="text here, dummy" />
   <Button
     disabled={false}

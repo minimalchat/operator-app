@@ -4,7 +4,8 @@
   * TODO: implement 'Assigned To Me' functionality (0.2)
 */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './OperatorClientMenu.css';
 import { setOperatorFilter } from '../../store/Chat/actions';

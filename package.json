@@ -50,9 +50,10 @@
     "testRegex": "((test|spec))\\.(js|jsx)$"
   },
   "dependencies": {
-    "faker": "^4.1.0",
     "electron": "^1.4.1",
+    "faker": "^4.1.0",
     "moment": "^2.17.1",
+    "prop-types": "^15.5.10",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",

@@ -12,3 +12,6 @@ assets/js/**
 .DS_Store
 
 config.json
+
+*.swp
+*.swo

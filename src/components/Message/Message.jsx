@@ -2,7 +2,8 @@
   * @summary: Displays a single message in the Message List
 */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './Message.css';
 
 const Message = (props) => {

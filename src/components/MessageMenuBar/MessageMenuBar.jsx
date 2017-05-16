@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Button from '../Button/Button.jsx';
 import { toggleChatOpen } from '../../store/Chat/actions';
