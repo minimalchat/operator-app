@@ -21,5 +21,6 @@
   padding-right: 0.25rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 8px;
 }

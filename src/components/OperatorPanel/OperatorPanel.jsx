@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleSettings } from '../../store/Ui/';
+import { toggleSettings } from '../../store/UI';
 
 import OperatorClientMenu from '../OperatorClientMenu/OperatorClientMenu.jsx';
 import OperatorSettingsMenu from '../OperatorSettingsMenu/OperatorSettingsMenu.jsx';
@@ -9,7 +9,7 @@ import OperatorSettingsMenu from '../OperatorSettingsMenu/OperatorSettingsMenu.j
 import './OperatorPanel.css';
 
 const OperatorPanel = props => (
-  <div id="OperatorPanel" className="panel">
+  <div className="OperatorPanel panel">
     <header className="OperatorPanel__header">minimal chat</header>
     <OperatorSettingsMenu />
     <OperatorClientMenu />
@@ -33,5 +33,6 @@ OperatorPanel.propTypes = {
 const mapDispatchToProps = dispatch => ({
   toggleSettings: () => dispatch(toggleSettings()),
 });
+
 
 export default connect(null, mapDispatchToProps)(OperatorPanel);

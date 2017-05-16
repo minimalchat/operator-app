@@ -1,24 +1,26 @@
 .Message__client {
-  color: white;
-  background: #3498db;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 2px;
   align-self: flex-end;
+  background: #ffffff;
+  border-radius: 10px 10px 0 10px;
+  color: #000;
+  float: left;
   font-size: 12px;
-  max-width: 45%;
   letter-spacing: 1px;
+  margin-top: 6px;
+  margin-right: 6px;
+  max-width: 45%;
+  padding: 10px;
+  text-align: left;
 }
 
-
 .Message__operator {
+  align-self: flex-start;
+  background: rgb(230, 126, 34);
+  border-radius: 2px;
   color: white;
   font-size: 12px;
-  background: rgb(230, 126, 34);
   letter-spacing: 1px;
   padding: 0.5rem;
   margin: 0.5rem;
-  border-radius: 2px;
-  align-self: flex-start;
   max-width: 45%;
 }

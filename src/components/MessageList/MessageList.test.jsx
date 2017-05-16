@@ -7,7 +7,10 @@ const store = {
   dispatch: jest.fn(),
 
   getState: jest.fn(() => ({
-    chat: { messages: [] },
+    chat: {
+      messages: [],
+      config: {},
+    },
   })),
 };
 

@@ -10,11 +10,11 @@ const store = {
   getState: jest.fn(() => ({
     chat: {
       operatorFilter: 'all',
-      config: {},
       chats: [
         { client: { first_name: 'Robert', last_name: 'waffle' } },
         { client: { first_name: 'Lisa', last_name: 'pancake' } },
       ],
+      config: {},
     },
   })),
 };

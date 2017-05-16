@@ -8,8 +8,9 @@ import Application from './components/Application/Application.jsx';
 import socketInit from './store/socket_init.js';
 
 // Reducers
-import chat from './store/Chat/reducer';
-import ui from './store/Ui/';
+import chat from './store/Chat';
+import ui from './store/UI';
+import socket from './store/Socket';
 
 // Middleware
 const logger = createLogger();        // TODO: make DEV only.
@@ -19,7 +20,9 @@ const store = createStore(
   combineReducers({
     chat,
     ui,
+    socket,
   }),
+
   applyMiddleware(logger),             // NOTE: `logger` must come last
 );
 

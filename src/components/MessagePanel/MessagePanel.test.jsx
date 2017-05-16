@@ -7,7 +7,9 @@ import MessagePanel from './MessagePanel.jsx';
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
-  getState: jest.fn(() => ({ })),
+  getState: jest.fn(() => ({
+    chat: { },
+  })),
 };
 
 describe('MessagePanel', () => {

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { ipcRenderer } from 'electron';
 
 import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
-import { setConfig } from '../../store/Chat/actions.js';
+
+import { setConfig, loadChats } from '../../store/Chat';
+
 import './Application.css';
 
 
@@ -23,7 +24,7 @@ class Application extends Component {
 
 
   renderSettingsView = () => (
-    <div className="App_settingsview">
+    <div className="App__settingsview">
       <SettingsPanel />
     </div>
   )
@@ -58,7 +59,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateConfig: (event, config) => dispatch(setConfig(config)),
+  updateConfig: (event, config) => {
+    // Set config
+    dispatch(setConfig(config));
+
+    // Then reload chats
+    loadChats(dispatch, config);
+  },
 });
 
 
