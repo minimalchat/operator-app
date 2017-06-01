@@ -21,6 +21,7 @@ export function toggleSettings () {
 
 
 function UIReducer (state = initialState, action) {
+  console.log('UI', action);
   switch (action.type) {
 
     case TOGGLE_SETTINGS:

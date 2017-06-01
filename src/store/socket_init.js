@@ -17,8 +17,27 @@ import {
   addMessage,
 } from './Chat';
 
+let socket = null;
 
-export default function (store) {
+// Middleware for Redux to watch for new chat messages
+export function socketMessageHook (store) {
+  return next => (action) => {
+    const result = next(action);
+
+    if (socket && action.type === 'CHAT_ADD_MESSAGE') {
+      let { chat: { messages, config: { operator } } } = store.getState();
+
+      // If the author is the operator we can send the message to the server
+      if (messages[messages.length - 1].author === operator) {
+        socket.emit('operator:message', messages[messages.length - 1]);
+      }
+      console.log('LAST MESSAGE', messages[messages.length - 1]);
+    }
+  };
+}
+
+
+export default function socketInit (store) {
   const { dispatch } = store;
   const { chat: { config } } = store.getState();
   const socketPath = config.apiServer || 'http://localhost:8000';
@@ -30,7 +49,7 @@ export default function (store) {
   console.debug('CONNECTING SOCKET');
 
   // Make connection
-  const socket = io.connect(socketPath, {
+  socket = io.connect(socketPath, {
     reconnectionAttempts: 10,
     query: 'type=operator',
   });
@@ -40,7 +59,7 @@ export default function (store) {
   socket.onevent = function onEvent (packet) {
     const args = packet.data || [];
     onevent.call(this, packet);    // original call
-    packet.data = ['*'].concat(args);
+    packet.data = ['*', ...args];
     onevent.call(this, packet);      // additional call to catch-all
   };
   socket.on('*', (...args) => console.debug('SOCKET', args));
@@ -74,4 +93,6 @@ export default function (store) {
   socket.on('ping', () => console.debug('PING'));
 
   socket.on('pong', latency => console.debug('PONG', latency, 'ms'));
+
+  return socket;
 }

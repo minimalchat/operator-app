@@ -88,14 +88,12 @@ export function setOperatorFilter (payload) {
   };
 }
 
-
 export function toggleChatOpen (payload) {
   return {
     type: TOGGLE_OPEN,
     payload,
   };
 }
-
 
 export function addChat (payload) {
   return {
@@ -116,6 +114,7 @@ export function addMessage (payload) {
 //
 
 function ChatReducer (state = initialState, action) {
+  console.log('CHAT', action);
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
       return {
