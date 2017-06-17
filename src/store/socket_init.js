@@ -29,7 +29,7 @@ export function socketMessageHook (store) {
 
       // If the author is the operator we can send the message to the server
       if (messages[messages.length - 1].author === operator) {
-        socket.emit('operator:message', messages[messages.length - 1]);
+        socket.emit('operator:message', JSON.stringify(messages[messages.length - 1]));
       }
       console.log('LAST MESSAGE', messages[messages.length - 1]);
     }
@@ -51,18 +51,10 @@ export default function socketInit (store) {
   // Make connection
   socket = io.connect(socketPath, {
     reconnectionAttempts: 10,
-    query: 'type=operator',
+    query: {
+      type: 'operator',
+    },
   });
-
-  // Listen for anything, useful in debugging
-  const onevent = socket.onevent;
-  socket.onevent = function onEvent (packet) {
-    const args = packet.data || [];
-    onevent.call(this, packet);    // original call
-    packet.data = ['*', ...args];
-    onevent.call(this, packet);      // additional call to catch-all
-  };
-  socket.on('*', (...args) => console.debug('SOCKET', args));
 
 
   // Client events
@@ -90,9 +82,21 @@ export default function socketInit (store) {
 
   socket.on('reconnect_timeout', () => dispatch(socketReconnectTimeout()));
 
-  socket.on('ping', () => console.debug('PING'));
+  socket.on('ping', () => {
+    console.debug('PING');
+  });
 
   socket.on('pong', latency => console.debug('PONG', latency, 'ms'));
+
+  // Listen for anything, useful in debugging
+  const onevent = socket.onevent;
+  socket.onevent = function onEvent (packet) {
+    const args = packet.data || [];
+    onevent.call(this, packet);    // original call
+    packet.data = ['*', ...args];
+    onevent.call(this, packet);      // additional call to catch-all
+  };
+  socket.on('*', (...args) => console.debug('SOCKET', args));
 
   return socket;
 }
