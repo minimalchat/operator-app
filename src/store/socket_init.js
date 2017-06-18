@@ -14,7 +14,7 @@ import {
 
 import {
   addChat,
-  addMessage,
+  receiveMessage,
 } from './Chat';
 
 let socket = null;
@@ -24,14 +24,12 @@ export function socketMessageHook (store) {
   return next => (action) => {
     const result = next(action);
 
-    if (socket && action.type === 'CHAT_ADD_MESSAGE') {
-      let { chat: { messages, config: { operator } } } = store.getState();
+    if (socket && action.type === 'CHAT_MESSAGE_OPERATOR') {
+      socket.emit('operator:message', JSON.stringify(action.payload));
+    }
 
-      // If the author is the operator we can send the message to the server
-      if (messages[messages.length - 1].author === operator) {
-        socket.emit('operator:message', JSON.stringify(messages[messages.length - 1]));
-      }
-      console.log('LAST MESSAGE', messages[messages.length - 1]);
+    if (socket && action.type === 'TYPING') {
+      socket.emit('operator:typing');
     }
   };
 }
@@ -58,7 +56,7 @@ export default function socketInit (store) {
 
 
   // Client events
-  socket.on('client:message', data => dispatch(addMessage(data ? JSON.parse(data) : [])));
+  socket.on('client:message', data => dispatch(receiveMessage(data ? JSON.parse(data) : [])));
 
   socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));
 

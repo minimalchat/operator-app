@@ -6,21 +6,40 @@
   float: left;
   font-size: 12px;
   letter-spacing: 1px;
+  list-style: none;
   margin-top: 6px;
   margin-right: 6px;
   max-width: 45%;
+  min-width: 25%;
   padding: 10px;
   text-align: left;
 }
 
+.Message__client ul li {
+  text-align: right;
+}
+
 .Message__operator {
   align-self: flex-start;
-  background: rgb(230, 126, 34);
-  border-radius: 2px;
+  background: #0a6bef;
+  border-radius: 10px 10px 10px 0;
   color: white;
   font-size: 12px;
   letter-spacing: 1px;
+  list-style: none;
   padding: 0.5rem;
   margin: 0.5rem;
   max-width: 45%;
+  min-width: 25%;
+}
+
+.Message__operator ul,
+.Message__client ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Message__operator ul li {
+  text-align: left;
 }

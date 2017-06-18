@@ -14,7 +14,7 @@ const store = {
 
 describe('MessageList', () => {
   it('matches snapshot', () => {
-    const component = shallow(<Message type="operator">test message</Message>);
+    const component = shallow(<Message author={'operator.steve'} content={['test message']} />);
     expect(component).toMatchSnapshot();
   });
 });

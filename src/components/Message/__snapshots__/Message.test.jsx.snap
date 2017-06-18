@@ -1,6 +1,17 @@
 exports[`MessageList matches snapshot 1`] = `
-<div
-  className="Message__operator">
-  test message
-</div>
+<li
+  className="Message__operator"
+  style={
+    Object {
+      "clear": "both",
+    }
+  }>
+  <div>
+    <ul>
+      <li>
+        test message
+      </li>
+    </ul>
+  </div>
+</li>
 `;
