@@ -33,23 +33,53 @@ build:
 	$(NPM_CMD) run build
 
 
-compile: build
-	@echo
-	@# SUPER HACKY
-	mkdir -p $(ASSETS)/css
-	sed 's/\.\.\/resources/\.\./g' <node_modules/@blueprintjs/core/dist/blueprint.css >assets/css/blueprint.css
-	sed 's/\.\.\/resources/\.\./g' <node_modules/@blueprintjs/core/dist/blueprint.css.map >assets/css/blueprint.css.map
-	mkdir -p $(ASSETS)/icons
-	cp -r node_modules/@blueprintjs/core/resources/icons/*.{eot,ttf,woff} $(ASSETS)/icons/
+compile-linux:
+	@echo "\nLinux\n"
 
-	$(NPM_CMD) run compile -- \
+	$(NPM_CMD) run compile:linux -- \
 	 --ignore=README.md \
 	 --ignore=webpack.config.js \
 	 --ignore=Makefile \
 	 --ignore=yarn.lock \
 	 --ignore=.gitignore \
 	 --ignore=src \
-	 --ignore=node_modules
+	 --ignore=node_modules \
+	 --win32metadata.CompanyName='Minimal Chat' \
+	 --win32metadata.ProductName=Operator \
+	 --appname=Operator \
+	 --app-copyright=BSD-3
+
+compile-win:
+	@echo "\nWindows\n"
+	$(NPM_CMD) run compile:win -- \
+	--ignore=README.md \
+	--ignore=webpack.config.js \
+	--ignore=Makefile \
+	--ignore=yarn.lock \
+	--ignore=.gitignore \
+	--ignore=src \
+	--ignore=node_modules \
+	--win32metadata.CompanyName='Minimal Chat' \
+	--win32metadata.ProductName=Operator \
+	--appname=Operator \
+	--app-copyright=BSD-3
+
+compile-osx:
+	@echo "\nOSX\n"
+	$(NPM_CMD) run compile:osx -- \
+	--ignore=README.md \
+	--ignore=webpack.config.js \
+	--ignore=Makefile \
+	--ignore=yarn.lock \
+	--ignore=.gitignore \
+	--ignore=src \
+	--ignore=node_modules \
+	--win32metadata.CompanyName='Minimal Chat' \
+	--win32metadata.ProductName=Operator \
+	--appname=Operator \
+	--app-copyright=BSD-3
+ 
+compile: build compile-linux compile-win compile-osx
 
 distribute:
 	@echo

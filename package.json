@@ -15,6 +15,9 @@
     "build": "webpack --progress --colors",
     "build:watch": "webpack --progress --colors --watch",
     "compile": "electron-packager . --all --out=dist/",
+    "compile:win": "electron-packager . Operator --platform=win32 --arch=all --out=dist/",
+    "compile:osx": "electron-packager . Operator --platform=darwin --platform=mas --arch=all --out=dist/",
+    "compile:linux": "electron-packager . operator --platform=linux --arch=all --out=dist/",
     "start": "electron ."
   },
   "jest": {
@@ -90,5 +93,9 @@
     "react-test-renderer": "^15.4.1",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^3.0.1",
+    "utf-8-validate": "^3.0.2"
   }
 }

@@ -65,6 +65,7 @@ class InputBar extends Component {
           onChange={this.handleChange}
           onKeyDown={this.onKeyPress}
           name="chatText"
+          value={this.state.chatText}
           placeholder="Say something meaningful &hellip;"
         />
         <Button variant="send" onClick={this.sendChat} >Send</Button>
