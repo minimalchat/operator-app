@@ -1,16 +1,14 @@
 exports[`InputBar matches snapshot 1`] = `
-<div
-  className="InputBar">
-  <textarea
-    name="chatText"
-    onChange={[Function]}
-    placeholder="text here, dummy" />
-  <Button
-    disabled={false}
-    onClick={[Function]}
-    type="button"
-    variant="send">
-    Send
-  </Button>
-</div>
+<InputBar
+  activeId="TEST"
+  dispatch={[Function]}
+  operator="TEST"
+  socket={Object {}}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "subscribe": [Function],
+    }
+  } />
 `;

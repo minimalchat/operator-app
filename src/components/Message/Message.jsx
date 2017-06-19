@@ -8,15 +8,32 @@ import './Message.css';
 
 const Message = (props) => {
   const msgClass = () => (
-    props.type === 'operator' ? 'Message__operator' : 'Message__client'
+    props.author.indexOf('client') >= 0 ? 'Message__client' : 'Message__operator'
   );
 
-  return <div className={msgClass()}>{props.children}</div>;
+  const { author } = props;
+  const content = props.content.map((message, index) => <li key={index}>{message}</li>);
+
+  let message = (
+    <div>
+      <ul>
+        {content}
+      </ul>
+    </div>
+  );
+
+  return (
+    <li className={msgClass()} style={{ clear: 'both' }}>
+      {message}
+    </li>
+  );
 };
 
 Message.propTypes = {
-  children: PropTypes.node.isRequired,
-  type: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  content: PropTypes.arrayOf(
+    PropTypes.string,
+  ),
 };
 
 

@@ -14,11 +14,28 @@ import {
 
 import {
   addChat,
-  addMessage,
+  receiveMessage,
 } from './Chat';
 
+let socket = null;
 
-export default function (store) {
+// Middleware for Redux to watch for new chat messages
+export function socketMessageHook (store) {
+  return next => (action) => {
+    const result = next(action);
+
+    if (socket && action.type === 'CHAT_MESSAGE_OPERATOR') {
+      socket.emit('operator:message', JSON.stringify(action.payload));
+    }
+
+    if (socket && action.type === 'TYPING') {
+      socket.emit('operator:typing');
+    }
+  };
+}
+
+
+export default function socketInit (store) {
   const { dispatch } = store;
   const { chat: { config } } = store.getState();
   const socketPath = config.apiServer || 'http://localhost:8000';
@@ -30,24 +47,16 @@ export default function (store) {
   console.debug('CONNECTING SOCKET');
 
   // Make connection
-  const socket = io.connect(socketPath, {
+  socket = io.connect(socketPath, {
     reconnectionAttempts: 10,
-    query: 'type=operator',
+    query: {
+      type: 'operator',
+    },
   });
-
-  // Listen for anything, useful in debugging
-  const onevent = socket.onevent;
-  socket.onevent = function onEvent (packet) {
-    const args = packet.data || [];
-    onevent.call(this, packet);    // original call
-    packet.data = ['*'].concat(args);
-    onevent.call(this, packet);      // additional call to catch-all
-  };
-  socket.on('*', (...args) => console.debug('SOCKET', args));
 
 
   // Client events
-  socket.on('client:message', data => dispatch(addMessage(data ? JSON.parse(data) : [])));
+  socket.on('client:message', data => dispatch(receiveMessage(data ? JSON.parse(data) : [])));
 
   socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));
 
@@ -71,7 +80,21 @@ export default function (store) {
 
   socket.on('reconnect_timeout', () => dispatch(socketReconnectTimeout()));
 
-  socket.on('ping', () => console.debug('PING'));
+  socket.on('ping', () => {
+    console.debug('PING');
+  });
 
   socket.on('pong', latency => console.debug('PONG', latency, 'ms'));
+
+  // Listen for anything, useful in debugging
+  const onevent = socket.onevent;
+  socket.onevent = function onEvent (packet) {
+    const args = packet.data || [];
+    onevent.call(this, packet);    // original call
+    packet.data = ['*', ...args];
+    onevent.call(this, packet);      // additional call to catch-all
+  };
+  socket.on('*', (...args) => console.debug('SOCKET', args));
+
+  return socket;
 }

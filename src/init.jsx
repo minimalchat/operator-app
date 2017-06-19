@@ -5,15 +5,12 @@ import { Provider } from 'react-redux';
 import createLogger from 'redux-logger';
 
 import Application from './components/Application/Application.jsx';
-import socketInit from './store/socket_init.js';
+import socketInit, { socketMessageHook } from './store/socket_init.js';
 
 // Reducers
 import chat from './store/Chat';
 import ui from './store/UI';
 import socket from './store/Socket';
-
-// Middleware
-const logger = createLogger();        // TODO: make DEV only.
 
 // Create redux store
 const store = createStore(
@@ -23,7 +20,7 @@ const store = createStore(
     socket,
   }),
 
-  applyMiddleware(logger),             // NOTE: `logger` must come last
+  applyMiddleware(socketMessageHook),
 );
 
 
@@ -35,5 +32,6 @@ ReactDOM.render(
   <Provider store={store}>
     <Application />
   </Provider>,
+
   document.getElementById('app'),
 );

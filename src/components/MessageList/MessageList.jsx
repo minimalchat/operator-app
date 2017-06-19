@@ -13,7 +13,12 @@ import './MessageList.css';
 
 class MessageList extends Component {
   static propTypes = {
-    messages: PropTypes.array.isRequired,
+    messages: PropTypes.arrayOf(
+      PropTypes.shape({
+        author: PropTypes.string,
+        content: PropTypes.arrayOf(PropTypes.string),
+      }),
+    ).isRequired,
     config: PropTypes.object.isRequired,
     activeId: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
@@ -37,7 +42,7 @@ class MessageList extends Component {
 
       return activeMsgs.map((msg, index) => {
         const key = `${index}_${msg.chat}`;
-        return <Message key={key} type={msg.author}>{msg.content}</Message>;
+        return <Message key={key} author={msg.author} content={msg.content} />;
       });
     };
 

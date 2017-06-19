@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadChats } from '../../store/Chat';
+
 import ClientCard from '../ClientCard/ClientCard.jsx';
+import { loadChats } from '../../store/Chat';
 import './ClientList.css';
 
 class ClientList extends Component {

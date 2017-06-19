@@ -34,7 +34,10 @@ const SET_ACTIVE_CHAT = 'CHAT_SET_ACTIVE_CHAT';
 
 const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
 
-const ADD_MESSAGE = 'CHAT_ADD_MESSAGE';
+const TYPING = 'CHAT_TYPING';
+const SEND_MESSAGE = 'CHAT_MESSAGE_OPERATOR';
+const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
+
 const ADD_CHAT = 'CHAT_ADD_CHAT';
 
 
@@ -88,14 +91,12 @@ export function setOperatorFilter (payload) {
   };
 }
 
-
 export function toggleChatOpen (payload) {
   return {
     type: TOGGLE_OPEN,
     payload,
   };
 }
-
 
 export function addChat (payload) {
   return {
@@ -104,9 +105,22 @@ export function addChat (payload) {
   };
 }
 
-export function addMessage (payload) {
+export function typing () {
   return {
-    type: ADD_MESSAGE,
+    type: TYPING,
+  };
+}
+
+export function sendMessage (payload) {
+  return {
+    type: SEND_MESSAGE,
+    payload,
+  };
+}
+
+export function receiveMessage (payload) {
+  return {
+    type: RECEIVE_MESSAGE,
     payload,
   };
 }
@@ -116,6 +130,11 @@ export function addMessage (payload) {
 //
 
 function ChatReducer (state = initialState, action) {
+  let messages = [];
+  let sortedPayload = [];
+
+  console.log('CHAT', action);
+
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
       return {
@@ -161,9 +180,34 @@ function ChatReducer (state = initialState, action) {
       //   });
       // }
 
+      // We need to run through the entire array of messages and aggregate them
+      //  into similar sets
+
+      if (action.payload.length > 0) {
+        sortedPayload = action.payload.sort((curr, next) => (
+          new Date(curr.timestamp) - new Date(next.timestamp)
+        ));
+        // There should be an algorithm here that would speed things up
+
+        for (let i = 0; i < sortedPayload.length; i += 1) {
+          // All we have to do is see if the last message has the same author
+
+          if (messages.length > 0 &&
+            messages[messages.length - 1].author === sortedPayload[i].author) {
+            // If it is the same author, do our usual slice magic
+            messages[messages.length - 1].content.push(sortedPayload[i].content);
+          } else {
+            messages.push({
+              ...sortedPayload[i],
+              content: [sortedPayload[i].content],
+            });
+          }
+        }
+      }
+
       return {
         ...state,
-        messages: [...action.payload],
+        messages,
       };
     }
 
@@ -218,10 +262,56 @@ function ChatReducer (state = initialState, action) {
         chats: [...state.chats, action.payload],
       };
 
-    case ADD_MESSAGE:
+    case SEND_MESSAGE:
+      if (state.messages.length > 0 &&
+        // TODO: This should check if author === operator username
+        state.messages[state.messages.length - 1].author === action.payload.author) {
+        messages = [
+          ...state.messages[state.messages.length - 1].content,
+          action.payload.content,
+        ];
+
+        return {
+          ...state,
+          messages: [
+            ...state.messages.slice(0, state.messages.length - 1),
+            { ...state.messages[state.messages.length - 1], content: messages },
+          ],
+        };
+      }
+
       return {
         ...state,
-        messages: [...state.messages, action.payload],
+        messages: [
+          ...state.messages,
+          { ...action.payload, content: [action.payload.content] },
+        ],
+      };
+
+    case RECEIVE_MESSAGE:
+      if (state.messages.length > 0 &&
+        // TODO: This should check if the author = client ID
+        state.messages[state.messages.length - 1].author === action.payload.author) {
+        messages = [
+          ...state.messages[state.messages.length - 1].content,
+          action.payload.content,
+        ];
+
+        return {
+          ...state,
+          messages: [
+            ...state.messages.slice(0, state.messages.length - 1),
+            { ...state.messages[state.messages.length - 1], content: messages },
+          ],
+        };
+      }
+
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          { ...action.payload, content: [action.payload.content] },
+        ],
       };
 
     default:
