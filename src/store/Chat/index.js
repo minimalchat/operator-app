@@ -10,6 +10,7 @@ const initialState = {
   activeIsOpen: null,
   chats: [], // DUMMY_DATA ? dummy.chatSessions : [],
   messages: [], // DUMMY_DATA ? dummy.messages : [],
+  typing: {},
   operatorFilter: 'all',
   config: {
     apiServer: null,
@@ -35,6 +36,8 @@ const SET_ACTIVE_CHAT = 'CHAT_SET_ACTIVE_CHAT';
 const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
 
 const TYPING = 'CHAT_TYPING';
+const CLIENT_TYPING = 'CHAT_CLIENT_TYPING';
+const CLIENT_IDLE = 'CHAT_CLIENT_IDLE';
 const SEND_MESSAGE = 'CHAT_MESSAGE_OPERATOR';
 const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
 
@@ -108,6 +111,20 @@ export function addChat (payload) {
 export function typing () {
   return {
     type: TYPING,
+  };
+}
+
+export function clientTyping (payload) {
+  return {
+    type: CLIENT_TYPING,
+    payload,
+  };
+}
+
+export function clientIdle (payload) {
+  return {
+    type: CLIENT_IDLE,
+    payload,
   };
 }
 
@@ -312,6 +329,22 @@ function ChatReducer (state = initialState, action) {
           ...state.messages,
           { ...action.payload, content: [action.payload.content] },
         ],
+      };
+
+    case CLIENT_TYPING:
+      return {
+        ...state,
+        typing: Object.assign({}, ...state.typing, {
+          [action.payload.chat]: true,
+        }),
+      };
+
+    case CLIENT_IDLE:
+      return {
+        ...state,
+        typing: Object.assign({}, ...state.typing, {
+          [action.payload.chat]: false,
+        }),
       };
 
     default:

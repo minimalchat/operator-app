@@ -14,6 +14,8 @@ import {
 
 import {
   addChat,
+  clientTyping,
+  clientIdle,
   receiveMessage,
 } from './Chat';
 
@@ -56,6 +58,9 @@ export default function socketInit (store) {
 
 
   // Client events
+  socket.on('client:typing', data => dispatch(clientTyping(data ? JSON.parse(data) : [])));
+  socket.on('client:idle', data => dispatch(clientIdle(data ? JSON.parse(data) : [])));
+
   socket.on('client:message', data => dispatch(receiveMessage(data ? JSON.parse(data) : [])));
 
   socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));
