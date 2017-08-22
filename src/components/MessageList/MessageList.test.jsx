@@ -9,6 +9,7 @@ const store = {
   getState: jest.fn(() => ({
     chat: {
       messages: [],
+      typing: {},
       config: {},
     },
   })),

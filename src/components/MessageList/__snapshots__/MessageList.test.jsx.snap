@@ -9,5 +9,6 @@ exports[`MessageList matches snapshot 1`] = `
       "getState": [Function],
       "subscribe": [Function],
     }
-  } />
+  }
+  typing={Object {}} />
 `;
