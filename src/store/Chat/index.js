@@ -1,10 +1,6 @@
 import API from '../endpoints';
 import makeDummy from '../dummy';
 
-// Flag to enable putting dummy data into redux
-// const DUMMY_DATA = process.env.NODE_ENV !== 'production';
-// const dummy = makeDummy(6, 50);
-
 const initialState = {
   activeId: '',
   activeIsOpen: null,
@@ -19,7 +15,6 @@ const initialState = {
 
 
 // Constants
-//
 
 const LOAD_CHATS_SUCCESS = 'CHAT_LOAD_CHATS_SUCCESS';
 const LOAD_CHATS_FAILURE = 'CHAT_LOAD_CHATS_FAILURE';
@@ -45,7 +40,6 @@ const ADD_CHAT = 'CHAT_ADD_CHAT';
 
 
 // Actions
-//
 
 export function loadChats (dispatch, config) {
   return fetch(`${config.apiServer}${API.chats}`)
@@ -145,7 +139,6 @@ export function receiveMessage (payload) {
 
 
 // Reducer
-//
 
 function ChatReducer (state = initialState, action) {
   // TODO: Cleanup dangling variables that lose their meaning at the top
@@ -179,43 +172,10 @@ function ChatReducer (state = initialState, action) {
       // TODO: Handle error
       return state;
 
-    case LOAD_MESSAGES_SUCCESS: {
-      // let currentMessages = state.messages;
-      //
-      // const newMessageIds = action.payload.map(message => [
-      //   message.chat,
-      //   '.',
-      //   new Date(message.timestamp).getTime(),
-      // ].join(''));
-      //
-      // if (state.messages.length > 0) {
-      //   currentMessages = state.messages.reduce((messages, message) => {
-      //     const messageId = [
-      //       message.chat,
-      //       '.',
-      //       new Date(message.timestamp).getTime(),
-      //     ].join('');
-      //
-      //     console.log(
-      //       'CHECKING',
-      //       messageId,
-      //       'IN',
-      //       newMessageIds,
-      //       '(',
-      //       messageId in newMessageIds,
-      //       ')'
-      //     );
-      //     if (messageId in newMessageIds) {
-      //       return messages;
-      //     }
-      //
-      //     return [...messages, message];
-      //   });
-      // }
 
+    case LOAD_MESSAGES_SUCCESS: {
       // We need to run through the entire array of messages and aggregate them
       //  into similar sets
-
       if (action.payload.length > 0) {
         sortedPayload = action.payload.sort((curr, next) => (
           new Date(curr.timestamp) - new Date(next.timestamp)
@@ -334,6 +294,20 @@ function ChatReducer (state = initialState, action) {
       };
 
     case RECEIVE_MESSAGE:
+      let msgText = action.payload.content
+
+      let newMessageNotification = new Notification('New Message', {
+        body: msgText.length > 80 ? msgText.substring(0, 80) + "..." : msgText
+      })
+      
+      try {
+        newMessageNotification.show()
+      }
+      catch(e) {
+        // ignore this error as chrome browser thinks `.show()` isn't a method
+      }
+
+
       if (state.messages.length > 0 &&
         // TODO: This should check if the author = client ID
         state.messages[state.messages.length - 1].author === action.payload.author) {
