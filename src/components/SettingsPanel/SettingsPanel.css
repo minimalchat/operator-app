@@ -18,5 +18,17 @@
   margin: 2rem;
   border-radius: 2px;
   display: flex;
-  flex-grow: 1;
+}
+
+.Settings__single {
+  display: flex;
+  margin: 1rem 0;
+  align-content: center;
+}
+
+.Settings__notification-label {
+  font-size: 18px;
+  color: #919191;
+  align-self: center;
+  padding-left: 1rem;
 }

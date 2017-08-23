@@ -6,9 +6,12 @@ import Toggle from 'react-toggle';
 const SettingsPanel = () =>
   <div className="Settings">
     <h1 className="Settings__header">Settings</h1>
-    
+
     <section className="Settings__body">
-      <Toggle defaultChecked onChange={() => console.log('hi')} />
+      <div className="Settings__single">
+        <Toggle defaultChecked onChange={() => console.log('hi')} />
+        <div className="Settings__notification-label">Disable notifications</div>
+      </div>
     </section>
   </div>;
 
