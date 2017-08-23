@@ -296,6 +296,7 @@ function ChatReducer (state = initialState, action) {
     case RECEIVE_MESSAGE:
       let msgText = action.payload.content
 
+      // TODO: clicking notification should take user to chat notification
       let newMessageNotification = new Notification('New Message', {
         body: msgText.length > 80 ? msgText.substring(0, 80) + "..." : msgText
       })
