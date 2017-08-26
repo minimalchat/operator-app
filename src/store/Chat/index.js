@@ -27,10 +27,8 @@ const LOAD_CHATS_FAILURE = 'CHAT_LOAD_CHATS_FAILURE';
 const LOAD_MESSAGES_SUCCESS = 'CHAT_LOAD_MESSAGES_SUCCESS';
 const LOAD_MESSAGES_FAILURE = 'CHAT_LOAD_MESSAGES_FAILURE';
 
-const SET_CONFIG = 'CHAT_SET_CONFIG';
-const SET_APISERVER = 'CHAT_SET_APISERVER';
 const SET_OPERATOR = 'CHAT_SET_OPERATOR';
-const SET_OPERATOR_FILTER = 'CHAT_SETOPERATOR_FILTER';
+const SET_OPERATOR_FILTER = 'CHAT_SET_OPERATOR_FILTER';
 const SET_ACTIVE_CHAT = 'CHAT_SET_ACTIVE_CHAT';
 
 const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
@@ -73,13 +71,13 @@ export function loadMessages (dispatch, config, activeId) {
     }));
 }
 
-export function setConfig (payload) {
-  return {
-    type: SET_CONFIG,
-    payload,
-  };
-}
-
+/* export function setConfig (payload) {
+ *   return {
+ *     type: SET_CONFIG,
+ *     payload,
+ *   };
+ * }
+ * */
 export function setActiveChat (payload) {
   return {
     type: SET_ACTIVE_CHAT,
@@ -154,7 +152,11 @@ function ChatReducer (state = initialState, action) {
   let chat = {};
   let chats = {};
 
+<<<<<<< HEAD
   console.log('CHAT', action, state);
+=======
+  /* console.log('CHAT', action);*/
+>>>>>>> Refactoring to config redux tuple
 
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
@@ -214,11 +216,11 @@ function ChatReducer (state = initialState, action) {
       // TODO: Handle error
       return state;
 
-    case SET_CONFIG:
-      return {
-        ...state,
-        config: action.payload,
-      };
+      /* case SET_CONFIG:
+       *   return {
+       *     ...state,
+       *     config: action.payload,
+       *   };*/
 
     case SET_ACTIVE_CHAT:
       return {
