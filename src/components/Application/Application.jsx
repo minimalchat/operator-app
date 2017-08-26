@@ -7,7 +7,6 @@ import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
-
 import { loadChats } from '../../store/Chat';
 import { setConfig } from '../../store/Config'
 
@@ -64,6 +63,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setConfig(config));
 
     // Then reload chats
+    // TODO: ^ why does this need to happen?
     loadChats(dispatch, config);
   },
 });

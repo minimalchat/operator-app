@@ -45,6 +45,7 @@ const ADD_CHAT = 'CHAT_ADD_CHAT';
 
 // Actions
 
+// TODO: not sure what this is doing but it's broken?
 export function loadChats (dispatch, config) {
   return fetch(`${config.apiServer}${API.chats}`)
     .then(res => res.json())
@@ -71,13 +72,6 @@ export function loadMessages (dispatch, config, activeId) {
     }));
 }
 
-/* export function setConfig (payload) {
- *   return {
- *     type: SET_CONFIG,
- *     payload,
- *   };
- * }
- * */
 export function setActiveChat (payload) {
   return {
     type: SET_ACTIVE_CHAT,
@@ -215,12 +209,6 @@ function ChatReducer (state = initialState, action) {
     case LOAD_MESSAGES_FAILURE:
       // TODO: Handle error
       return state;
-
-      /* case SET_CONFIG:
-       *   return {
-       *     ...state,
-       *     config: action.payload,
-       *   };*/
 
     case SET_ACTIVE_CHAT:
       return {

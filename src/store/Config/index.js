@@ -50,19 +50,17 @@ function ConfigReducer (state = initialState, action) {
   console.log('config reducer:', action)
   switch(action.type) {
 
-    // SET_CONFIG: is only triggered by incoming IPC message: 'config'
+    // Triggered by incoming IPC message: 'config'
     // NOTE: payload from server should match the exact initial state in this file;
     // IPC ON: 'config' <--
     case SET_CONFIG:
-      console.log('setting config, let\' compare state and payload')
-      console.log('state', state)
-      console.log('payload', action.payload)
       return Object.assign({}, action.payload)
 
     //Sends payload to server to be written to file
     //IPC SEND: 'update-settings' -->
     case UPDATE_SETTINGS:
-      ipcRenderer.send('update-settings', state)
+      var newState = Object.assign({}, state, action.payload)
+      ipcRenderer.send('update-settings', newState)
 
 
     default:

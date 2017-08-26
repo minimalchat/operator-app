@@ -29,18 +29,12 @@ function initConfig (event) {
 }
 
 // Handle changing the settings via front end `config.index` reducer
-// NOTE: Might not have to use `require` to reload the configure. Maybe use callback on success?
+// Writes to file and then sends payload to front end via ipc event.
 function updateSettings(event, payload) {
-  const fd = fs.openSync(configPath, 'w');
-  console.log('update-settings:', 'payload', payload, 'old file is:', fd)
-  console.log('old file is:', require(configPath))
-  fs.writeSync(fd, JSON.stringify(payload, null, '  '), 0, 'utf8');
-  fs.closeSync(fd);
-
-  let newConfig = require(configPath);
-  console.log('config path going to front end is;', newConfig,)
-  console.log('notifications should be ', payload.notificationsEnabled)
-  event.sender.send('config', newConfig)
+  fs.writeFile(configPath, JSON.stringify(payload, null, 2), function (err) {
+    if (err) return console.log(err);
+    event.sender.send('config', payload)
+  });
 }
 
 module.exports = {
