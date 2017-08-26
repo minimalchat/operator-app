@@ -1,16 +1,19 @@
 /**
-  * This file handles the state / actions for writing / reading the config.json file
-  * The config state object needs to match the keys of the back end config json file.
-  * An example interaction with this file / these functions would be as follows:
-  * User toggles a setting such as: "disable notifications"
-    |> clicking the toggle dispatches an action
-    |> the action triggers an ipcSend call sending the config object to the server
-    |> the server takes the data and tries to write it to the config file
-    |>  -> on success: return payload, and, finally, update the config state object
-    |>  -> on failure: return a message indicating a failure; client config state doesn't change
-*/
+ * This file handles the state / actions for writing / reading the config.json file
+ * The config state object needs to match the keys of the back end config json file.
+ * An example interaction with this file / these functions would be as follows:
+ * User toggles a setting such as: "disable notifications"
+   |> clicking the toggle dispatches an action
+   |> the action triggers an ipcSend call sending the config object to the server
+   |> the server takes the data and tries to write it to the config file
+   |>  -> on success: return payload, and, finally, update the config state object
+   |>  -> on failure: return a message indicating a failure; client config state doesn't change
+ */
 
-// State (config object)
+// setup
+
+import { ipcRenderer } from 'electron';
+
 const initialState = {
   apiServer: null,
   operator: null,
@@ -47,16 +50,19 @@ function ConfigReducer (state = initialState, action) {
   console.log('config reducer:', action)
   switch(action.type) {
 
-    // when a user sets the config, set it in the state
+    // SET_CONFIG: is only triggered by incoming IPC message: 'config'
     // NOTE: payload from server should match the exact initial state in this file;
-    // Still, we use object assign to create a new object and merge any lingering properties that could be in memory memory
-    // if SET_CONFIG was to be called in any other place that an `initialize` type function
+    // IPC ON: 'config' <--
     case SET_CONFIG:
-      return Object.assign({}, state, action.payload)
+      console.log('setting config, let\' compare state and payload')
+      console.log('state', state)
+      console.log('payload', action.payload)
+      return Object.assign({}, action.payload)
 
-    //Sends payload to server and then setting the return value on the state
+    //Sends payload to server to be written to file
+    //IPC SEND: 'update-settings' -->
     case UPDATE_SETTINGS:
-      return Object.assign({}, state, action.payload)
+      ipcRenderer.send('update-settings', state)
 
 
     default:

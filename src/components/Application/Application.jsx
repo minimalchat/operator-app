@@ -18,11 +18,10 @@ class Application extends Component {
   constructor (props) {
     super(props);
 
-    // Setup our IPC listener
+    // Setup our IPC listeners
     ipcRenderer.on('config', props.updateConfig);
     ipcRenderer.send('init-config');
   }
-
 
   renderSettingsView = () => (
     <div className="App__settingsview">
