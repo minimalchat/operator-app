@@ -30,8 +30,8 @@ export function socketMessageHook (store) {
       socket.emit('operator:message', JSON.stringify(action.payload));
     }
 
-    if (socket && action.type === 'OPERATOR_TYPING') {
-      socket.emit('operator:typing');
+    if (socket && action.type === 'CHAT_OPERATOR_TYPING') {
+      socket.emit('operator:typing', JSON.stringify(action.payload));
     }
   };
 }
