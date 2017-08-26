@@ -13,13 +13,11 @@ function initConfig (event) {
     const fd = fs.openSync(configPath, 'w');
 
     // this config must be mirrored in the client app for passing config payloads from client<->server
-    // TODO: move this to another file
+    // TODO: move this to another file / share between client / server
     const initialConfig = {
       apiServer: '',
       operator: '',
-      settings: {
-        notificationsEnabled: true,
-      },
+      notificationsEnabled: true,
     };
 
     fs.writeSync(fd, JSON.stringify(initialConfig, null, '  '), 0, 'utf8');
