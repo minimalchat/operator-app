@@ -4,8 +4,14 @@ import makeDummy from '../dummy';
 const initialState = {
   activeId: '',
   activeIsOpen: null,
+<<<<<<< HEAD
   chats: {}, // DUMMY_DATA ? dummy.chatSessions : [],
   messages: [], // DUMMY_DATA ? dummy.messages : [],
+=======
+  chats: [],
+  messages: [],
+  typing: {},
+>>>>>>> Moar refactoring + accidentally adding a package json loc file ¯\_(ツ)_/¯
   operatorFilter: 'all',
   config: {
     apiServer: null,
@@ -300,7 +306,7 @@ function ChatReducer (state = initialState, action) {
       let newMessageNotification = new Notification('New Message', {
         body: msgText.length > 80 ? msgText.substring(0, 80) + "..." : msgText
       })
-      
+
       try {
         newMessageNotification.show()
       }

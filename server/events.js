@@ -8,9 +8,10 @@ function initConfig (event) {
   let config = null;
   const configPath = path.join(__dirname, '../config.json');
 
-  // TODO: Make all this nice without needing to sync
+  // TODO: Convert this to asynchronous file ops (faster; not super important though)
   if (!fs.existsSync('../config.jsonconfig.json')) {
     const fd = fs.openSync(configPath, 'w');
+    // this config must be mirrored in the client app for passing config payloads from client<->server
     const initialConfig = {
       apiServer: '',
       operator: '',
