@@ -8,9 +8,8 @@ import makeDummy from '../dummy';
 const initialState = {
   activeId: '',
   activeIsOpen: null,
-  chats: [], // DUMMY_DATA ? dummy.chatSessions : [],
+  chats: {}, // DUMMY_DATA ? dummy.chatSessions : [],
   messages: [], // DUMMY_DATA ? dummy.messages : [],
-  typing: {},
   operatorFilter: 'all',
   config: {
     apiServer: null,
@@ -35,10 +34,11 @@ const SET_ACTIVE_CHAT = 'CHAT_SET_ACTIVE_CHAT';
 
 const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
 
-const TYPING = 'CHAT_TYPING';
+const OPERATOR_TYPING = 'CHAT_OPERATOR_TYPING';
+const SEND_MESSAGE = 'CHAT_MESSAGE_OPERATOR';
+
 const CLIENT_TYPING = 'CHAT_CLIENT_TYPING';
 const CLIENT_IDLE = 'CHAT_CLIENT_IDLE';
-const SEND_MESSAGE = 'CHAT_MESSAGE_OPERATOR';
 const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
 
 const ADD_CHAT = 'CHAT_ADD_CHAT';
@@ -108,9 +108,10 @@ export function addChat (payload) {
   };
 }
 
-export function typing () {
+export function operatorTyping (payload) {
   return {
-    type: TYPING,
+    type: OPERATOR_TYPING,
+    payload,
   };
 }
 
@@ -147,16 +148,31 @@ export function receiveMessage (payload) {
 //
 
 function ChatReducer (state = initialState, action) {
+  // TODO: Cleanup dangling variables that lose their meaning at the top
+  //    of this list
   let messages = [];
   let sortedPayload = [];
+  let chat = {};
+  let chats = {};
 
-  console.log('CHAT', action);
+  console.log('CHAT', action, state);
 
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
+      // Turn the array of chats into an object with the chat ID as the key
+      for (let i = 0; i < (action.payload || []).length; i += 1) {
+        chats[action.payload[i].id] = {
+          client: action.payload[i].client,
+          update_time: action.payload[i].update_time,
+          creation_time: action.payload[i].creation_time,
+          open: action.payload[i].open,
+          typing: null,
+        };
+      }
+
       return {
         ...state,
-        chats: action.payload,
+        chats,
       };
 
     case LOAD_CHATS_FAILURE:
@@ -253,30 +269,42 @@ function ChatReducer (state = initialState, action) {
       };
 
 
-    case TOGGLE_OPEN: {
-      const chats = state.chats.map((chat) => {
-        if (chat.id === action.payload) {
-          const toggledChat = chat;
+    // case TOGGLE_OPEN: {
+    //   const chats = state.chats.map((chat) => {
+    //     if (chat.id === action.payload) {
+    //       const toggledChat = chat;
 
-          toggledChat.open = !toggledChat.open;
+    //       toggledChat.open = !toggledChat.open;
 
-          return toggledChat;
-        }
-        return chat;
-      });
+    //       return toggledChat;
+    //     }
+    //     return chat;
+    //   });
 
-      return {
-        ...state,
-        chats,
-        activeId: '',
-      };
-    }
+    //   return {
+    //     ...state,
+    //     chats,
+    //     activeId: '',
+    //   };
+    // }
 
 
     case ADD_CHAT:
+      // Pull the chat ID out of the payload and use it as the key
       return {
         ...state,
-        chats: [...state.chats, action.payload],
+        chats: Object.assign(
+          {},
+          state.chats,
+          {
+            [action.payload.id]: {
+              client: action.payload.client,
+              update_time: action.payload.update_time,
+              creation_time: action.payload.creation_time,
+              open: action.payload.open,
+              typing: null,
+            },
+          }),
       };
 
     case SEND_MESSAGE:
@@ -334,17 +362,31 @@ function ChatReducer (state = initialState, action) {
     case CLIENT_TYPING:
       return {
         ...state,
-        typing: Object.assign({}, ...state.typing, {
-          [action.payload.chat]: true,
-        }),
+        chats: Object.assign(
+          {},
+          state.chats,
+          {
+            [action.payload.chat]: {
+              ...state.chats[action.payload.chat],
+              typing: action.payload.typing,
+            },
+          },
+        ),
       };
 
     case CLIENT_IDLE:
       return {
         ...state,
-        typing: Object.assign({}, ...state.typing, {
-          [action.payload.chat]: false,
-        }),
+        chats: Object.assign(
+          {},
+          state.chats,
+          {
+            [action.payload.chat]: {
+              ...state.chats[action.payload.chat],
+              typing: null,
+            },
+          },
+        ),
       };
 
     default:

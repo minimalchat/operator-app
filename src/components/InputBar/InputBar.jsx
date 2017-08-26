@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Button from '../Button/Button.jsx';
-import { sendMessage, typing } from '../../store/Chat';
+import { sendMessage, operatorTyping } from '../../store/Chat';
 import './InputBar.css';
 
 // TODO: Move to a constants file
@@ -35,7 +35,7 @@ class InputBar extends Component {
         event.preventDefault();
       }
     }
-    dispatch(typing());
+    dispatch(operatorTyping());
   }
 
   // dummy function to stub out sending message via socket

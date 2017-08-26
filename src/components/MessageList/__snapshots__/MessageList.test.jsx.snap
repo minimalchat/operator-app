@@ -1,5 +1,6 @@
 exports[`MessageList matches snapshot 1`] = `
 <MessageList
+  chat={Object {}}
   config={Object {}}
   dispatch={[Function]}
   messages={Array []}
@@ -9,6 +10,5 @@ exports[`MessageList matches snapshot 1`] = `
       "getState": [Function],
       "subscribe": [Function],
     }
-  }
-  typing={Object {}} />
+  } />
 `;

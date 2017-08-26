@@ -19,6 +19,11 @@
   text-align: right;
 }
 
+.Message__client.typing {
+  padding: 3px 10px 3px 10px;
+  min-width: auto;
+}
+
 .Message__operator {
   align-self: flex-start;
   background: #0a6bef;

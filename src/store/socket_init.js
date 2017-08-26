@@ -30,7 +30,7 @@ export function socketMessageHook (store) {
       socket.emit('operator:message', JSON.stringify(action.payload));
     }
 
-    if (socket && action.type === 'TYPING') {
+    if (socket && action.type === 'OPERATOR_TYPING') {
       socket.emit('operator:typing');
     }
   };
@@ -58,10 +58,38 @@ export default function socketInit (store) {
 
 
   // Client events
-  socket.on('client:typing', data => dispatch(clientTyping(data ? JSON.parse(data) : [])));
-  socket.on('client:idle', data => dispatch(clientIdle(data ? JSON.parse(data) : [])));
+  socket.on('client:typing', (data) => {
+    const { chat: { chats } } = store.getState();
+    let buffer = data ? JSON.parse(data) : [];
 
-  socket.on('client:message', data => dispatch(receiveMessage(data ? JSON.parse(data) : [])));
+    // Check if timeout exists for client
+    if (chats.hasOwnProperty(buffer.chat)) {
+      // Clear timeout for client as we'll be resetting it farther into
+      //  the future right after
+      window.clearTimeout(chats[buffer.chat].typing);
+    }
+
+    // Start new timeout for client
+    buffer.typing = window.setTimeout(() => dispatch(clientIdle(buffer)), 3000);
+
+    // Dispatch client typing action
+    dispatch(clientTyping(buffer));
+  });
+
+  socket.on('client:message', (data) => {
+    const { chat: { chats } } = store.getState();
+    let buffer = data ? JSON.parse(data) : [];
+
+    if (chats.hasOwnProperty(buffer.chat)) {
+      // We want to clear the timeout for typing here because we just received
+      //  a message so assuming they've stopped typing for now
+      window.clearTimeout(chats[buffer.chat].typing);
+    }
+
+    // After recieving a message, we can go idle
+    dispatch(clientIdle(buffer));
+    dispatch(receiveMessage(buffer));
+  });
 
   socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));
 
