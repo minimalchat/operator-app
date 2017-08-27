@@ -4,14 +4,9 @@ import makeDummy from '../dummy';
 const initialState = {
   activeId: '',
   activeIsOpen: null,
-<<<<<<< HEAD
-  chats: {}, // DUMMY_DATA ? dummy.chatSessions : [],
-  messages: [], // DUMMY_DATA ? dummy.messages : [],
-=======
   chats: [],
   messages: [],
   typing: {},
->>>>>>> Moar refactoring + accidentally adding a package json loc file ¯\_(ツ)_/¯
   operatorFilter: 'all',
   config: {
     apiServer: null,
@@ -146,11 +141,7 @@ function ChatReducer (state = initialState, action) {
   let chat = {};
   let chats = {};
 
-<<<<<<< HEAD
-  console.log('CHAT', action, state);
-=======
   /* console.log('CHAT', action);*/
->>>>>>> Refactoring to config redux tuple
 
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
@@ -298,7 +289,11 @@ function ChatReducer (state = initialState, action) {
       })
 
       try {
-        newMessageNotification.show()
+        console.log(window.config.notificationsEnabled)
+        // NOTE: come back to this - this should be working but it's not?
+        if (window.config.notificationsEnabled) {
+          newMessageNotification.show()
+        }
       }
       catch(e) {
         // ignore this error as chrome browser thinks `.show()` isn't a method

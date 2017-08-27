@@ -54,7 +54,15 @@ function ConfigReducer (state = initialState, action) {
     // NOTE: payload from server should match the exact initial state in this file;
     // IPC ON: 'config' <--
     case SET_CONFIG:
-      return Object.assign({}, action.payload)
+      const newConfig = Object.assign({}, action.payload)
+
+      // attach config to window to avoid doing all the passing around of the state between reducers
+      // example: the chat reducer needs to know the config data, but that would entail passing the entire store and accessing the config object
+      // every time a message gets sent (referring to when to show a messagen notification)
+      // TODO: figure out a better way to do this
+      window.config = newConfig
+      return newConfig
+
 
     //Sends payload to server to be written to file
     //IPC SEND: 'update-settings' -->

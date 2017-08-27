@@ -126,13 +126,8 @@ const mapStateToProps = state => ({
   messages: state.chat.messages.sort((curr, next) => (
     new Date(curr.timestamp) - new Date(next.timestamp)
   )),
-<<<<<<< HEAD
-  chat: state.chat.activeId ? state.chat.chats[state.chat.activeId] : {},
-  config: state.chat.config,
-=======
   typing: state.chat.typing,
   config: state.config,
->>>>>>> Refactoring to config redux tuple
   activeId: state.chat.activeId,
 });
 
