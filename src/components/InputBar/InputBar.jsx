@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Button from '../Button/Button.jsx';
-import { sendMessage, typing } from '../../store/Chat';
+import { sendMessage, operatorTyping } from '../../store/Chat';
 import './InputBar.css';
 
 // TODO: Move to a constants file
@@ -22,7 +22,7 @@ class InputBar extends Component {
 
   onKeyPress = (e) => {
     const { key, keyCode, shiftKey, ctrlKey, altKey } = e;
-    const { dispatch } = this.props;
+    const { dispatch, activeId, operator } = this.props;
     console.log(`INPUT KEYPRESS ${key} (${keyCode}), SHIFT ${shiftKey}, CTRL ${ctrlKey}, ALT ${altKey}`);
 
     if (keyCode === KEY_ENTER) {
@@ -34,22 +34,25 @@ class InputBar extends Component {
 
         event.preventDefault();
       }
+    } else {
+      dispatch(operatorTyping(this.formatMessage(null, operator, activeId)));
     }
-    dispatch(typing());
   }
 
-  // dummy function to stub out sending message via socket
-  // this will eventually happen via redux actions.
+  formatMessage = (content, operatorID, chatID) => ({
+    timestamp: (new Date()).toISOString(),
+    author: `operator.${operatorID}`,
+    content,
+    chat: chatID,
+  })
+
+  // Dummy function to stub out sending message via socket
+  //  this will eventually happen via redux actions.
   sendChat = () => {
     const { chatText } = this.state;
     const { dispatch, activeId, operator } = this.props;
 
-    dispatch(sendMessage({
-      author: operator,
-      chat: activeId,
-      content: chatText,
-      timestamp: (new Date()).toISOString(),
-    }));
+    dispatch(sendMessage(this.formatMessage(chatText, operator, activeId)));
   }
 
   handleChange = (e) => {
@@ -61,7 +64,7 @@ class InputBar extends Component {
   render () {
     return (
       <div className="InputBar">
-        <textarea
+        <input
           onChange={this.handleChange}
           onKeyDown={this.onKeyPress}
           name="chatText"

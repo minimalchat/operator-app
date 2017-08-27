@@ -59,9 +59,13 @@ class ClientList extends Component {
 const mapStateToProps = state => ({
   operatorFilter: state.chat.operatorFilter,
   config: state.chat.config,
-  chats: state.chat.chats.sort((curr, next) => (
-    new Date(next.updated_time) - new Date(curr.updated_time)
-  )),
+  chats: Object.keys(state.chat.chats)
+    .map(k => Object.assign({}, state.chat.chats[k], {
+      id: k,
+    }))
+    .sort((curr, next) => (
+      new Date(next.updated_time) - new Date(curr.updated_time)
+    )),
 });
 
 const mapDispatchToProps = dispatch => ({
