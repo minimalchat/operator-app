@@ -7,12 +7,14 @@ exports[`ClientList matches snapshot 1`] = `
           "first_name": "Robert",
           "last_name": "waffle",
         },
+        "id": "0",
       },
       Object {
         "client": Object {
           "first_name": "Lisa",
           "last_name": "pancake",
         },
+        "id": "1",
       },
     ]
   }

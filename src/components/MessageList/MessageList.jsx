@@ -7,8 +7,9 @@ import Message from '../Message/Message.jsx';
 
 import './MessageList.css';
 
+
 /**
- * @summary: responsible for handling the display of messages.
+ * @summary: MessageList is responsible for handling the display of messages.
  */
 
 class MessageList extends Component {
@@ -19,16 +20,10 @@ class MessageList extends Component {
         content: PropTypes.arrayOf(PropTypes.string),
       }),
     ).isRequired,
-    typing: PropTypes.object.isRequired,
+    chat: PropTypes.object.isRequired,
     config: PropTypes.object.isRequired,
     activeId: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-  }
-
-  static clientTypingRenderer () {
-    return (
-      <div className="MessageList__client-typing">Client is typing...</div>
-    );
   }
 
   static emptyRenderer () {
@@ -45,15 +40,65 @@ class MessageList extends Component {
     }
   }
 
+  renderTyping () {
+    // TODO: Make this somehow not a giant eyesore on this file
+    return (
+      <div>
+        <ul>
+          <li className="Message__client-typing">
+            <svg width="32" height="20">
+              <circle id="typing-circle-1" r="3" cx="8" cy="16" fill="#aeaeae" />
+              <animate
+                xlinkHref="#typing-circle-1"
+                attributeName="cy"
+                from="16"
+                to="16"
+                values="16; 12; 16;"
+                dur="500ms"
+                repeat="always"
+                begin="0s"
+                repeatCount="indefinite"
+                fill="freeze"
+                id="typing-1"
+              />
+              <circle id="typing-circle-2" r="3" cx="16" cy="16" fill="#aeaeae" />
+              <animate
+                xlinkHref="#typing-circle-2"
+                attributeName="cy"
+                from="16"
+                to="16"
+                values="16; 12; 16;"
+                dur="500ms"
+                begin="typing-1.begin + 250ms"
+                repeatCount="indefinite"
+                fill="freeze"
+                id="typing-2"
+              />
+              <circle id="typing-circle-3" r="3" cx="24" cy="16" fill="#aeaeae" />
+              <animate
+                xlinkHref="#typing-circle-3"
+                attributeName="cy"
+                from="16"
+                to="16"
+                values="16; 12; 16;"
+                dur="500ms"
+                begin="typing-2.begin + 250ms"
+                repeatCount="indefinite"
+                fill="freeze"
+                id="typing-3"
+              />
+            </svg>
+          </li>
+        </ul>
+      </div>
+    );
+  }
+
   render () {
-    const { messages, typing, activeId } = this.props;
-
+    const { messages, chat, activeId } = this.props;
     const activeMsgs = messages.filter(msg => msg.chat === activeId);
-    const clientTypingStatus = (activeId != null && typing[activeId])
-      ? MessageList.clientTypingRenderer()
-      : null;
 
-    // render a map of <Message> components with their contents.
+    // Render a map of <Message> components with their contents.
     const renderView = () => {
       if (!activeId) return MessageList.emptyRenderer();
 
@@ -67,11 +112,10 @@ class MessageList extends Component {
       <div className="MessageList">
         <ul className="MessageList__box">
           { renderView() }
+          <li style={{ display: chat.typing ? 'block' : 'none' }} className="Message__client typing">
+            {this.renderTyping()}
+          </li>
         </ul>
-
-        <div className="MessageList__status">
-          { clientTypingStatus }
-        </div>
       </div>
     );
   }
@@ -82,7 +126,7 @@ const mapStateToProps = state => ({
   messages: state.chat.messages.sort((curr, next) => (
     new Date(curr.timestamp) - new Date(next.timestamp)
   )),
-  typing: state.chat.typing,
+  chat: state.chat.activeId ? state.chat.chats[state.chat.activeId] : {},
   config: state.chat.config,
   activeId: state.chat.activeId,
 });
