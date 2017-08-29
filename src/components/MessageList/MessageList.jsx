@@ -96,6 +96,7 @@ class MessageList extends Component {
 
   render () {
     const { messages, chat, activeId } = this.props;
+    console.log('chat should be :', chat)
     const activeMsgs = messages.filter(msg => msg.chat === activeId);
 
     // Render a map of <Message> components with their contents.
@@ -127,6 +128,7 @@ const mapStateToProps = state => ({
     new Date(curr.timestamp) - new Date(next.timestamp)
   )),
   typing: state.chat.typing,
+  chat: state.chat.activeId ? state.chat.chats[state.chat.activeId] : {},
   config: state.config,
   activeId: state.chat.activeId,
 });
