@@ -1,4 +1,4 @@
 # Minimal Chat operator application
 Cross-platform operator application for Minimal Chat
 
-![operator-screenshot-0](https://user-images.githubusercontent.com/563301/27521458-45d2d598-59eb-11e7-94f7-c29a7d6a8c4b.png)
+![operator-screenshot-0](https://user-images.githubusercontent.com/563301/29819738-f25ad906-8c8f-11e7-96c3-785f1e0f95b8.png)
