@@ -6,7 +6,6 @@ import {connect} from 'react-redux'
 import { updateSettings } from '../../store/Config'
 
 const SettingsPanel = (props) => {
-  console.log(props)
   const {notificationsEnabled, updateSettings} = props
   return (
     <div className="Settings">

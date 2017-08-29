@@ -96,7 +96,6 @@ class MessageList extends Component {
 
   render () {
     const { messages, chat, activeId } = this.props;
-    console.log('chat should be :', chat)
     const activeMsgs = messages.filter(msg => msg.chat === activeId);
 
     // Render a map of <Message> components with their contents.

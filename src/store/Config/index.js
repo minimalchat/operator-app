@@ -47,7 +47,6 @@ export function updateSettings (payload) {
 // Reducer
 
 function ConfigReducer (state = initialState, action) {
-  console.log('config reducer:', action)
   switch(action.type) {
 
     // Triggered by incoming IPC message: 'config'
@@ -58,8 +57,7 @@ function ConfigReducer (state = initialState, action) {
 
       // attach config to window to avoid doing all the passing around of the state between reducers
       // example: the chat reducer needs to know the config data, but that would entail passing the entire store and accessing the config object
-      // every time a message gets sent (referring to when to show a messagen notification)
-      // TODO: figure out a better way to do this
+      // every time a message gets sent (referring to when to show a messagen notification). NOTE: consider refactoring. Works for now.
       window.config = newConfig
       return newConfig
 

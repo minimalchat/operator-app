@@ -1,9 +1,5 @@
 
 const electron = require('electron');
-// Module to control application life.
-const { app, ipcMain } = electron;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const MenuItem = electron.MenuItem;
 
@@ -47,6 +43,7 @@ const defaultMenuTemplate = [
 ];
 
 function buildMenu (template = defaultMenuTemplate) {
+  //TODO: remove: This is not needed as there are click listeners/handlers that can be specified in the defaultMenuType Struct above
   let handleMenuClick = (menu) => {
     if ('submenu' in menu) {
       // If there is a submenu handle it as well, recursively!
@@ -87,6 +84,7 @@ function buildMenu (template = defaultMenuTemplate) {
 
   // If the menu template objects don't include click properties,
   //  attempt to handle them if we can
+  // TODO this will be refactored out in another PR 
   for (let menu of template) {
     handleMenuClick(menu);
   }

@@ -16,7 +16,6 @@ const MessageMenuBar = (props) => {
 
   return (
     <div className="MessageMenuBar">
-      {/* <Button onClick={() => {}}>Assign to other</Button> */} {/* TODO: 0.2*/ }
       <Button onClick={() => toggleOpen(activeChatId)}>{renderBtnMsg()}</Button>
     </div>
   );
