@@ -48,6 +48,8 @@
 .Button--send {
   background: #27ae60;
   color: #fff;
+  line-height: 13px;
+  height: 36px;
 }
 .Button--send:not(:disabled):hover,
 .Button--send:not(:disabled):active {

@@ -10,18 +10,41 @@
 
 
 .OperatorPanel__header {
+  position: relative;
   align-self: center;
+  align-items: center;
+  background: rgba(52, 73, 94, 1.0);
   color: #afafaf;
   display: flex;
-  flex-direction: column;
-  font-family: courier;
+  flex-direction: row;
+  font-family: Roboto, sans-serif;
   font-size: 12px;
   height: 50px;
+  width: 100%;
   justify-content: center;
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-align: center;
 }
 
+.OperatorPanel__header span {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  color: white;
+}
+
+.OperatorPanel__logo {
+  flex-grow: 1;
+  height: 20px;
+  margin-right: 10px;
+  margin-bottom: 3px;
+  fill: rgba(255, 255, 255, 1.0);
+}
+
+.OperatorPanel__appname {
+  flex-grow: 1;
+  text-align: left;
+}
 
 .OperatorPanel__footer {
   color: #777;
@@ -42,8 +65,21 @@
   font-size: 12px;
   justify-content: center;
   margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 1rem 0 0.7rem 0;
   width: 100%;
+  outline: none;
+}
+
+.OperatorPanel__settings .ss-icon {
+  font-size: 18px;
+  flex-grow: 1;
+}
+
+.OperatorPanel__settings span:not(.ss-icon) {
+  height: 18px;
+  flex-grow: 2;
+  text-align: left;
+  padding-left: 20px;
 }
 
 /*

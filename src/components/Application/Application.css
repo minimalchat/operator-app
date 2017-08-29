@@ -2,14 +2,16 @@
   outline-offset: 0;
 }
 
+input, button {
+  font-family: Roboto, sans-serif;
+}
+
 .App {
   display: flex;
-  font-family: Arial, Sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .App__mainview {
   display: flex;
   flex-grow: 2;
-
-
 }
