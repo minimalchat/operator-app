@@ -55,6 +55,7 @@
   "dependencies": {
     "electron": "^1.4.1",
     "faker": "^4.1.0",
+    "file-loader": "^0.11.2",
     "moment": "^2.17.1",
     "prop-types": "^15.5.10",
     "react": "^15.3.2",

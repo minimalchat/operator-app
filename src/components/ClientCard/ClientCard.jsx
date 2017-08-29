@@ -13,25 +13,52 @@ import './ClientCard.css';
 class ClientCard extends Component {
   static propTypes = {
     chat: PropTypes.object.isRequired,
+    messages: PropTypes.array.isRequired,
     config: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
     setActiveChat: PropTypes.func.isRequired,
     loadMessages: PropTypes.func.isRequired,
+    activeId: PropTypes.string,
+  }
+
+  getChatLastMessage () {
+    const { messages } = this.props;
+
+    console.log('LAST MESSAGE', messages);
+
+    if (messages.length > 0) {
+      if (messages[messages.length - 1].hasOwnProperty('content') &&
+        messages[messages.length - 1].content.length > 0) {
+        return messages[messages.length - 1].content[
+          messages[messages.length - 1].content.length - 1
+        ];
+      }
+
+      return messages[messages.length];
+    }
+
+    return '';
   }
 
   select () {
-    const { chat, config } = this.props;
 
-    this.props.setActiveChat(chat);
-
-    this.props.loadMessages(config, chat.id);
   }
 
   render () {
+    const { chat, config, activeId } = this.props;
+    const classes = [
+      'ClientCard',
+      (activeId === chat.id) ? 'active' : '',
+    ];
+
     return (
-      <li className="ClientCard">
+      <li className={classes.join(' ')}>
         <button
-          onClick={this.select}
+          onClick={() => {
+            this.props.setActiveChat(chat);
+
+            this.props.loadMessages(config, chat.id);
+          }}
           className="ClientCard__btn"
         >
           <div className="ClientCard__icon ss-icon">
@@ -43,7 +70,7 @@ class ClientCard extends Component {
               <span className="ClientCard__status" />
             </div>
             <div className="ClientCard__information-row">
-              <p className="ClientCard__lastmsg">Lorem ipsum dolor sit amet</p>
+              <p className="ClientCard__lastmsg">{this.getChatLastMessage()}&hellip;</p>
               <span className="ClientCard__lastmsgtime">2 minutes ago</span>
             </div>
           </div>
@@ -55,6 +82,8 @@ class ClientCard extends Component {
 
 const mapStateToProps = state => ({
   config: state.chat.config,
+  messages: state.chat.messages,
+  activeId: state.chat.activeId,
 });
 
 const mapDispatchToProps = dispatch => ({

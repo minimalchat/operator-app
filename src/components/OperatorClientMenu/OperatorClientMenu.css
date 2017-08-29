@@ -1,4 +1,4 @@
-.OperatorClientMenu{
+.OperatorClientMenu {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -10,7 +10,10 @@
   padding: 0;
   margin: 0;
   list-style-type: none;
-  cursor: pointer;
+}
+
+.OperatorClient__Menu__item:hover {
+  background: #fafafa;
 }
 
 .OperatorClient__selectedFilter {
@@ -21,7 +24,7 @@
   height: 100%;
   width: 100%;
   padding: 15px 15px 15px 15px;
-  border-left: 3px solid rgb(231, 76, 60);
+  border-left: 3px solid rgba(231, 76, 60, 1.0);
 }
 
 .OperatorClient__filter {
@@ -29,7 +32,14 @@
   background: #fdfdfd;
   border: none;
   outline: 0;
-  padding: 15px 15px 15px 18px; /*must offset border-left for selected filter*/
+  padding: 15px 15px 15px 15px;
   height: 100%;
   width: 100%;
+  cursor: pointer;
+  border-left: 3px solid #fdfdfd;
+}
+
+.OperatorClient__filter:hover {
+  background: #fafafa;
+  border-left: 3px solid rgba(231, 76, 60, 1.0);
 }

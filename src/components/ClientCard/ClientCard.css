@@ -17,10 +17,12 @@
   display: flex;
 }
 
+.ClientCard.active .ClientCard__btn,
 .ClientCard__btn:hover {
   background: #fdfdfd;
 }
 
+.ClientCard.active .ClientCard__btn .ClientCard__icon,
 .ClientCard__btn:hover .ClientCard__icon {
   color: rgba(52, 152, 219, 1.0);
 }
@@ -58,11 +60,13 @@
   text-align: left;
   font-style: italic;
   font-size: 11px;
+  color: #555;
 }
 
 .ClientCard__lastmsg:before,
 .ClientCard__lastmsg:after {
   content: "\"";
+  color: #555;
 }
 
 .ClientCard__lastmsgtime {
@@ -71,5 +75,6 @@
   font-style: italic;
   font-size: 11px;
   padding-right: 10px;
+  color: #555;
 }
 
