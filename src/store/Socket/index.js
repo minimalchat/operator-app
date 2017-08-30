@@ -30,9 +30,10 @@ export function socketDisconnected () {
   };
 }
 
-export function socketConnectionError () {
+export function socketConnectionError (error) {
   return {
     type: CONNECTION_ERROR,
+    error,
   };
 }
 
@@ -54,9 +55,10 @@ export function socketReconnected () {
   };
 }
 
-export function socketReconnectError () {
+export function socketReconnectError (error) {
   return {
     type: RECONNECT_ERROR,
+    error,
   };
 }
 

@@ -24,7 +24,9 @@ class ClientCard extends Component {
 
   getChatLastMessage () {
     const { messages, chat, activeId } = this.props;
-    let filteredMessages = messages.filter(msg => (msg.chat === chat.id));
+    let filteredMessages = messages.filter(msg => (
+      msg.chat === chat.id && msg.author === `client.${msg.chat}`
+    ));
 
     if (filteredMessages.length > 0) {
       return filteredMessages[filteredMessages.length - 1];
