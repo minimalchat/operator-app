@@ -141,11 +141,12 @@ function ChatReducer (state = initialState, action) {
   // TODO: Cleanup dangling variables that lose their meaning at the top
   //    of this list
   let messages = [];
+  let uniqueMessages = [];
   let sortedPayload = [];
   const chat = {};
-  const chats = {};
+  let chats = {};
 
-  /* console.log('CHAT', action);*/
+  console.log('CHAT', state, action);
 
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
@@ -198,7 +199,16 @@ function ChatReducer (state = initialState, action) {
 
       return {
         ...state,
-        messages,
+        messages: state.messages.concat(messages).filter((msg) => {
+          const msgId = `message.${msg.chat}-${(new Date(msg.timestamp).getTime() / 1000)}`;
+          if (uniqueMessages.includes(msgId)) {
+            // Don't let the same message go through twice
+            return false;
+          }
+
+          uniqueMessages.push(msgId);
+          return true;
+        }),
       };
     }
 
@@ -219,24 +229,17 @@ function ChatReducer (state = initialState, action) {
         operatorFilter: action.payload,
       };
 
-    // case TOGGLE_OPEN: {
-    //   const chats = state.chats.map((chat) => {
-    //     if (chat.id === action.payload) {
-    //       const toggledChat = chat;
-
-    //       toggledChat.open = !toggledChat.open;
-
-    //       return toggledChat;
-    //     }
-    //     return chat;
-    //   });
-
-    //   return {
-    //     ...state,
-    //     chats,
-    //     activeId: '',
-    //   };
-    // }
+    case TOGGLE_OPEN:
+      return {
+        ...state,
+        chats: Object.assign({}, state.chats, {
+          [action.payload]: {
+            ...state.chats[action.payload],
+            open: !state.chats[action.payload].open,
+          },
+        }),
+        activeId: '',
+      };
 
     case ADD_CHAT:
       // Pull the chat ID out of the payload and use it as the key
@@ -276,18 +279,17 @@ function ChatReducer (state = initialState, action) {
       };
 
     case RECEIVE_MESSAGE:
-      const msgText = action.payload.content;
-
-      // TODO: clicking the system notification should take user to chat notification
+      // TODO: Clicking the system notification should take user to chat notification
       if (window.config.notificationsEnabled) {
         const newMessageNotification = new Notification('New Message', {
-          body: msgText.length > 80 ? `${msgText.substring(0, 80)}...` : msgText,
+          body: `${action.payload.content.substring(0, 80)}${action.payload.content.length > 80 ? '...' : ''}`,
         });
 
         try {
           newMessageNotification.show();
         } catch (e) {
-          // ignore this error as chrome browser thinks `.show()` isn't a method
+          // Ignore this error as chrome browser thinks `.show()` isn't a method
+          // TODO: Figure out how to get around this oddity
         }
       }
 

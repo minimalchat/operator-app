@@ -79,7 +79,7 @@ class InputBar extends Component {
 
 const mapStateToProps = state => ({
   activeId: state.chat.activeId,
-  operator: state.chat.config.operator,
+  operator: state.config.operator,
 });
 
 const mapDispatchToProps = dispatch => ({

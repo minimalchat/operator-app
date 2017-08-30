@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { setActiveChat, loadMessages } from '../../store/Chat';
 import './ClientCard.css';
@@ -22,22 +23,14 @@ class ClientCard extends Component {
   }
 
   getChatLastMessage () {
-    const { messages } = this.props;
+    const { messages, chat, activeId } = this.props;
+    let filteredMessages = messages.filter(msg => (msg.chat === chat.id));
 
-    console.log('LAST MESSAGE', messages);
-
-    if (messages.length > 0) {
-      if (messages[messages.length - 1].hasOwnProperty('content') &&
-        messages[messages.length - 1].content.length > 0) {
-        return messages[messages.length - 1].content[
-          messages[messages.length - 1].content.length - 1
-        ];
-      }
-
-      return messages[messages.length];
+    if (filteredMessages.length > 0) {
+      return filteredMessages[filteredMessages.length - 1];
     }
 
-    return '';
+    return false;
   }
 
   select () {
@@ -50,6 +43,8 @@ class ClientCard extends Component {
       'ClientCard',
       (activeId === chat.id) ? 'active' : '',
     ];
+
+    const lastMessage = this.getChatLastMessage();
 
     return (
       <li className={classes.join(' ')}>
@@ -70,8 +65,17 @@ class ClientCard extends Component {
               <span className="ClientCard__status" />
             </div>
             <div className="ClientCard__information-row">
-              <p className="ClientCard__lastmsg">{this.getChatLastMessage()}&hellip;</p>
-              <span className="ClientCard__lastmsgtime">2 minutes ago</span>
+              {lastMessage ? (
+                <p className="ClientCard__lastmsg">
+                  {lastMessage.content ?
+                      lastMessage.content[lastMessage.content.length - 1] :
+                       ''}
+                  &hellip;
+                </p>
+              ) : null}
+              <span className="ClientCard__lastmsgtime">
+                {moment(lastMessage.timestamp).fromNow()}
+              </span>
             </div>
           </div>
         </button>
@@ -81,7 +85,7 @@ class ClientCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  config: state.chat.config,
+  config: state.config,
   messages: state.chat.messages,
   activeId: state.chat.activeId,
 });

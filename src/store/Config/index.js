@@ -18,13 +18,13 @@ const initialState = {
   apiServer: null,
   operator: null,
   notificationsEnabled: null,
-}
+};
 
 // Constants
 
 const SET_CONFIG = 'SET_CONFIG';
 const SET_API_SERVER = 'SET_API_SERVER';
-const UPDATE_SETTINGS = 'UPDATE_SETTINGS'
+const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
 
 
 // Actions
@@ -40,38 +40,47 @@ export function updateSettings (payload) {
   return {
     type: UPDATE_SETTINGS,
     payload,
-  }
+  };
 }
 
 
 // Reducer
 
 function ConfigReducer (state = initialState, action) {
-  switch(action.type) {
+  let newSettings = {};
+
+  console.log('CONFIG', state, action);
+
+  switch (action.type) {
 
     // Triggered by incoming IPC message: 'config'
     // NOTE: payload from server should match the exact initial state in this file;
+
     // IPC ON: 'config' <--
     case SET_CONFIG:
-      const newConfig = Object.assign({}, action.payload)
+      // Attach config to window to avoid doing all the passing around of the
+      //   state between reducers
+      // Example: the chat reducer needs to know the config data, but that would
+      //   entail passing the entire store and accessing the config object
+      //   every time a message gets sent (referring to when to show a message
+      //   notification).
 
-      // attach config to window to avoid doing all the passing around of the state between reducers
-      // example: the chat reducer needs to know the config data, but that would entail passing the entire store and accessing the config object
-      // every time a message gets sent (referring to when to show a messagen notification). NOTE: consider refactoring. Works for now.
-      window.config = newConfig
-      return newConfig
+      //   NOTE: consider refactoring. Works for now.
+      window.config = Object.assign({}, state, action.payload);
+      return window.config;
 
+    // Sends payload to server to be written to file
 
-    //Sends payload to server to be written to file
-    //IPC SEND: 'update-settings' -->
+    // IPC SEND: 'update-settings' -->
     case UPDATE_SETTINGS:
-      var newState = Object.assign({}, state, action.payload)
-      ipcRenderer.send('update-settings', newState)
+      newSettings = Object.assign({}, state, action.payload);
 
+      ipcRenderer.send('update-settings', newSettings);
+
+      return newSettings;
 
     default:
       return state;
-
   }
 }
 

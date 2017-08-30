@@ -63,12 +63,6 @@
   color: #555;
 }
 
-.ClientCard__lastmsg:before,
-.ClientCard__lastmsg:after {
-  content: "\"";
-  color: #555;
-}
-
 .ClientCard__lastmsgtime {
   flex-grow: 1;
   text-align: right;
