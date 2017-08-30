@@ -15,3 +15,10 @@ input, button {
   display: flex;
   flex-grow: 2;
 }
+
+.App__settingsview {
+  background: #e3eaf0;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+};

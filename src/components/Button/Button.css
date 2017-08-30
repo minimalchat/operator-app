@@ -57,14 +57,6 @@
   color: #fff;
 }
 
-.Button--primary {
-  /* TODO */
-}
-.Button--primary:not(:disabled):hover,
-.Button--primary:not(:disabled):active {
-  /* TODO */
-}
-
 .Button--transparent {
   border-color: transparent;
   background: transparent;
