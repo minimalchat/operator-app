@@ -4,6 +4,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+
 import './Message.css';
 
 const Message = (props) => {
@@ -11,14 +13,23 @@ const Message = (props) => {
     props.author.indexOf('client') >= 0 ? 'Message__client' : 'Message__operator'
   );
 
-  const { author } = props;
+  const { author, timestamp } = props;
   const content = props.content.map((message, index) => <li key={index}>{message}</li>);
+
+  console.log('MESSAGE TIME', timestamp);
 
   let message = (
     <div>
       <ul>
         {content}
       </ul>
+      {author.indexOf('client') >= 0 ?
+        (
+          <span className="Message__time">
+            {moment(new Date(timestamp)).format('ddd, h:mma')}
+          </span>
+        ) : null
+      }
     </div>
   );
 
@@ -31,6 +42,7 @@ const Message = (props) => {
 
 Message.propTypes = {
   author: PropTypes.string.isRequired,
+  timestamp: PropTypes.string.isRequired,
   content: PropTypes.arrayOf(
     PropTypes.string,
   ),
