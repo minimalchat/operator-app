@@ -1,22 +1,20 @@
 exports[`ClientList matches snapshot 1`] = `
 <ClientList
   chats={
-    Array [
-      Object {
+    Object {
+      "id-0": Object {
         "client": Object {
           "first_name": "Robert",
           "last_name": "waffle",
         },
-        "id": "0",
       },
-      Object {
+      "id-1": Object {
         "client": Object {
           "first_name": "Lisa",
           "last_name": "pancake",
         },
-        "id": "1",
       },
-    ]
+    }
   }
   config={Object {}}
   dispatch={[Function]}

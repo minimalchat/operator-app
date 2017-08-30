@@ -76,7 +76,6 @@ export function socketReconnectTimeout () {
 // Reducer
 //
 function SocketReducer (state = initialState, action) {
-  /* console.log('SOCKET', action);*/
   switch (action.type) {
     default:
       return state;

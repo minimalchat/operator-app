@@ -9,7 +9,7 @@ import './ClientList.css';
 class ClientList extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired,
-    chats: PropTypes.array.isRequired,
+    chats: PropTypes.object.isRequired,
     operatorFilter: PropTypes.string.isRequired,
     query: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -39,14 +39,22 @@ class ClientList extends Component {
 
   filterByQuery = () => {
     const { chats, query } = this.props;
+    let filteredChats = Object.keys(chats)
+      .map(k => Object.assign({}, chats[k], {
+        id: k,
+      }))
+      .sort((curr, next) => (
+        new Date(next.updated_time) - new Date(curr.updated_time)
+      ));
 
-    if (query === '') return chats;
+    if (query === '') return filteredChats;
 
     const lowerQuery = query.trim().toLowerCase();
 
-    return chats.filter(chat => (
-      `${chat.client.first_name.toLowerCase()} ${chat.client.last_name.toLowerCase()}`.includes(lowerQuery)
-    ));
+    return filteredChats
+      .filter(chat => (
+        `${chat.client.first_name.toLowerCase()} ${chat.client.last_name.toLowerCase()}`.includes(lowerQuery)
+      ));
   }
 
   render () {
@@ -59,13 +67,7 @@ class ClientList extends Component {
 const mapStateToProps = state => ({
   operatorFilter: state.chat.operatorFilter,
   config: state.chat.config,
-  chats: Object.keys(state.chat.chats)
-    .map(k => Object.assign({}, state.chat.chats[k], {
-      id: k,
-    }))
-    .sort((curr, next) => (
-      new Date(next.updated_time) - new Date(curr.updated_time)
-    )),
+  chats: state.chat.chats,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -11,7 +11,7 @@ const store = {
       messages: [],
       typing: {},
     },
-    config: {}
+    config: {},
   })),
 };
 

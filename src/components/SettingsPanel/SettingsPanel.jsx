@@ -1,12 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Toggle from 'react-toggle';
+
+import { updateSettings } from '../../store/Config';
+
 import '../Toggle/index.css';
 import './SettingsPanel.css';
-import Toggle from 'react-toggle';
-import {connect} from 'react-redux'
-import { updateSettings } from '../../store/Config'
 
 const SettingsPanel = (props) => {
-  const {notificationsEnabled, updateSettings} = props
+  const { notificationsEnabled, changeSettings } = props;
+
   return (
     <div className="Settings">
       <h1 className="Settings__header">Settings</h1>
@@ -15,21 +19,29 @@ const SettingsPanel = (props) => {
         <div className="Settings__single">
           <Toggle
             checked={notificationsEnabled}
-            onChange={() => updateSettings({notificationsEnabled: !notificationsEnabled})}
+            onChange={() => changeSettings({ notificationsEnabled: !notificationsEnabled })}
           />
           <div className="Settings__notification-label">Disable notifications</div>
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => ({
-  notificationsEnabled: state.config.notificationsEnabled
-})
+SettingsPanel.propTypes = {
+  notificationsEnabled: PropTypes.bool,
+  changeSettings: PropTypes.func.isRequired,
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  updateSettings: (newSettings) => dispatch(updateSettings(newSettings))
-})
+const mapStateToProps = state => ({
+  notificationsEnabled: state.config.notificationsEnabled,
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsPanel);
+const mapDispatchToProps = dispatch => ({
+  changeSettings: newSettings => dispatch(updateSettings(newSettings)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SettingsPanel);

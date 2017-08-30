@@ -39,7 +39,7 @@ export function socketMessageHook (store) {
 
 export default function socketInit (store) {
   const { dispatch } = store;
-  const { chat: { config } } = store.getState();
+  const { config } = store.getState();
   const socketPath = config.apiServer || 'http://localhost:8000';
 
   if (!socketPath) {
