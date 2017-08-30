@@ -13,7 +13,7 @@ const url = require('url');
 const buildMenu = require('./server/build-menu');
 const events = require('./server/events');
 
-const WINDOW_HEIGHT = 900;
+const WINDOW_HEIGHT = 768;
 const WINDOW_WIDTH = 1200;
 
 const defaultURL = url.format({

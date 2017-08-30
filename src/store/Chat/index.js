@@ -177,8 +177,8 @@ function ChatReducer (state = initialState, action) {
         sortedPayload = action.payload.sort(
           (curr, next) => new Date(curr.timestamp) - new Date(next.timestamp),
         );
-        // There should be an algorithm here that would speed things up
 
+        // TODO: There should be an algorithm here that would speed things up
         for (let i = 0; i < sortedPayload.length; i += 1) {
           // All we have to do is see if the last message has the same author
 
@@ -188,6 +188,9 @@ function ChatReducer (state = initialState, action) {
           ) {
             // If it is the same author, do our usual slice magic
             messages[messages.length - 1].content.push(sortedPayload[i].content);
+
+            // We update the root 'message' with the most recent timestamp
+            messages[messages.length - 1].timestamp = sortedPayload[i].timestamp;
           } else {
             messages.push({
               ...sortedPayload[i],
@@ -304,14 +307,24 @@ function ChatReducer (state = initialState, action) {
           ...state,
           messages: [
             ...state.messages.slice(0, state.messages.length - 1),
-            { ...state.messages[state.messages.length - 1], content: messages },
+            {
+              ...state.messages[state.messages.length - 1],
+              content: messages,
+              timestamp: action.payload.timestamp,
+            },
           ],
         };
       }
 
       return {
         ...state,
-        messages: [...state.messages, { ...action.payload, content: [action.payload.content] }],
+        messages: [
+          ...state.messages,
+          {
+            ...action.payload,
+            content: [action.payload.content],
+          },
+        ],
       };
 
     case CLIENT_TYPING:
