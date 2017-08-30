@@ -8,8 +8,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
+
 import { setActiveChat, loadMessages } from '../../store/Chat';
+
 import './ClientCard.css';
+
+// TODO: Improve this by pulling ping/pong from daemon's connection with the
+//   client.
+// If a client is not active for 2 minutes, consider them offline
+const ONLINE_TIMEOUT = 120000;
 
 class ClientCard extends Component {
   static propTypes = {
@@ -41,12 +48,18 @@ class ClientCard extends Component {
 
   render () {
     const { chat, config, activeId } = this.props;
+    const lastMessage = this.getChatLastMessage();
     const classes = [
       'ClientCard',
       (activeId === chat.id) ? 'active' : '',
     ];
-
-    const lastMessage = this.getChatLastMessage();
+    const statusClasses = [
+      'ClientCard__status',
+      (lastMessage.timestamp &&
+        (new Date(lastMessage.timestamp) >= new Date().getTime() - ONLINE_TIMEOUT)) ?
+      'online' :
+      'offline',
+    ];
 
     return (
       <li className={classes.join(' ')}>
@@ -64,7 +77,7 @@ class ClientCard extends Component {
           <div className="ClientCard__information">
             <div className="ClientCard__information-row">
               <span className="ClientCard__name">{this.props.children}</span>
-              <span className="ClientCard__status" />
+              <span className={statusClasses.join(' ')} />
             </div>
             <div className="ClientCard__information-row">
               {lastMessage ? (
@@ -75,9 +88,11 @@ class ClientCard extends Component {
                   &hellip;
                 </p>
               ) : null}
-              <span className="ClientCard__lastmsgtime">
-                {moment(lastMessage.timestamp).fromNow()}
-              </span>
+              {lastMessage.timestamp ? (
+                <span className="ClientCard__lastmsgtime">
+                  {moment(lastMessage.timestamp).fromNow()}
+                </span>
+              ) : null }
             </div>
           </div>
         </button>

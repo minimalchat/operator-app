@@ -53,6 +53,26 @@
 .ClientCard__status {
   flex-grow: 1;
   text-align: right;
+  position: relative;
+}
+
+.ClientCard__status:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+.ClientCard__status.offline:after {
+  background: rgba(236, 240, 241, 1.0);
+}
+
+.ClientCard__status.online:after {
+  background: rgba(46, 204, 113, 1.0);
 }
 
 .ClientCard__lastmsg {
