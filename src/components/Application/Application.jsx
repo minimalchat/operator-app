@@ -7,8 +7,8 @@ import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
-
-import { setConfig, loadChats } from '../../store/Chat';
+import { loadChats } from '../../store/Chat';
+import { setConfig } from '../../store/Config'
 
 import './Application.css';
 
@@ -17,11 +17,10 @@ class Application extends Component {
   constructor (props) {
     super(props);
 
-    // Setup our IPC listener
+    // Setup our IPC listeners
     ipcRenderer.on('config', props.updateConfig);
     ipcRenderer.send('init-config');
   }
-
 
   renderSettingsView = () => (
     <div className="App__settingsview">
@@ -64,6 +63,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setConfig(config));
 
     // Then reload chats
+    // TODO: ^ why does this need to happen?
     loadChats(dispatch, config);
   },
 });

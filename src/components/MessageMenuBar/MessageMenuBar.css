@@ -1,7 +1,7 @@
 .MessageMenuBar {
   align-items: stretch;
   box-sizing: border-box;
-  height: 50px; /* TODO: Inherit the height of this component so it matches the siblings.*/
+  height: 50px; 
   justify-content: space-around;
   padding: 8px;
 }

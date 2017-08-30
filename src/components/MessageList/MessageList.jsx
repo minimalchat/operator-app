@@ -126,8 +126,9 @@ const mapStateToProps = state => ({
   messages: state.chat.messages.sort((curr, next) => (
     new Date(curr.timestamp) - new Date(next.timestamp)
   )),
+  typing: state.chat.typing,
   chat: state.chat.activeId ? state.chat.chats[state.chat.activeId] : {},
-  config: state.chat.config,
+  config: state.config,
   activeId: state.chat.activeId,
 });
 

@@ -1,15 +1,11 @@
 import API from '../endpoints';
 import makeDummy from '../dummy';
 
-// Flag to enable putting dummy data into redux
-// const DUMMY_DATA = process.env.NODE_ENV !== 'production';
-// const dummy = makeDummy(6, 50);
-
 const initialState = {
   activeId: '',
   activeIsOpen: null,
-  chats: {}, // DUMMY_DATA ? dummy.chatSessions : [],
-  messages: [], // DUMMY_DATA ? dummy.messages : [],
+  chats: {},
+  messages: [],
   operatorFilter: 'all',
   config: {
     apiServer: null,
@@ -17,19 +13,15 @@ const initialState = {
   },
 };
 
-
 // Constants
-//
 
 const LOAD_CHATS_SUCCESS = 'CHAT_LOAD_CHATS_SUCCESS';
 const LOAD_CHATS_FAILURE = 'CHAT_LOAD_CHATS_FAILURE';
 const LOAD_MESSAGES_SUCCESS = 'CHAT_LOAD_MESSAGES_SUCCESS';
 const LOAD_MESSAGES_FAILURE = 'CHAT_LOAD_MESSAGES_FAILURE';
 
-const SET_CONFIG = 'CHAT_SET_CONFIG';
-const SET_APISERVER = 'CHAT_SET_APISERVER';
 const SET_OPERATOR = 'CHAT_SET_OPERATOR';
-const SET_OPERATOR_FILTER = 'CHAT_SETOPERATOR_FILTER';
+const SET_OPERATOR_FILTER = 'CHAT_SET_OPERATOR_FILTER';
 const SET_ACTIVE_CHAT = 'CHAT_SET_ACTIVE_CHAT';
 
 const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
@@ -43,41 +35,41 @@ const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
 
 const ADD_CHAT = 'CHAT_ADD_CHAT';
 
-
 // Actions
-//
 
+// TODO: not sure what this is doing but it's broken?
 export function loadChats (dispatch, config) {
   return fetch(`${config.apiServer}${API.chats}`)
     .then(res => res.json())
-    .then(data => dispatch({
-      type: LOAD_CHATS_SUCCESS,
-      payload: data.chats || [],
-    }))
-    .catch(error => dispatch({
-      type: LOAD_CHATS_FAILURE,
-      error,
-    }));
+    .then(data =>
+      dispatch({
+        type: LOAD_CHATS_SUCCESS,
+        payload: data.chats || [],
+      }),
+    )
+    .catch(error =>
+      dispatch({
+        type: LOAD_CHATS_FAILURE,
+        error,
+      }),
+    );
 }
 
 export function loadMessages (dispatch, config, activeId) {
   return fetch(`${config.apiServer}${API.chat}/${activeId}/messages`)
     .then(res => res.json())
-    .then(data => dispatch({
-      type: LOAD_MESSAGES_SUCCESS,
-      payload: data.messages || [],
-    }))
-    .catch(error => dispatch({
-      type: LOAD_MESSAGES_FAILURE,
-      error,
-    }));
-}
-
-export function setConfig (payload) {
-  return {
-    type: SET_CONFIG,
-    payload,
-  };
+    .then(data =>
+      dispatch({
+        type: LOAD_MESSAGES_SUCCESS,
+        payload: data.messages || [],
+      }),
+    )
+    .catch(error =>
+      dispatch({
+        type: LOAD_MESSAGES_FAILURE,
+        error,
+      }),
+    );
 }
 
 export function setActiveChat (payload) {
@@ -143,19 +135,17 @@ export function receiveMessage (payload) {
   };
 }
 
-
 // Reducer
-//
 
 function ChatReducer (state = initialState, action) {
   // TODO: Cleanup dangling variables that lose their meaning at the top
   //    of this list
   let messages = [];
   let sortedPayload = [];
-  let chat = {};
-  let chats = {};
+  const chat = {};
+  const chats = {};
 
-  console.log('CHAT', action, state);
+  /* console.log('CHAT', action);*/
 
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
@@ -180,53 +170,21 @@ function ChatReducer (state = initialState, action) {
       return state;
 
     case LOAD_MESSAGES_SUCCESS: {
-      // let currentMessages = state.messages;
-      //
-      // const newMessageIds = action.payload.map(message => [
-      //   message.chat,
-      //   '.',
-      //   new Date(message.timestamp).getTime(),
-      // ].join(''));
-      //
-      // if (state.messages.length > 0) {
-      //   currentMessages = state.messages.reduce((messages, message) => {
-      //     const messageId = [
-      //       message.chat,
-      //       '.',
-      //       new Date(message.timestamp).getTime(),
-      //     ].join('');
-      //
-      //     console.log(
-      //       'CHECKING',
-      //       messageId,
-      //       'IN',
-      //       newMessageIds,
-      //       '(',
-      //       messageId in newMessageIds,
-      //       ')'
-      //     );
-      //     if (messageId in newMessageIds) {
-      //       return messages;
-      //     }
-      //
-      //     return [...messages, message];
-      //   });
-      // }
-
       // We need to run through the entire array of messages and aggregate them
       //  into similar sets
-
       if (action.payload.length > 0) {
-        sortedPayload = action.payload.sort((curr, next) => (
-          new Date(curr.timestamp) - new Date(next.timestamp)
-        ));
+        sortedPayload = action.payload.sort(
+          (curr, next) => new Date(curr.timestamp) - new Date(next.timestamp),
+        );
         // There should be an algorithm here that would speed things up
 
         for (let i = 0; i < sortedPayload.length; i += 1) {
           // All we have to do is see if the last message has the same author
 
-          if (messages.length > 0 &&
-            messages[messages.length - 1].author === sortedPayload[i].author) {
+          if (
+            messages.length > 0 &&
+            messages[messages.length - 1].author === sortedPayload[i].author
+          ) {
             // If it is the same author, do our usual slice magic
             messages[messages.length - 1].content.push(sortedPayload[i].content);
           } else {
@@ -248,12 +206,6 @@ function ChatReducer (state = initialState, action) {
       // TODO: Handle error
       return state;
 
-    case SET_CONFIG:
-      return {
-        ...state,
-        config: action.payload,
-      };
-
     case SET_ACTIVE_CHAT:
       return {
         ...state,
@@ -261,13 +213,11 @@ function ChatReducer (state = initialState, action) {
         activeIsOpen: action.payload.open,
       };
 
-
     case SET_OPERATOR_FILTER:
       return {
         ...state,
         operatorFilter: action.payload,
       };
-
 
     // case TOGGLE_OPEN: {
     //   const chats = state.chats.map((chat) => {
@@ -288,33 +238,28 @@ function ChatReducer (state = initialState, action) {
     //   };
     // }
 
-
     case ADD_CHAT:
       // Pull the chat ID out of the payload and use it as the key
       return {
         ...state,
-        chats: Object.assign(
-          {},
-          state.chats,
-          {
-            [action.payload.id]: {
-              client: action.payload.client,
-              update_time: action.payload.update_time,
-              creation_time: action.payload.creation_time,
-              open: action.payload.open,
-              typing: null,
-            },
-          }),
+        chats: Object.assign({}, state.chats, {
+          [action.payload.id]: {
+            client: action.payload.client,
+            update_time: action.payload.update_time,
+            creation_time: action.payload.creation_time,
+            open: action.payload.open,
+            typing: null,
+          },
+        }),
       };
 
     case SEND_MESSAGE:
-      if (state.messages.length > 0 &&
+      if (
+        state.messages.length > 0 &&
         // TODO: This should check if author === operator username
-        state.messages[state.messages.length - 1].author === action.payload.author) {
-        messages = [
-          ...state.messages[state.messages.length - 1].content,
-          action.payload.content,
-        ];
+        state.messages[state.messages.length - 1].author === action.payload.author
+      ) {
+        messages = [...state.messages[state.messages.length - 1].content, action.payload.content];
 
         return {
           ...state,
@@ -327,20 +272,31 @@ function ChatReducer (state = initialState, action) {
 
       return {
         ...state,
-        messages: [
-          ...state.messages,
-          { ...action.payload, content: [action.payload.content] },
-        ],
+        messages: [...state.messages, { ...action.payload, content: [action.payload.content] }],
       };
 
     case RECEIVE_MESSAGE:
-      if (state.messages.length > 0 &&
+      const msgText = action.payload.content;
+
+      // TODO: clicking the system notification should take user to chat notification
+      if (window.config.notificationsEnabled) {
+        const newMessageNotification = new Notification('New Message', {
+          body: msgText.length > 80 ? `${msgText.substring(0, 80)}...` : msgText,
+        });
+
+        try {
+          newMessageNotification.show();
+        } catch (e) {
+          // ignore this error as chrome browser thinks `.show()` isn't a method
+        }
+      }
+
+      if (
+        state.messages.length > 0 &&
         // TODO: This should check if the author = client ID
-        state.messages[state.messages.length - 1].author === action.payload.author) {
-        messages = [
-          ...state.messages[state.messages.length - 1].content,
-          action.payload.content,
-        ];
+        state.messages[state.messages.length - 1].author === action.payload.author
+      ) {
+        messages = [...state.messages[state.messages.length - 1].content, action.payload.content];
 
         return {
           ...state,
@@ -353,40 +309,29 @@ function ChatReducer (state = initialState, action) {
 
       return {
         ...state,
-        messages: [
-          ...state.messages,
-          { ...action.payload, content: [action.payload.content] },
-        ],
+        messages: [...state.messages, { ...action.payload, content: [action.payload.content] }],
       };
 
     case CLIENT_TYPING:
       return {
         ...state,
-        chats: Object.assign(
-          {},
-          state.chats,
-          {
-            [action.payload.chat]: {
-              ...state.chats[action.payload.chat],
-              typing: action.payload.typing,
-            },
+        chats: Object.assign({}, state.chats, {
+          [action.payload.chat]: {
+            ...state.chats[action.payload.chat],
+            typing: action.payload.typing,
           },
-        ),
+        }),
       };
 
     case CLIENT_IDLE:
       return {
         ...state,
-        chats: Object.assign(
-          {},
-          state.chats,
-          {
-            [action.payload.chat]: {
-              ...state.chats[action.payload.chat],
-              typing: null,
-            },
+        chats: Object.assign({}, state.chats, {
+          [action.payload.chat]: {
+            ...state.chats[action.payload.chat],
+            typing: null,
           },
-        ),
+        }),
       };
 
     default:

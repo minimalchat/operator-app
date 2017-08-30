@@ -10,8 +10,8 @@ const store = {
     chat: {
       messages: [],
       typing: {},
-      config: {},
     },
+    config: {}
   })),
 };
 
