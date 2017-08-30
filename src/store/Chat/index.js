@@ -4,9 +4,8 @@ import makeDummy from '../dummy';
 const initialState = {
   activeId: '',
   activeIsOpen: null,
-  chats: [],
+  chats: {},
   messages: [],
-  typing: {},
   operatorFilter: 'all',
   config: {
     apiServer: null,
