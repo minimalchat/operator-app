@@ -16,20 +16,31 @@ const Message = (props) => {
   const { author, timestamp } = props;
   const content = props.content.map((message, index) => <li key={index}>{message}</li>);
 
-  console.log('MESSAGE TIME', timestamp);
+  let datetime = null;
+
+  // Only show the timestamp on client messages
+  if (author.indexOf('client') >= 0) {
+    const momentTimestamp = moment(timestamp);
+
+    // If the timestamp is less than 24 hours, show relative time, otherwise
+    //  show Day of week, Time
+    datetime = (
+      <span className="Message__time">
+        {
+          momentTimestamp.isBefore(moment(), 'day') ?
+            momentTimestamp.format('ddd, h:mma') :
+            momentTimestamp.fromNow()
+        }
+      </span>
+    );
+  }
 
   let message = (
     <div>
       <ul>
         {content}
       </ul>
-      {author.indexOf('client') >= 0 ?
-        (
-          <span className="Message__time">
-            {moment(new Date(timestamp)).format('ddd, h:mma')}
-          </span>
-        ) : null
-      }
+      {datetime}
     </div>
   );
 
