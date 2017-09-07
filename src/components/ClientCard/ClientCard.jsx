@@ -105,11 +105,11 @@ class ClientCard extends Component {
     const { chat, config, activeId } = this.props;
     const classes = [
       'ClientCard',
-      this.isActive() ? 'active' : '',
+      this.isActive() ? 'ClientCard--active' : '',
     ];
     const statusClasses = [
       'ClientCard__status',
-      this.isOnline() ? 'online' : 'offline',
+      this.isOnline() ? 'ClientCard__status--online' : 'ClientCard__status--offline',
     ];
 
     return (
