@@ -2,5 +2,33 @@
   display: flex;
   flex-direction: column;
   flex-grow: 2;
-  padding: 2rem;
+}
+
+.Settings__header {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  height: 50px; /* helps align with minimal chat top left bar thing */
+  color: #595959;
+  border-bottom: 1px solid #D5D5D5;
+}
+
+.Settings__body {
+  margin: 2rem;
+  border-radius: 2px;
+  display: flex;
+}
+
+.Settings__single {
+  display: flex;
+  margin: 1rem 0;
+  align-content: center;
+}
+
+.Settings__notification-label {
+  font-size: 18px;
+  color: #919191;
+  align-self: center;
+  padding-left: 1rem;
 }

@@ -53,7 +53,11 @@ OperatorClientMenu.propTypes = {
 
 const mapStateToProps = state => ({
   operatorFilter: state.chat.operatorFilter,
-  openChats: state.chat.chats.filter(chat => chat.open).length,
+  openChats: Object
+   .keys(state.chat.chats)
+   .map(k => state.chat.chats[k])
+   .filter(chat => chat.open)
+   .length,
 });
 
 const mapDispatchToProps = dispatch => ({

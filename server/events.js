@@ -2,21 +2,23 @@
 const path = require('path');
 const fs = require('fs')
 
-// creates config file if it doesn't already exist
-function initConfig (event) {
-  // Config file read/create
-  let config = null;
-  const configPath = path.join(__dirname, '../config.json');
+const configPath = path.join(__dirname, '../config.json');
 
-  // TODO: Make all this nice without needing to sync
-  if (!fs.existsSync('../config.jsonconfig.json')) {
+// creates config file if it doesn't already exist
+// InitConfig creates a config if it does not exist;
+// Config must be mirrored in the client app for passing config payloads from client<->server
+// TODO: move the initialConfig to another file / share between client / server
+// TODO: Convert *sync to asynchronous file ops (faster?)
+function initConfig (event) {
+  let config = null;
+
+  if (!fs.existsSync(configPath)) {
     const fd = fs.openSync(configPath, 'w');
+
     const initialConfig = {
       apiServer: '',
       operator: '',
-      settings: {
-        notificationsEnabled: true,
-      },
+      notificationsEnabled: true,
     };
 
     fs.writeSync(fd, JSON.stringify(initialConfig, null, '  '), 0, 'utf8');
@@ -24,10 +26,19 @@ function initConfig (event) {
   }
 
   config = require(configPath);
-
   event.sender.send('config', config);
+}
+
+// Handle changing the settings via front end `config.index` reducer
+// Writes to file and then sends payload to front end via ipc event.
+function updateSettings(event, payload) {
+  fs.writeFile(configPath, JSON.stringify(payload, null, 2), function (err) {
+    if (err) return console.log(err);
+    event.sender.send('config', payload)
+  });
 }
 
 module.exports = {
   initConfig,
+  updateSettings
 };

@@ -67,6 +67,7 @@ module.exports = class Window {
   // sets up all event handlers for messages main<->renderer
   configureIpc () {
     ipcMain.on('init-config', events.initConfig);
+    ipcMain.on('update-settings', events.updateSettings);
   }
 
   // Window events
