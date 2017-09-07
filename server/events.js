@@ -1,6 +1,7 @@
 // This file handles the functions to call when certain events are received by the ipc renderer.
 const path = require('path');
 const fs = require('fs')
+
 const configPath = path.join(__dirname, '../config.json');
 
 // creates config file if it doesn't already exist
