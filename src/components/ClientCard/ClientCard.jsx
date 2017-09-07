@@ -29,36 +29,87 @@ class ClientCard extends Component {
     activeId: PropTypes.string,
   }
 
-  getChatLastMessage () {
-    const { messages, chat, activeId } = this.props;
-    let filteredMessages = messages.filter(msg => (
+  getClientMessages () {
+    const { messages, chat } = this.props;
+
+    return messages.filter(msg => (
       msg.chat === chat.id && msg.author === `client.${msg.chat}`
     ));
+  }
+
+  getLastMessage () {
+    const filteredMessages = this.getClientMessages();
 
     if (filteredMessages.length > 0) {
       return filteredMessages[filteredMessages.length - 1];
     }
 
+    return {};
+  }
+
+  isOnline () {
+    const lastMessage = this.getLastMessage();
+
+    if (lastMessage.hasOwnProperty('timestamp')) {
+      // Make the timestamp into a date object so we can do some comparisons
+      const lastMessageTime = new Date(lastMessage.timestamp);
+
+      // Current time minus the ONLINE_TIMEOUT static value
+      const onlineThreshold = new Date().getTime() - ONLINE_TIMEOUT;
+
+      return lastMessageTime >= onlineThreshold;
+    }
+
     return false;
   }
 
-  select () {
+  isActive () {
+    const { chat, activeId } = this.props;
 
+    return activeId === chat.id;
+  }
+
+  renderLastMessage () {
+    const lastMessage = this.getLastMessage();
+
+    if (lastMessage.hasOwnProperty('content') &&
+      lastMessage.content.hasOwnProperty('length') &&
+      lastMessage.content.length > 0) {
+      const lastMessageContent = lastMessage.content;
+
+      return (
+        <p className="ClientCard__lastmsg">
+          {lastMessageContent[lastMessageContent.length - 1]}&hellip;
+        </p>
+      );
+    }
+
+    return null;
+  }
+
+  renderLastMessageTimestamp () {
+    const lastMessage = this.getLastMessage();
+
+    if (lastMessage.hasOwnProperty('timestamp')) {
+      return (
+        <span className="ClientCard__lastmsgtime">
+          {moment(lastMessage.timestamp).fromNow()}
+        </span>
+      );
+    }
+
+    return null;
   }
 
   render () {
     const { chat, config, activeId } = this.props;
-    const lastMessage = this.getChatLastMessage();
     const classes = [
       'ClientCard',
-      (activeId === chat.id) ? 'active' : '',
+      this.isActive() ? 'active' : '',
     ];
     const statusClasses = [
       'ClientCard__status',
-      (lastMessage.timestamp &&
-        (new Date(lastMessage.timestamp) >= new Date().getTime() - ONLINE_TIMEOUT)) ?
-      'online' :
-      'offline',
+      this.isOnline() ? 'online' : 'offline',
     ];
 
     return (
@@ -80,19 +131,8 @@ class ClientCard extends Component {
               <span className={statusClasses.join(' ')} />
             </div>
             <div className="ClientCard__information-row">
-              {lastMessage ? (
-                <p className="ClientCard__lastmsg">
-                  {lastMessage.content ?
-                      lastMessage.content[lastMessage.content.length - 1] :
-                       ''}
-                  &hellip;
-                </p>
-              ) : null}
-              {lastMessage.timestamp ? (
-                <span className="ClientCard__lastmsgtime">
-                  {moment(lastMessage.timestamp).fromNow()}
-                </span>
-              ) : null }
+              {this.renderLastMessage()}
+              {this.renderLastMessageTimestamp()}
             </div>
           </div>
         </button>
