@@ -17,12 +17,12 @@
   display: flex;
 }
 
-.ClientCard.active .ClientCard__btn,
+.ClientCard--active .ClientCard__btn,
 .ClientCard__btn:hover {
   background: #fdfdfd;
 }
 
-.ClientCard.active .ClientCard__btn .ClientCard__icon,
+.ClientCard--active .ClientCard__btn .ClientCard__icon,
 .ClientCard__btn:hover .ClientCard__icon {
   color: rgba(52, 152, 219, 1.0);
 }
@@ -67,11 +67,11 @@
     top: 0;
 }
 
-.ClientCard__status.offline:after {
+.ClientCard__status--offline:after {
   background: rgba(236, 240, 241, 1.0);
 }
 
-.ClientCard__status.online:after {
+.ClientCard__status--online:after {
   background: rgba(46, 204, 113, 1.0);
 }
 
