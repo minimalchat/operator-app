@@ -8,7 +8,7 @@ import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
 import { loadChats } from '../../store/Chat';
-import { setConfig } from '../../store/Config'
+import { setConfig } from '../../store/Config';
 
 import './Application.css';
 

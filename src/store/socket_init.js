@@ -19,6 +19,8 @@ import {
   receiveMessage,
 } from './Chat';
 
+const TYPING_TIMEOUT = 1000;
+
 let socket = null;
 
 // Middleware for Redux to watch for new chat messages
@@ -39,7 +41,7 @@ export function socketMessageHook (store) {
 
 export default function socketInit (store) {
   const { dispatch } = store;
-  const { chat: { config } } = store.getState();
+  const { config } = store.getState();
   const socketPath = config.apiServer || 'http://localhost:8000';
 
   if (!socketPath) {
@@ -70,7 +72,7 @@ export default function socketInit (store) {
     }
 
     // Start new timeout for client
-    buffer.typing = window.setTimeout(() => dispatch(clientIdle(buffer)), 3000);
+    buffer.typing = window.setTimeout(() => dispatch(clientIdle(buffer)), TYPING_TIMEOUT);
 
     // Dispatch client typing action
     dispatch(clientTyping(buffer));

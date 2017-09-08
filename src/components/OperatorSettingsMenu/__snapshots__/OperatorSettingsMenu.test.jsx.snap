@@ -6,7 +6,7 @@ exports[`OperatorSettingsMenu matches snapshot 1`] = `
     <img
       alt="billmurray"
       className="Settings__avatar"
-      src="http://www.fillmurray.com/50/50" />
+      src="http://www.fillmurray.com/58/58" />
     <span>
       Steve
     </span>

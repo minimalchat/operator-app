@@ -9,4 +9,5 @@
 .MessageMenuBar .Button {
   height: 100%;
   line-height: inherit;
+  font-weight: 400;
 }

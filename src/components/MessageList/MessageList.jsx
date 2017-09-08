@@ -104,7 +104,14 @@ class MessageList extends Component {
 
       return activeMsgs.map((msg, index) => {
         const key = `${index}_${msg.chat}`;
-        return <Message key={key} author={msg.author} content={msg.content} />;
+        return (
+          <Message
+            key={key}
+            author={msg.author}
+            content={msg.content}
+            timestamp={msg.timestamp}
+          />
+        );
       });
     };
 

@@ -10,9 +10,9 @@ const store = {
   getState: jest.fn(() => ({
     chat: {
       activeId: 'TEST',
-      config: {
-        operator: 'TEST',
-      },
+    },
+    config: {
+      operator: 'TEST',
     },
   })),
 };
