@@ -7,6 +7,5 @@ exports[`Chat matches snapshot 1`] = `
       "getState": [Function],
       "subscribe": [Function],
     }
-  }
-  updateConfig={[Function]} />
+  } />
 `;

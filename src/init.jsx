@@ -11,7 +11,7 @@ import socketInit, { socketMessageHook } from './socket.js';
 // Reducers
 import chat from './store/Chat';
 import ui from './store/UI';
-import config from './store/Config';
+import config, { setConfig } from './store/Config';
 import socket from './store/Socket';
 
 // Create redux store
@@ -32,16 +32,16 @@ window.state = store.getState;
 // Configuration for the system
 ipcRenderer.on('config', (event, newConfig) => {
   const { dispatch } = store;
-  const { config } = store.getState();
+  const state = store.getState();
 
   dispatch(setConfig(newConfig));
 
   // Create Socket Connection only if there is a new apiServer config
-  if (newConfig.apiServer === config.apiServer) {
+  if (newConfig.apiServer === state.config.apiServer) {
     console.log('SOCKET', 'Already initialized, skipping ...');
     return;
   }
-  
+
   console.log('SOCKET', 'Initializing ...');
   socketInit(store);
 });
