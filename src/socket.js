@@ -10,14 +10,14 @@ import {
   socketReconnectError,
   socketReconnectFailed,
   socketReconnectTimeout,
-} from './Socket';
+} from './store/Socket';
 
 import {
   addChat,
   clientTyping,
   clientIdle,
   receiveMessage,
-} from './Chat';
+} from './store/Chat';
 
 const TYPING_TIMEOUT = 1000;
 
@@ -42,7 +42,7 @@ export function socketMessageHook (store) {
 export default function socketInit (store) {
   const { dispatch } = store;
   const { config } = store.getState();
-  const socketPath = config.apiServer || 'http://localhost:8000';
+  const socketPath = config.apiServer || 'http://192.168.86.137:8000';
 
   if (!socketPath) {
     console.error('ERROR: No API Server defined', config);
@@ -53,6 +53,7 @@ export default function socketInit (store) {
   // Make connection
   socket = io.connect(socketPath, {
     reconnectionAttempts: 10,
+    transports: ['websocket'],
     query: {
       type: 'operator',
     },

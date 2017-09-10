@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ipcRenderer } from 'electron';
 
 import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
+
 import { loadChats } from '../../store/Chat';
 import { setConfig } from '../../store/Config';
 
@@ -18,8 +18,8 @@ class Application extends Component {
     super(props);
 
     // Setup our IPC listeners
-    ipcRenderer.on('config', props.updateConfig);
-    ipcRenderer.send('init-config');
+    // ipcRenderer.on('config', props.updateConfig);
+    // ipcRenderer.send('init-config');
   }
 
   renderSettingsView = () => (

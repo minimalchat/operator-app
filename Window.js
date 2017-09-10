@@ -44,6 +44,7 @@ module.exports = class Window {
     // be closed automatically when the JavaScript object is garbage collected.
 
     this.window = windowObject = new BrowserWindow({
+      titleBarStyle: 'hidden',
       width,
       height,
     });

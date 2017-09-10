@@ -1,6 +1,7 @@
 node_modules/
 yarn.lock
 dist/*-linux-armv7l
+dist/*-linux-arm64
 dist/*-win32-x64
 dist/*-mas-x64
 dist/*-linux-x64
