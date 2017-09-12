@@ -22,7 +22,7 @@ import {
 import {
   showNotification,
   hideNotification,
-} from './UI';
+} from './store/UI';
 
 const TYPING_TIMEOUT = 1000;
 const RECONNECTED_TIMEOUT = 3000;
@@ -48,11 +48,7 @@ export function socketMessageHook (store) {
 export default function socketInit (store) {
   const { dispatch } = store;
   const { config } = store.getState();
-<<<<<<< HEAD:src/socket.js
-  const socketPath = config.apiServer || 'http://localhost:8000';
-=======
   const socketPath = config.apiServer || 'http://127.0.0.1:8000';
->>>>>>> c46ec979e396396586e29c0ebef76b65e3568c0b:src/socket.js
 
   if (!socketPath) {
     console.error('ERROR: No API Server defined', config);
