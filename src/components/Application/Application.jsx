@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ipcRenderer } from 'electron';
 
 import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
-import { loadChats } from '../../store/Chat';
-import { setConfig } from '../../store/Config';
 
 import './Application.css';
 
 
 class Application extends Component {
-  constructor (props) {
-    super(props);
-
-    // Setup our IPC listeners
-    ipcRenderer.on('config', props.updateConfig);
-    ipcRenderer.send('init-config');
-  }
-
   renderSettingsView = () => (
     <div className="App__settingsview">
       <SettingsPanel />
@@ -48,7 +37,6 @@ class Application extends Component {
 }
 
 Application.propTypes = {
-  updateConfig: PropTypes.func.isRequired,
   settingsOpen: PropTypes.bool.isRequired,
 };
 
@@ -57,16 +45,7 @@ const mapStateToProps = state => ({
   settingsOpen: state.ui.settingsOpen,
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateConfig: (event, config) => {
-    // Set config
-    dispatch(setConfig(config));
-
-    // Then reload chats
-    // TODO: ^ why does this need to happen?
-    loadChats(dispatch, config);
-  },
-});
+const mapDispatchToProps = dispatch => ({ });
 
 
 export default connect(
