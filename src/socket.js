@@ -10,14 +10,14 @@ import {
   socketReconnectError,
   socketReconnectFailed,
   socketReconnectTimeout,
-} from './Socket';
+} from './store/Socket';
 
 import {
   addChat,
   clientTyping,
   clientIdle,
   receiveMessage,
-} from './Chat';
+} from './store/Chat';
 
 const TYPING_TIMEOUT = 1000;
 
@@ -53,6 +53,7 @@ export default function socketInit (store) {
   // Make connection
   socket = io.connect(socketPath, {
     reconnectionAttempts: 10,
+    transports: ['websocket'],
     query: {
       type: 'operator',
     },
