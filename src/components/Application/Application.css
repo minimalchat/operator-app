@@ -14,6 +14,7 @@ input, button {
 .App__mainview {
   display: flex;
   flex-grow: 2;
+  position: relative;
 }
 
 .App__settingsview {
@@ -21,4 +22,4 @@ input, button {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-};
+}
