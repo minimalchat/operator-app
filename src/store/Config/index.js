@@ -48,9 +48,6 @@ export function updateSettings (payload) {
 
 function ConfigReducer (state = initialState, action) {
   let newSettings = {};
-
-  console.log('CONFIG', state, action);
-
   switch (action.type) {
 
     // Triggered by incoming IPC message: 'config'
@@ -76,7 +73,6 @@ function ConfigReducer (state = initialState, action) {
       newSettings = Object.assign({}, state, action.payload);
 
       ipcRenderer.send('update-settings', newSettings);
-
       return newSettings;
 
     default:

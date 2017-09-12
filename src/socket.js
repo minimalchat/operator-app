@@ -19,7 +19,13 @@ import {
   receiveMessage,
 } from './store/Chat';
 
+import {
+  showNotification,
+  hideNotification,
+} from './UI';
+
 const TYPING_TIMEOUT = 1000;
+const RECONNECTED_TIMEOUT = 3000;
 
 let socket = null;
 
@@ -42,7 +48,11 @@ export function socketMessageHook (store) {
 export default function socketInit (store) {
   const { dispatch } = store;
   const { config } = store.getState();
+<<<<<<< HEAD:src/socket.js
   const socketPath = config.apiServer || 'http://localhost:8000';
+=======
+  const socketPath = config.apiServer || 'http://127.0.0.1:8000';
+>>>>>>> c46ec979e396396586e29c0ebef76b65e3568c0b:src/socket.js
 
   if (!socketPath) {
     console.error('ERROR: No API Server defined', config);
@@ -100,15 +110,50 @@ export default function socketInit (store) {
   // Connection events
   socket.on('connect', () => dispatch(socketConnected()));
 
-  socket.on('disconnect', () => dispatch(socketDisconnected()));
+  socket.on('disconnect', () => {
+    dispatch(socketDisconnected());
+
+    // Show notification bar
+    dispatch(showNotification({
+      notification: 'Disconnected',
+      notificationIcon: 'flash off',
+      notificationColour: 'red',
+    }));
+  });
 
   socket.on('connect_error', error => dispatch(socketConnectionError(error)));
 
   socket.on('connect_timeout', () => dispatch(socketConnectionTimeout()));
 
-  socket.on('reconnect', attempt => dispatch(socketReconnected(attempt)));
+  socket.on('reconnect', (attempt) => {
+    let reconnectingTimeout = null;
+    const { socket: { reconnecting } } = store.getState();
 
-  socket.on('reconnecting', attempt => dispatch(socketReconnecting(attempt)));
+    window.clearTimeout(reconnecting);
+
+    reconnectingTimeout = window.setTimeout(
+      () => dispatch(hideNotification()),
+      RECONNECTED_TIMEOUT,
+    );
+
+    dispatch(socketReconnected(attempt, reconnectingTimeout));
+
+    dispatch(showNotification({
+      notification: 'Reconnected',
+      notificationIcon: 'flash',
+      notificationColour: 'green',
+    }));
+  });
+
+  socket.on('reconnecting', (attempt) => {
+    dispatch(socketReconnecting(attempt));
+
+    dispatch(showNotification({
+      notification: 'Disconnected; trying to reconnect...',
+      notificationIcon: 'flash off',
+      notificationColour: 'orange',
+    }));
+  });
 
   socket.on('reconnect_error', error => dispatch(socketReconnectError(error)));
 

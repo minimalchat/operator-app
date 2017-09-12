@@ -6,6 +6,7 @@ import OperatorPanel from '../OperatorPanel/OperatorPanel.jsx';
 import ClientsPanel from '../ClientsPanel/ClientsPanel.jsx';
 import MessagePanel from '../MessagePanel/MessagePanel.jsx';
 import SettingsPanel from '../SettingsPanel/SettingsPanel.jsx';
+import NotificationBar from '../NotificationBar/NotificationBar.jsx';
 
 import './Application.css';
 
@@ -19,6 +20,7 @@ class Application extends Component {
 
   renderMainView = () => (
     <div className="App__mainview">
+      <NotificationBar />
       <ClientsPanel />
       <MessagePanel />
     </div>

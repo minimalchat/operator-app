@@ -146,8 +146,6 @@ function ChatReducer (state = initialState, action) {
   const chat = {};
   let chats = {};
 
-  console.log('CHAT', state, action);
-
   switch (action.type) {
     case LOAD_CHATS_SUCCESS:
       // Turn the array of chats into an object with the chat ID as the key

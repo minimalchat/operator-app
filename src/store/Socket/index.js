@@ -1,5 +1,5 @@
 const initialState = {
-  state: null,
+  status: null,
 };
 
 // Constants
@@ -49,9 +49,11 @@ export function socketReconnecting () {
   };
 }
 
-export function socketReconnected () {
+export function socketReconnected (attempt, timeout) {
   return {
     type: RECONNECTED,
+    reconnectAttempt: attempt,
+    reconnectTimeout: timeout,
   };
 }
 

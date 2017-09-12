@@ -1,0 +1,66 @@
+.NotificationBar {
+  z-index: 2;
+  display: flex;
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  width: 100%;
+  transition: top ease 500ms;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: rgba(255,255,255,1);
+}
+
+.NotificationBar--active {
+  top: 0;
+}
+
+.NotificationBar--red {
+  background: rgba(235, 110, 96, 1);
+}
+
+.NotificationBar--green {
+  background: rgba(137, 220, 203, 1);
+}
+
+.NotificationBar--orange {
+  background: rgba(235, 190, 117, 1);
+}
+
+
+.NotificationBar__status {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.NotificationBar__icon {
+  padding: 11px 8px 8px 8px;
+  box-sizing: border-box;
+  height: 50px;
+  width: 36px;
+  font-size: 24px;
+  float: left;
+  margin: 0 8px;
+}
+
+.NotificationBar__close {
+  position: absolute;
+  text-align: right;
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 32px;
+  line-height: 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 16px;
+  cursor: pointer;
+  color: rgba(230, 126, 34,1.0);
+  right: 0;
+}
