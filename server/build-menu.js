@@ -36,9 +36,8 @@ const menuTemplate = [
        *   click() {
        *     return;
        *   }
-       * },*/
-
-      { type: "separator" },
+       * },
+       * { type: "separator" }, */
 
       {
         label: "Quit",
