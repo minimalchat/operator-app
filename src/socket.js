@@ -17,6 +17,7 @@ import {
   clientTyping,
   clientIdle,
   receiveMessage,
+  triggerNotification
 } from './store/Chat';
 
 import {
@@ -98,6 +99,7 @@ export default function socketInit (store) {
     // After recieving a message, we can go idle
     dispatch(clientIdle(buffer));
     dispatch(receiveMessage(buffer));
+    dispatch(triggerNotification(buffer))
   });
 
   socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));

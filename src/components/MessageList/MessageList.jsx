@@ -28,6 +28,7 @@ class MessageList extends Component {
 
 
   emptyRenderer () {
+    console.log(this.props)
     if (Object.keys(this.props.chats).length === 0) {
       return (
         <div className="MessageList__empty">
@@ -38,7 +39,7 @@ class MessageList extends Component {
       );
     }
 
-    if (this.props.chat.hasOwnProperty = "open") {
+    if (!this.props.chat.hasOwnProperty("open")) {
       return (
         <div className="MessageList__empty">
           <div className="ss-icon ss-mailbox lil-mailbox" />
@@ -72,7 +73,6 @@ class MessageList extends Component {
                 to="16"
                 values="16; 12; 16;"
                 dur="500ms"
-                repeat="always"
                 begin="0s"
                 repeatCount="indefinite"
                 fill="freeze"

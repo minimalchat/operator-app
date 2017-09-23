@@ -113,7 +113,7 @@ class ClientCard extends Component {
     ];
 
     return (
-      <li className={classes.join(' ')}>
+     <li className={classes.join(' ')}>
         <button
           onClick={() => {
             this.props.setActiveChat(chat);

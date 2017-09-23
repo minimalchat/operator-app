@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import createLogger from 'redux-logger';
 import { ipcRenderer } from 'electron';
 
 import Application from './components/Application/Application.jsx';
@@ -29,7 +28,7 @@ const store = createStore(
 // TODO: Use a env var to disable this on build
 window.state = store.getState;
 
-// Configuration for the system
+// Configuration for the systeloggerm
 ipcRenderer.on('config', (event, newConfig) => {
   const { dispatch } = store;
   const state = store.getState();
