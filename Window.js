@@ -13,8 +13,8 @@ const url = require('url');
 const buildMenu = require('./server/build-menu');
 const events = require('./server/events');
 
-const WINDOW_HEIGHT = 768;
-const WINDOW_WIDTH = 1200;
+const WINDOW_HEIGHT = 700;
+const WINDOW_WIDTH = 1000;
 
 const defaultURL = url.format({
   pathname: path.join(__dirname, 'index.html'),
