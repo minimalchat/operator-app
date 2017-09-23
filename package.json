@@ -18,7 +18,7 @@
     "compile:win": "electron-packager . Operator --platform=win32 --arch=all --out=dist/",
     "compile:osx": "electron-packager . Operator --platform=darwin --platform=mas --arch=all --out=dist/",
     "compile:linux": "electron-packager . operator --platform=linux --arch=all --out=dist/",
-    "start": "electron ."
+    "start": "NODE_ENV=development electron ."
   },
   "jest": {
     "setupFiles": [
