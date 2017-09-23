@@ -17,13 +17,10 @@ import {
   clientTyping,
   clientIdle,
   receiveMessage,
-  triggerNotification
+  triggerNotification,
 } from './store/Chat';
 
-import {
-  showNotification,
-  hideNotification,
-} from './store/UI';
+import { showNotification, hideNotification } from './store/UI';
 
 const TYPING_TIMEOUT = 1000;
 const RECONNECTED_TIMEOUT = 3000;
@@ -31,8 +28,8 @@ const RECONNECTED_TIMEOUT = 3000;
 let socket = null;
 
 // Middleware for Redux to watch for new chat messages
-export function socketMessageHook (store) {
-  return next => (action) => {
+export function socketMessageHook(store) {
+  return next => action => {
     const result = next(action);
 
     if (socket && action.type === 'CHAT_MESSAGE_OPERATOR') {
@@ -45,8 +42,7 @@ export function socketMessageHook (store) {
   };
 }
 
-
-export default function socketInit (store) {
+export default function socketInit(store) {
   const { dispatch } = store;
   const { config } = store.getState();
   const socketPath = config.apiServer || 'http://127.0.0.1:8000';
@@ -62,15 +58,14 @@ export default function socketInit (store) {
     reconnectionAttempts: 10,
     transports: ['websocket'],
     query: {
-      type: 'operator',
+      type: 'operator'
     },
   });
 
-
   // Client events
-  socket.on('client:typing', (data) => {
+  socket.on('client:typing', data => {
     const { chat: { chats } } = store.getState();
-    let buffer = data ? JSON.parse(data) : [];
+    const buffer = data ? JSON.parse(data) : [];
 
     // Check if timeout exists for client
     if (chats.hasOwnProperty(buffer.chat)) {
@@ -80,15 +75,18 @@ export default function socketInit (store) {
     }
 
     // Start new timeout for client
-    buffer.typing = window.setTimeout(() => dispatch(clientIdle(buffer)), TYPING_TIMEOUT);
+    buffer.typing = window.setTimeout(
+      () => dispatch(clientIdle(buffer)),
+      TYPING_TIMEOUT,
+    );
 
     // Dispatch client typing action
     dispatch(clientTyping(buffer));
   });
 
-  socket.on('client:message', (data) => {
+  socket.on('client:message', data => {
     const { chat: { chats } } = store.getState();
-    let buffer = data ? JSON.parse(data) : [];
+    const buffer = data ? JSON.parse(data) : [];
 
     if (chats.hasOwnProperty(buffer.chat)) {
       // We want to clear the timeout for typing here because we just received
@@ -99,11 +97,12 @@ export default function socketInit (store) {
     // After recieving a message, we can go idle
     dispatch(clientIdle(buffer));
     dispatch(receiveMessage(buffer));
-    dispatch(triggerNotification(buffer))
+    dispatch(triggerNotification(buffer));
   });
 
-  socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));
-
+  socket.on('chat:new', data =>
+    dispatch(addChat(data ? JSON.parse(data) : [])),
+  );
 
   // Connection events
   socket.on('connect', () => dispatch(socketConnected()));
@@ -112,18 +111,20 @@ export default function socketInit (store) {
     dispatch(socketDisconnected());
 
     // Show notification bar
-    dispatch(showNotification({
-      notification: 'Disconnected',
-      notificationIcon: 'flash off',
-      notificationColour: 'red',
-    }));
+    dispatch(
+      showNotification({
+        notification: 'Disconnected',
+        notificationIcon: 'flash off',
+        notificationColour: 'red'
+      })
+    );
   });
 
   socket.on('connect_error', error => dispatch(socketConnectionError(error)));
 
   socket.on('connect_timeout', () => dispatch(socketConnectionTimeout()));
 
-  socket.on('reconnect', (attempt) => {
+  socket.on('reconnect', attempt => {
     let reconnectingTimeout = null;
     const { socket: { reconnecting } } = store.getState();
 
@@ -131,26 +132,30 @@ export default function socketInit (store) {
 
     reconnectingTimeout = window.setTimeout(
       () => dispatch(hideNotification()),
-      RECONNECTED_TIMEOUT,
+      RECONNECTED_TIMEOUT
     );
 
     dispatch(socketReconnected(attempt, reconnectingTimeout));
 
-    dispatch(showNotification({
-      notification: 'Reconnected',
-      notificationIcon: 'flash',
-      notificationColour: 'green',
-    }));
+    dispatch(
+      showNotification({
+        notification: 'Reconnected',
+        notificationIcon: 'flash',
+        notificationColour: 'green'
+      })
+    );
   });
 
-  socket.on('reconnecting', (attempt) => {
+  socket.on('reconnecting', attempt => {
     dispatch(socketReconnecting(attempt));
 
-    dispatch(showNotification({
-      notification: 'Disconnected; trying to reconnect...',
-      notificationIcon: 'flash off',
-      notificationColour: 'orange',
-    }));
+    dispatch(
+      showNotification({
+        notification: 'Disconnected; trying to reconnect...',
+        notificationIcon: 'flash off',
+        notificationColour: 'orange'
+      })
+    );
   });
 
   socket.on('reconnect_error', error => dispatch(socketReconnectError(error)));
@@ -167,11 +172,11 @@ export default function socketInit (store) {
 
   // Listen for anything, useful in debugging
   const onevent = socket.onevent;
-  socket.onevent = function onEvent (packet) {
+  socket.onevent = function onEvent(packet) {
     const args = packet.data || [];
-    onevent.call(this, packet);    // original call
+    onevent.call(this, packet); // original call
     packet.data = ['*', ...args];
-    onevent.call(this, packet);      // additional call to catch-all
+    onevent.call(this, packet); // additional call to catch-all
   };
   socket.on('*', (...args) => console.debug('SOCKET', args));
 

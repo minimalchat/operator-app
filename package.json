@@ -18,7 +18,8 @@
     "compile:win": "electron-packager . Operator --platform=win32 --arch=all --out=dist/",
     "compile:osx": "electron-packager . Operator --platform=darwin --platform=mas --arch=all --out=dist/",
     "compile:linux": "electron-packager . operator --platform=linux --arch=all --out=dist/",
-    "start": "NODE_ENV=development electron ."
+    "start": "NODE_ENV=development electron .",
+    "format": "prettier-eslint --trailing-comma es5 --single-quote --print-width 100 --write \"src/**/*.js\""
   },
   "jest": {
     "setupFiles": [
@@ -90,6 +91,9 @@
     "jest": "^18.1.0",
     "jest-cli": "^17.0.3",
     "jest-enzyme": "^2.1.0",
+    "prettier": "^1.7.0",
+    "prettier-eslint": "^8.1.1",
+    "prettier-eslint-cli": "^4.3.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-addons-test-utils": "^15.4.1",
     "react-test-renderer": "^15.4.1",

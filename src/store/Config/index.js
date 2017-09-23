@@ -26,30 +26,27 @@ const SET_CONFIG = 'SET_CONFIG';
 const SET_API_SERVER = 'SET_API_SERVER';
 const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
 
-
 // Actions
 
-export function setConfig (payload) {
+export function setConfig(payload) {
   return {
     type: SET_CONFIG,
     payload,
   };
 }
 
-export function updateSettings (payload) {
+export function updateSettings(payload) {
   return {
     type: UPDATE_SETTINGS,
     payload,
   };
 }
 
-
 // Reducer
 
-function ConfigReducer (state = initialState, action) {
+function ConfigReducer(state = initialState, action) {
   let newSettings = {};
   switch (action.type) {
-
     // Triggered by incoming IPC message: 'config'
     // NOTE: payload from server should match the exact initial state in this file;
 

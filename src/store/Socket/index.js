@@ -15,41 +15,40 @@ const RECONNECT_ERROR = 'SOCKET_RECONNECT_ERROR';
 const RECONNECT_FAILED = 'SOCKET_RECONNECT_FAILED';
 const RECONNECT_TIMEOUT = 'SOCKET_RECONNECT_TIMEOUT';
 
-
 // Actions
 //
-export function socketConnected () {
+export function socketConnected() {
   return {
     type: CONNECTED,
   };
 }
 
-export function socketDisconnected () {
+export function socketDisconnected() {
   return {
     type: DISCONNECTED,
   };
 }
 
-export function socketConnectionError (error) {
+export function socketConnectionError(error) {
   return {
     type: CONNECTION_ERROR,
     error,
   };
 }
 
-export function socketConnectionTimeout () {
+export function socketConnectionTimeout() {
   return {
     type: CONNECTION_TIMEOUT,
   };
 }
 
-export function socketReconnecting () {
+export function socketReconnecting() {
   return {
     type: RECONNECTING,
   };
 }
 
-export function socketReconnected (attempt, timeout) {
+export function socketReconnected(attempt, timeout) {
   return {
     type: RECONNECTED,
     reconnectAttempt: attempt,
@@ -57,29 +56,28 @@ export function socketReconnected (attempt, timeout) {
   };
 }
 
-export function socketReconnectError (error) {
+export function socketReconnectError(error) {
   return {
     type: RECONNECT_ERROR,
     error,
   };
 }
 
-export function socketReconnectFailed () {
+export function socketReconnectFailed() {
   return {
     type: RECONNECT_FAILED,
   };
 }
 
-export function socketReconnectTimeout () {
+export function socketReconnectTimeout() {
   return {
     type: RECONNECT_TIMEOUT,
   };
 }
 
-
 // Reducer
 //
-function SocketReducer (state = initialState, action) {
+function SocketReducer(state = initialState, action) {
   switch (action.type) {
     default:
       return state;
