@@ -26,10 +26,27 @@ class MessageList extends Component {
     dispatch: PropTypes.func.isRequired,
   }
 
-  static emptyRenderer () {
-    return (
-      <div className="MessageList__empty"> No chat selected </div>
-    );
+
+  emptyRenderer () {
+    if (Object.keys(this.props.chats).length === 0) {
+      return (
+        <div className="MessageList__empty">
+          <div className="ss-icon ss-ghost lil-ghost" />
+          <div>You have no chats!</div>
+          <div style={{fontSize: "12px", padding: "10px"}}>We still love you.</div>
+        </div>
+      );
+    }
+
+    if (this.props.chat.hasOwnProperty = "open") {
+      return (
+        <div className="MessageList__empty">
+          <div className="ss-icon ss-mailbox lil-mailbox" />
+          <div>No chat selected</div>
+          <div style={{fontSize: "12px", padding: "10px"}}>Click a chat on the left to get started!</div>
+        </div>
+      );
+    }
   }
 
   componentWillMount () {
@@ -95,12 +112,13 @@ class MessageList extends Component {
   }
 
   render () {
+    window.props = this.props
     const { messages, chat, activeId } = this.props;
     const activeMsgs = messages.filter(msg => msg.chat === activeId);
 
     // Render a map of <Message> components with their contents.
     const renderView = () => {
-      if (!activeId) return MessageList.emptyRenderer();
+      if (!activeId) return this.emptyRenderer();
 
       return activeMsgs.map((msg, index) => {
         const key = `${index}_${msg.chat}`;
@@ -135,6 +153,7 @@ const mapStateToProps = state => ({
   )),
   typing: state.chat.typing,
   chat: state.chat.activeId ? state.chat.chats[state.chat.activeId] : {},
+  chats: state.chat.chats,
   config: state.config,
   activeId: state.chat.activeId,
 });
