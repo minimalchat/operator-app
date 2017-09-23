@@ -9,7 +9,7 @@ import Application from './components/Application/Application.jsx';
 import socketInit, { socketMessageHook } from './socket.js';
 
 // Reducers
-import chat from './store/Chat';
+import chat, { loadChats } from './store/Chat';
 import ui from './store/UI';
 import config, { setConfig } from './store/Config';
 import socket from './store/Socket';
@@ -38,12 +38,12 @@ ipcRenderer.on('config', (event, newConfig) => {
 
   // Create Socket Connection only if there is a new apiServer config
   if (newConfig.apiServer === state.config.apiServer) {
-    console.log('SOCKET', 'Already initialized, skipping ...');
     return;
   }
 
-  console.log('SOCKET', 'Initializing ...');
   socketInit(store);
+
+  loadChats(dispatch, newConfig);
 });
 
 ipcRenderer.send('init-config');

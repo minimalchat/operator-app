@@ -21,32 +21,10 @@ class MessageList extends Component {
       }),
     ).isRequired,
     chat: PropTypes.object.isRequired,
+    chats: PropTypes.object,
     config: PropTypes.object.isRequired,
     activeId: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-  }
-
-
-  emptyRenderer () {
-    if (Object.keys(this.props.chats).length === 0) {
-      return (
-        <div className="MessageList__empty">
-          <div className="ss-icon ss-ghost lil-ghost" />
-          <div>You have no chats!</div>
-          <div style={{fontSize: "12px", padding: "10px"}}>We still love you.</div>
-        </div>
-      );
-    }
-
-    if (this.props.chat.hasOwnProperty = "open") {
-      return (
-        <div className="MessageList__empty">
-          <div className="ss-icon ss-mailbox lil-mailbox" />
-          <div>No chat selected</div>
-          <div style={{fontSize: "12px", padding: "10px"}}>Click a chat on the left to get started!</div>
-        </div>
-      );
-    }
   }
 
   componentWillMount () {
@@ -55,6 +33,30 @@ class MessageList extends Component {
     if (this.props.config.apiServer && activeId) {
       loadMessages(this.props.dispatch, this.props.config, activeId);
     }
+  }
+
+  renderEmpty () {
+    if (Object.keys(this.props.chats).length === 0) {
+      return (
+        <div className="MessageList__empty">
+          <div className="ss-icon ss-ghost lil-ghost" />
+          <div>You have no chats!</div>
+          <div style={{ fontSize: '12px', padding: '10px' }}>We still love you.</div>
+        </div>
+      );
+    }
+
+    if (this.props.chat.hasOwnProperty('open')) {
+      return (
+        <div className="MessageList__empty">
+          <div className="ss-icon ss-mailbox lil-mailbox" />
+          <div>No chat selected</div>
+          <div style={{ fontSize: '12px', padding: '10px' }}>Click a chat on the left to get started!</div>
+        </div>
+      );
+    }
+
+    return null;
   }
 
   renderTyping () {
@@ -112,13 +114,12 @@ class MessageList extends Component {
   }
 
   render () {
-    window.props = this.props
     const { messages, chat, activeId } = this.props;
     const activeMsgs = messages.filter(msg => msg.chat === activeId);
 
     // Render a map of <Message> components with their contents.
     const renderView = () => {
-      if (!activeId) return this.emptyRenderer();
+      if (!activeId) return this.renderEmpty();
 
       return activeMsgs.map((msg, index) => {
         const key = `${index}_${msg.chat}`;
