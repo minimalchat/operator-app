@@ -51,8 +51,9 @@ module.exports = class Window {
 
     this.window.loadURL(url);
 
-    // TODO: Only use this when built using DEV environment
-    this.window.webContents.openDevTools();
+    if(process.env.NODE_ENV === "development") {
+      this.window.webContents.openDevTools();
+    }
 
     this.window.on('closed', this.onClosed);
 
