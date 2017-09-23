@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './OperatorClientMenu.css';
 import { setOperatorFilter } from '../../store/Chat';
+import { toggleSettings } from '../../store/UI';
 
 const OperatorClientMenu = (props) => {
   const { setFilter, operatorFilter, openChats } = props;
@@ -61,7 +62,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setFilter: filterType => dispatch(setOperatorFilter(filterType)),
+  setFilter: filterType => {
+    dispatch(setOperatorFilter(filterType))
+    dispatch(toggleSettings(false))
+  },
 });
 
 
