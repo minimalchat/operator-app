@@ -17,8 +17,8 @@ const HIDE_NOTIFICATION = 'UI_HIDE_NOTIFICATION';
 // Actions
 //
 
-export function toggleSettings () {
-  return { type: TOGGLE_SETTINGS };
+export function toggleSettings (payload) {
+  return { type: TOGGLE_SETTINGS, payload };
 }
 
 export function showNotification (payload) {
@@ -41,12 +41,8 @@ export function hideNotification () {
 
 function UIReducer (state = initialState, action) {
   switch (action.type) {
-
     case TOGGLE_SETTINGS:
-      return {
-        ...state,
-        settingsOpen: !state.settingsOpen,
-      };
+      return {...state, settingsOpen: action.payload}
 
     case SHOW_NOTIFICATION:
       return {

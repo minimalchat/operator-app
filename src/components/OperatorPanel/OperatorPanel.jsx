@@ -36,7 +36,7 @@ OperatorPanel.propTypes = {
 
 
 const mapDispatchToProps = dispatch => ({
-  toggleSettings: () => dispatch(toggleSettings()),
+  toggleSettings: () => dispatch(toggleSettings(true)),
 });
 
 
