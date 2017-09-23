@@ -31,7 +31,7 @@ const SEND_MESSAGE = 'CHAT_MESSAGE_OPERATOR';
 
 const CLIENT_TYPING = 'CHAT_CLIENT_TYPING';
 const CLIENT_IDLE = 'CHAT_CLIENT_IDLE';
-const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
+export const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
 const TRIGGER_NOTIFICATION = 'TRIGGER_NOTIFICATION';
 
 const ADD_CHAT = 'CHAT_ADD_CHAT';
@@ -74,6 +74,7 @@ export function loadMessages (dispatch, config, activeId) {
 }
 
 export function setActiveChat (payload) {
+  console.log('setActiveChat called', payload)
   return {
     type: SET_ACTIVE_CHAT,
     payload,
@@ -226,6 +227,7 @@ function ChatReducer (state = initialState, action) {
       return state;
 
     case SET_ACTIVE_CHAT:
+      console.log('SET ACTIVE HAT ACTION IS', action)
       return {
         ...state,
         activeId: action.payload.id,
@@ -319,38 +321,6 @@ function ChatReducer (state = initialState, action) {
           },
         ],
       };
-
-    case TRIGGER_NOTIFICATION:
-      // TODO: Clicking the system notification should take user to chat notification
-      if (window.config.notificationsEnabled) {
-        const newMessageNotification = new Notification('New Message', {
-          body: `${action.payload.content.substring(0, 80)}${action.payload.content.length > 80 ? '...' : ''}`,
-        });
-
-        // this works but not when iside the new MessageNotification
-        /* return {
-         *   ...state,
-         *   activeId: action.payload.id,
-         *   activeIsOpen: action.payload.open,
-         * };*/
-
-        // cant get this working
-        newMessageNotification.onclick = () => {
-          return {
-            ...state,
-            activeId: action.payload.id,
-            activeIsOpen: action.payload.open,
-          };
-        }
-
-        try {
-          newMessageNotification.show();
-        } catch (e) {
-          // Ignore this error as chrome browser thinks `.show()` isn't a method
-          // TODO: Figure out how to get around this oddity
-        }
-      }
-
 
     case CLIENT_TYPING:
       return {
