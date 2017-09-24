@@ -10,7 +10,7 @@ export const logger = store => next => action => {
 }
 
 export const notifications = store => next => action => {
-  const messageLength
+  const messageLength = 80;
   if (action.type === RECEIVE_MESSAGE){
     if (window.config.notificationsEnabled) {
       const newMessageNotification = new Notification('New Message', {
