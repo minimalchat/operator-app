@@ -74,7 +74,7 @@ class MessageList extends Component {
                 to="16"
                 values="16; 12; 16;"
                 dur="500ms"
-                repeat="always"
+                restart="always"
                 begin="0s"
                 repeatCount="indefinite"
                 fill="freeze"

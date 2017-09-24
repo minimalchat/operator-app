@@ -42,7 +42,7 @@ export function hideNotification () {
 function UIReducer (state = initialState, action) {
   switch (action.type) {
     case TOGGLE_SETTINGS:
-      return {...state, settingsOpen: action.payload}
+      return { ...state, settingsOpen: action.payload };
 
     case SHOW_NOTIFICATION:
       return {
