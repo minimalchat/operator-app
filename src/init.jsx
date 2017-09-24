@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import createLogger from 'redux-logger';
 import { ipcRenderer } from 'electron';
 
 import Application from './components/Application/Application.jsx';

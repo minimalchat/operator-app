@@ -62,9 +62,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setFilter: filterType => {
-    dispatch(setOperatorFilter(filterType))
-    dispatch(toggleSettings(false))
+  setFilter: (filterType) => {
+    dispatch(setOperatorFilter(filterType));
+    dispatch(toggleSettings(false));
   },
 });
 
