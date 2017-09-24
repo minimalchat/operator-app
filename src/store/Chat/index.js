@@ -140,7 +140,7 @@ export function triggerNotification (payload) {
   return {
     type: TRIGGER_NOTIFICATION,
     payload,
-  }
+  };
 }
 
 // Reducer

@@ -34,8 +34,9 @@
   color: rgba(149, 165, 166,1.0);
   font-size: 9px;
   font-style: italic;
-  width: 90px;
+  width: 94px;
   text-align: right;
+  letter-spacing: 0.4px;
 }
 
 .Message__operator {

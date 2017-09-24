@@ -30,13 +30,14 @@ class ClientList extends Component {
       return chat;
     });
 
-    return filteredChats.map(chat => {
-      if (chat.client == null) return null // avoids an async issue where chat client isn't avail. Weird bug.
+    return filteredChats.map((chat) => {
+      // Avoids an async issue where chat client isn't avail. Weird bug.
+      if (chat.client == null) return null;
       return (
         <ClientCard key={chat.id} chat={chat} chatId={chat.id}>
           {`${chat.client.first_name} ${chat.client.last_name}`}
         </ClientCard>
-      )
+      );
     });
   }
 
