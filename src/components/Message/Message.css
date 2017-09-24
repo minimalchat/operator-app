@@ -9,6 +9,8 @@
   list-style: none;
   margin-top: 6px;
   margin-right: 6px;
+  /* account for absolutely position time of messages below msg: */
+  margin-bottom: 24px;
   max-width: 45%;
   min-width: 25%;
   padding: 10px;
@@ -28,10 +30,12 @@
 .Message__time {
   position: absolute;
   bottom: -14px;
-  right: 10px;
+  right: 0px;
   color: rgba(149, 165, 166,1.0);
   font-size: 9px;
   font-style: italic;
+  width: 90px;
+  text-align: right;
 }
 
 .Message__operator {
