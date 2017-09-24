@@ -1,3 +1,4 @@
+import os from 'os';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -11,7 +12,12 @@ import './OperatorPanel.css';
 
 const OperatorPanel = props => (
   <div className="OperatorPanel panel">
-    <header className="OperatorPanel__header">
+    <header
+      className="OperatorPanel__header"
+      style={{
+        paddingLeft: os.platform() === 'darwin' ? '15px' : '0',
+      }}
+    >
       <BrandLogo />
       <span className="OperatorPanel__appname">Operator</span>
     </header>
