@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import createLogger from 'redux-logger';
 import { ipcRenderer } from 'electron';
 
 import Application from './components/Application/Application.jsx';
 import socketInit, { socketMessageHook } from './socket.js';
-import { logger, notifications } from './store/middleware.js';
+import { notifications } from './store/middleware.js';
 
 // Reducers
 import chat, { loadChats } from './store/Chat';
@@ -24,7 +23,7 @@ const store = createStore(
     socket,
   }),
 
-  applyMiddleware(socketMessageHook, notifications/* , logger*/),
+  applyMiddleware(socketMessageHook, notifications),
 );
 
 // TODO: Use a env var to disable this on build

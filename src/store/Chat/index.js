@@ -28,10 +28,10 @@ const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
 
 const OPERATOR_TYPING = 'CHAT_OPERATOR_TYPING';
 const SEND_MESSAGE = 'CHAT_MESSAGE_OPERATOR';
+export const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
 
 const CLIENT_TYPING = 'CHAT_CLIENT_TYPING';
 const CLIENT_IDLE = 'CHAT_CLIENT_IDLE';
-export const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
 const TRIGGER_NOTIFICATION = 'TRIGGER_NOTIFICATION';
 
 const ADD_CHAT = 'CHAT_ADD_CHAT';
@@ -74,7 +74,6 @@ export function loadMessages (dispatch, config, activeId) {
 }
 
 export function setActiveChat (payload) {
-  console.log('setActiveChat called', payload)
   return {
     type: SET_ACTIVE_CHAT,
     payload,
@@ -227,7 +226,6 @@ function ChatReducer (state = initialState, action) {
       return state;
 
     case SET_ACTIVE_CHAT:
-      console.log('SET ACTIVE HAT ACTION IS', action)
       return {
         ...state,
         activeId: action.payload.id,
