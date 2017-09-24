@@ -28,10 +28,11 @@ const TOGGLE_OPEN = 'CHAT_TOGGLE_OPEN';
 
 const OPERATOR_TYPING = 'CHAT_OPERATOR_TYPING';
 const SEND_MESSAGE = 'CHAT_MESSAGE_OPERATOR';
+export const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
 
 const CLIENT_TYPING = 'CHAT_CLIENT_TYPING';
 const CLIENT_IDLE = 'CHAT_CLIENT_IDLE';
-const RECEIVE_MESSAGE = 'CHAT_MESSAGE_CLIENT';
+const TRIGGER_NOTIFICATION = 'TRIGGER_NOTIFICATION';
 
 const ADD_CHAT = 'CHAT_ADD_CHAT';
 
@@ -133,6 +134,13 @@ export function receiveMessage (payload) {
     type: RECEIVE_MESSAGE,
     payload,
   };
+}
+
+export function triggerNotification (payload) {
+  return {
+    type: TRIGGER_NOTIFICATION,
+    payload,
+  }
 }
 
 // Reducer
@@ -280,19 +288,6 @@ function ChatReducer (state = initialState, action) {
       };
 
     case RECEIVE_MESSAGE:
-      // TODO: Clicking the system notification should take user to chat notification
-      if (window.config.notificationsEnabled) {
-        const newMessageNotification = new Notification('New Message', {
-          body: `${action.payload.content.substring(0, 80)}${action.payload.content.length > 80 ? '...' : ''}`,
-        });
-
-        try {
-          newMessageNotification.show();
-        } catch (e) {
-          // Ignore this error as chrome browser thinks `.show()` isn't a method
-          // TODO: Figure out how to get around this oddity
-        }
-      }
 
       if (
         state.messages.length > 0 &&

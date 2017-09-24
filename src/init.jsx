@@ -6,6 +6,7 @@ import { ipcRenderer } from 'electron';
 
 import Application from './components/Application/Application.jsx';
 import socketInit, { socketMessageHook } from './socket.js';
+import { notifications } from './store/middleware.js';
 
 // Reducers
 import chat, { loadChats } from './store/Chat';
@@ -22,7 +23,7 @@ const store = createStore(
     socket,
   }),
 
-  applyMiddleware(socketMessageHook),
+  applyMiddleware(socketMessageHook, notifications),
 );
 
 // TODO: Use a env var to disable this on build

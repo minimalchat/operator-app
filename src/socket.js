@@ -17,6 +17,7 @@ import {
   clientTyping,
   clientIdle,
   receiveMessage,
+  triggerNotification,
 } from './store/Chat';
 
 import {
