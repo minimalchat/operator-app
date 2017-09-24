@@ -41,7 +41,9 @@ export function hideNotification () {
 
 function UIReducer (state = initialState, action) {
   switch (action.type) {
+    // can take a boolean, or no args, in which case this just toggles opposite state value from  before
     case TOGGLE_SETTINGS:
+      if (action.payload == null) return { ...state, settingsOpen: !state.settingsOpen}
       return { ...state, settingsOpen: action.payload };
 
     case SHOW_NOTIFICATION:
