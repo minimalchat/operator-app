@@ -12,7 +12,7 @@ We're glad you're interested in contributing, feel free to create an [issue](htt
 
 Screenshot
 ---
-![operator-screenshot-0](https://user-images.githubusercontent.com/563301/29819738-f25ad906-8c8f-11e7-96c3-785f1e0f95b8.png)
+![operator-screenshot-1](https://user-images.githubusercontent.com/563301/32144257-84f8533e-bc8c-11e7-8875-48cb49c92a78.png)
 
 ---
 
