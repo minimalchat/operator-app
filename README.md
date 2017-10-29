@@ -1,14 +1,30 @@
 # Minimal Chat operator application
-Cross-platform operator application for Minimal Chat
 
+---
+
+Minimal Chat is an open source live chat system providing live one on one messaging to a website visitor and an operator.
+
+Minimal Chat is:
+-   **minimal**: simple, lightweight, accessible
+-   **extensible**: modular, pluggable, hookable, composable
+
+We're glad you're interested in contributing, feel free to create an [issue](https://github.com/minimalchat/operator-app/issues/new) or pick one up but first check out our [contributing doc](https://github.com/minimalchat/operator-app/blob/master/CONTRIBUTING.md) and [code of conduct](https://github.com/minimalchat/operator-app/blob/master/CODE_OF_CONDUCT.md). Check out our [design documentation](https://github.com/minimalchat/client/wiki/Design-Documentation) as well.
+
+Screenshot
+---
 ![operator-screenshot-0](https://user-images.githubusercontent.com/563301/29819738-f25ad906-8c8f-11e7-96c3-785f1e0f95b8.png)
 
+---
 
-## Getting Setup
+### Development
 
-**Configuration**
+Developing for the operator application is fairly straightforward with a few caveats. All of the Minimal Chat repositories are run through `make`. To get the application running:
 
-- To get the operator running you'll need to also have the minimal chat [daemon](https://github.com/minimalchat/daemon) running.
-- When you run the operator for the first time it will create a `config.json` file at the root of the application.
-- NOTE: if you are running the packages application, rather than having downloaded the source code, you will likely need to dive into the packages application to find the `config.json` file. For example, on Mac, you may need to right click > show package contents... and navigate to find the config.json file. We hope to streamline this more in the future.
-- Open `config.json` and edit the key `"apiServer"` with the port that you are running the _Minimal Daemon_ on.
+1. Clone the repository
+2. `make dependencies`
+3. `make run`
+
+To have the operator communicate with your local [daemon]() requires some confirguration. The operator application keeps a config.json file that it creates on run if it does not exist. **It is recommended to let the application run once in disconnected mode rather than creating your own `config.json`**.
+
+1. Once you've run the application once, find the `config.json` file.
+2. Open `config.json`, edit the `"apiServer"`, set this to the IP and port that the daemon is running on. (e.g. `http://localhost:8000`, the default setting)
