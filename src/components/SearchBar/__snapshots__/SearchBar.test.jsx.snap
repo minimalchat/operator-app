@@ -1,10 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`SearchBar matches snapshot 1`] = `
 <div
-  className="SearchBar">
+  className="SearchBar"
+>
   <input
     onChange={[Function]}
     placeholder="Search Chats..."
     type="text"
-    value="" />
+    value=""
+  />
 </div>
 `;

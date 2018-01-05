@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`MessageList matches snapshot 1`] = `
 <li
   className="Message__operator"
@@ -5,10 +7,13 @@ exports[`MessageList matches snapshot 1`] = `
     Object {
       "clear": "both",
     }
-  }>
+  }
+>
   <div>
     <ul>
-      <li>
+      <li
+        key="0"
+      >
         test message
       </li>
     </ul>

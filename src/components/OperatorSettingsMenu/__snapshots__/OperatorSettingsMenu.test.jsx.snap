@@ -1,12 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
 <section
-  className="SettingsMenu">
+  className="SettingsMenu"
+>
   <div
-    className="Settings__box">
+    className="Settings__box"
+  >
     <img
       alt="billmurray"
       className="Settings__avatar"
-      src="http://www.fillmurray.com/58/58" />
+      src="http://www.fillmurray.com/58/58"
+    />
     <span>
       Steve
     </span>

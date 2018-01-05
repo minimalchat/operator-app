@@ -1,12 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`MessageMenuBar matches snapshot 1`] = `
 <MessageMenuBar
   activeChatId="3r23fweefl"
   store={
     Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
+      "dispatch": [MockFunction],
+      "getState": [MockFunction] {
+        "calls": Array [
+          Array [],
+          Array [],
+        ],
+      },
+      "subscribe": [MockFunction] {
+        "calls": Array [
+          Array [
+            [Function],
+          ],
+        ],
+      },
     }
   }
-  toggleOpen={[Function]} />
+  toggleOpen={[Function]}
+/>
 `;

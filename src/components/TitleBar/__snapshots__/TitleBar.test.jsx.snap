@@ -1,7 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`TitleBar matches snapshot 1`] = `
 <div
   className="row bar"
-  id="title">
+  id="title"
+>
   <span>
     Operator
   </span>

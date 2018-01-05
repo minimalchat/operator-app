@@ -1,14 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`InputBar matches snapshot 1`] = `
 <InputBar
   activeId="TEST"
-  dispatch={[Function]}
+  dispatch={[MockFunction]}
   operator="TEST"
   socket={Object {}}
   store={
     Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
+      "dispatch": [MockFunction],
+      "getState": [MockFunction] {
+        "calls": Array [
+          Array [],
+          Array [],
+        ],
+      },
+      "subscribe": [MockFunction] {
+        "calls": Array [
+          Array [
+            [Function],
+          ],
+        ],
+      },
     }
-  } />
+  }
+/>
 `;

@@ -1,11 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Chat matches snapshot 1`] = `
 <Application
   settingsOpen={false}
   store={
     Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "subscribe": [Function],
+      "dispatch": [MockFunction],
+      "getState": [MockFunction] {
+        "calls": Array [
+          Array [],
+          Array [],
+        ],
+      },
+      "subscribe": [MockFunction] {
+        "calls": Array [
+          Array [
+            [Function],
+          ],
+        ],
+      },
     }
-  } />
+  }
+/>
 `;

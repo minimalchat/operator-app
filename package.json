@@ -24,7 +24,12 @@
     "setupFiles": [
       "./test/jest.setup.js"
     ],
-    "setupTestFrameworkScriptFile": "node_modules/jest-enzyme/lib/index.js",
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jest-enzyme"
+    ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/webpack*.js",
@@ -79,16 +84,17 @@
     "coveralls": "^2.11.14",
     "css-loader": "^0.26.1",
     "electron-packager": "9.0.1",
-    "enzyme": "^2.7.0",
-    "enzyme-to-json": "^1.4.5",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-to-json": "^3.3.0",
     "eslint": "^3.10.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
-    "jest": "^18.1.0",
-    "jest-cli": "^17.0.3",
-    "jest-enzyme": "^2.1.0",
+    "jest": "^22.0.4",
+    "jest-cli": "^22.0.4",
+    "jest-enzyme": "^4.0.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-addons-test-utils": "^15.4.1",
     "react-test-renderer": "^15.4.1",
