@@ -58,7 +58,7 @@
     "testRegex": "((test|spec))\\.(js|jsx)$"
   },
   "dependencies": {
-    "electron": "1.7.6",
+    "electron": "^1.7.11",
     "faker": "^4.1.0",
     "file-loader": "^0.11.2",
     "moment": "^2.18.1",
