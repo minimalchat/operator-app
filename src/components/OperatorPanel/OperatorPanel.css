@@ -2,9 +2,8 @@
   background: #fdfdfd;
   box-shadow: 1px 0 1px rgba(0, 0, 0, 0.1);
   display: flex;
-  /* flex-grow: 1; */
   flex-direction: column;
-  width: 200px;
+  flex: 0 0 200px;
   z-index: 4;
 }
 

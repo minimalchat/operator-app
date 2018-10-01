@@ -15,7 +15,7 @@ const OperatorPanel = props => (
     <header
       className="OperatorPanel__header"
       style={{
-        paddingLeft: os.platform() === 'darwin' ? '15px' : '0',
+        paddingTop: os.platform() === 'darwin' ? '16px' : '0',
       }}
     >
       <BrandLogo />

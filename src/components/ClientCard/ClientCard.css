@@ -81,6 +81,10 @@
   font-style: italic;
   font-size: 11px;
   color: #555;
+  overflow: hidden;
+  max-width: 300px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .ClientCard__lastmsgtime {
