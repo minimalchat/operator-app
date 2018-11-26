@@ -18,17 +18,40 @@
   margin: 2rem;
   border-radius: 2px;
   display: flex;
+  flex-direction: column;
 }
 
 .Settings__single {
   display: flex;
   margin: 1rem 0;
   align-content: center;
+  justify-content: space-between;
 }
 
 .Settings__notification-label {
   font-size: 18px;
   color: #919191;
   align-self: center;
-  padding-left: 1rem;
+}
+
+.Settings__operator-label {
+  font-size: 18px;
+  color: #919191;
+  align-self: center;
+  padding-right: 1rem;
+  flex-grow: 3;
+}
+
+.Settings__operator-name {
+  outline: 0;
+  display: flex;
+  padding: 0.8rem;
+  resize: none;
+  border: none;
+  border-radius: 2px;
+  flex-grow: 2;
+}
+
+.Settings__operator-name:focus {
+  outline-offset: 0;
 }

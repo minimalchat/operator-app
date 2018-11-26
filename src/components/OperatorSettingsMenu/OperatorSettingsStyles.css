@@ -7,7 +7,7 @@
   background:  #F7F8FA;
   border-top: 1px solid  #E8ECEE;
   border-bottom: 1px solid  #E8ECEE;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   font-size: 12px;
   color: #8f8f8f;
@@ -16,10 +16,13 @@
 
 .Settings__avatar {
   margin: 1rem;
-  margin-left: -1rem;
   border-radius: 50%;
   border: 3px solid white;
   box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
   width: 58px;
   height: 58px;
+}
+
+.Settings__operator {
+  word-break: break-word;
 }

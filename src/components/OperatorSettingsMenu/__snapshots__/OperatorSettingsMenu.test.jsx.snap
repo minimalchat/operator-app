@@ -1,20 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
-<section
-  className="SettingsMenu"
->
-  <div
-    className="Settings__box"
-  >
-    <img
-      alt="billmurray"
-      className="Settings__avatar"
-      src="http://www.fillmurray.com/58/58"
-    />
-    <span>
-      Steve
-    </span>
-  </div>
-</section>
+<OperatorSettingsMenu
+  dispatch={[MockFunction]}
+  store={
+    Object {
+      "dispatch": [MockFunction],
+      "getState": [MockFunction] {
+        "calls": Array [
+          Array [],
+          Array [],
+        ],
+      },
+      "subscribe": [MockFunction] {
+        "calls": Array [
+          Array [
+            [Function],
+          ],
+        ],
+      },
+    }
+  }
+/>
 `;

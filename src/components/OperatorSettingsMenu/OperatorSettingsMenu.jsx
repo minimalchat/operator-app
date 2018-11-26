@@ -4,17 +4,31 @@
 */
 
 import React from 'react';
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './OperatorSettingsStyles.css';
 
-
-const OperatorSettingsMenu = () => (
+const OperatorSettingsMenu = ({ operatorName }) => (
   <section className="SettingsMenu">
     <div className="Settings__box">
-      <img className="Settings__avatar" alt="billmurray" src="http://www.fillmurray.com/58/58" />
-      <span>Steve</span>
+      <img
+        className="Settings__avatar"
+        alt="billmurray"
+        src="http://www.fillmurray.com/58/58"
+      />
+      <span className="Settings__operator">{operatorName}</span>
     </div>
   </section>
 );
 
-export default OperatorSettingsMenu;
+OperatorSettingsMenu.propTypes = {
+  operatorName: PropTypes.string,
+};
+
+const mapStateToProps = state => ({
+  operatorName: state.config.operator,
+});
+
+export default connect(
+  mapStateToProps,
+)(OperatorSettingsMenu);
