@@ -7,7 +7,7 @@ import OperatorSettingsMenu from './OperatorSettingsMenu.jsx';
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
-  getState: jest.fn(() => ({ })),
+  getState: jest.fn(() => ({ config: {} })),
 };
 
 describe('OperatorSettingsMenu', () => {
