@@ -2,10 +2,10 @@
   "name": "operator",
   "version": "1.0.0",
   "main": "main.js",
-  "description": "Minimal Chat Application",
+  "description": "Minimal Chat Operator application",
   "author": "Matthew Mihok <matthew@minimal.chat>",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "BSD-3-Clause",
   "repository": "minimalchat/mnml-app.git",
   "scripts": {
     "test": "jest",
@@ -55,10 +55,11 @@
       "/assets/",
       "/dist/"
     ],
-    "testRegex": "((test|spec))\\.(js|jsx)$"
+    "testRegex": "((test|spec))\\.(js|jsx)$",
+    "testURL": "http://localhost/"
   },
   "dependencies": {
-    "electron": "^1.7.11",
+    "electron": ">=1.8.2-beta5",
     "faker": "^4.1.0",
     "file-loader": "^0.11.2",
     "moment": "^2.18.1",
@@ -72,7 +73,7 @@
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
-    "babel-core": "^6.21.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-istanbul": "^2.0.3",
@@ -84,8 +85,8 @@
     "coveralls": "^2.11.14",
     "css-loader": "^0.26.1",
     "electron-packager": "9.0.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-15": "^1.2.0",
     "enzyme-to-json": "^3.3.0",
     "eslint": "^3.10.0",
     "eslint-config-airbnb": "^13.0.0",
@@ -102,7 +103,7 @@
     "webpack": "^2.2.0"
   },
   "optionalDependencies": {
-    "bufferutil": "^3.0.1",
-    "utf-8-validate": "^3.0.2"
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
   }
 }
