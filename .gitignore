@@ -1,4 +1,5 @@
 node_modules/
+yarn.lock
 dist/
 dist/*-linux-armv7l
 dist/*-linux-arm64
