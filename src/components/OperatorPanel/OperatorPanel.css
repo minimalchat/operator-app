@@ -33,7 +33,7 @@
   color: white;
 }
 
-.OperatorPanel__logo {
+.OperatorPanel__header .SVG__logo {
   flex-grow: 1;
   height: 20px;
   margin-right: 10px;

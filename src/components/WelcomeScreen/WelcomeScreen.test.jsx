@@ -2,22 +2,21 @@ import React from 'react';
 
 import { shallow } from 'enzyme';
 
-import Application from './Application.jsx';
+import WelcomeScreen from './WelcomeScreen.jsx';
 
 const store = {
   subscribe: jest.fn(),
   dispatch: jest.fn(),
   getState: jest.fn(() => ({
-    ui: {
-      welcomeScreenOpen: false,
-      settingsOpen: false,
+    config: {
+      apiServer: '',
     },
   })),
 };
 
-describe('Chat', () => {
+describe('WelcomeScreen', () => {
   it('matches snapshot', () => {
-    const component = shallow(<Application store={store} />);
+    const component = shallow(<WelcomeScreen store={store} />);
 
     expect(component).toMatchSnapshot();
   });
