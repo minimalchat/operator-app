@@ -22,6 +22,8 @@ class WelcomeScreen extends Component {
     const { changeSettings } = this.props;
     const { connString } = this.state;
 
+    // TODO: Test connection by pulling the operator information
+
     changeSettings({ apiServer: connString });
   }
 
