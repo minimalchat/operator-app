@@ -47,6 +47,7 @@ export function updateSettings (payload) {
 // Reducer
 
 function ConfigReducer (state = initialState, action) {
+  console.log('CONFIG STATE', state);
   let newSettings = {};
   switch (action.type) {
     case SET_CONFIG:
