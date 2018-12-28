@@ -3,6 +3,7 @@
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
 <OperatorSettingsMenu
   dispatch={[MockFunction]}
+  operatorName=""
   store={
     Object {
       "dispatch": [MockFunction],
@@ -11,12 +12,32 @@ exports[`OperatorSettingsMenu matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "config": Object {},
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "config": Object {},
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

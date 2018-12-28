@@ -24,9 +24,13 @@ class ClientCard extends Component {
     messages: PropTypes.array.isRequired,
     config: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
-    setActiveChat: PropTypes.func.isRequired,
-    loadMessages: PropTypes.func.isRequired,
+    resetActiveChat: PropTypes.func.isRequired,
+    getMessages: PropTypes.func.isRequired,
     activeId: PropTypes.string,
+  }
+
+  static defaultProps = {
+    activeId: '',
   }
 
   getClientMessages () {
@@ -72,14 +76,15 @@ class ClientCard extends Component {
   renderLastMessage () {
     const lastMessage = this.getLastMessage();
 
-    if (lastMessage.hasOwnProperty('content') &&
-      lastMessage.content.hasOwnProperty('length') &&
-      lastMessage.content.length > 0) {
+    if (lastMessage.hasOwnProperty('content')
+      && lastMessage.content.hasOwnProperty('length')
+      && lastMessage.content.length > 0) {
       const lastMessageContent = lastMessage.content;
 
       return (
         <p className="ClientCard__lastmsg">
-          {lastMessageContent[lastMessageContent.length - 1]}&hellip;
+          {lastMessageContent[lastMessageContent.length - 1]}
+          &hellip;
         </p>
       );
     }
@@ -102,7 +107,9 @@ class ClientCard extends Component {
   }
 
   render () {
-    const { chat, config, activeId } = this.props;
+    const {
+      chat, config: { apiServer }, activeId, children,
+    } = this.props;
     const classes = [
       'ClientCard',
       this.isActive() ? 'ClientCard--active' : '',
@@ -115,10 +122,13 @@ class ClientCard extends Component {
     return (
       <li className={classes.join(' ')}>
         <button
+          type="button"
           onClick={() => {
-            this.props.setActiveChat(chat);
+            const { resetActiveChat, getMessages } = this.props;
 
-            this.props.loadMessages(config, chat.id);
+            resetActiveChat(chat);
+
+            getMessages(apiServer, chat.id);
           }}
           className="ClientCard__btn"
         >
@@ -127,7 +137,7 @@ class ClientCard extends Component {
           </div>
           <div className="ClientCard__information">
             <div className="ClientCard__information-row">
-              <span className="ClientCard__name">{this.props.children}</span>
+              <span className="ClientCard__name">{children}</span>
               <span className={statusClasses.join(' ')} />
             </div>
             <div className="ClientCard__information-row">
@@ -148,8 +158,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setActiveChat: chat => dispatch(setActiveChat(chat)),
-  loadMessages: (config, id) => loadMessages(dispatch, config, id),
+  resetActiveChat: (chat) => { dispatch(setActiveChat(chat)); },
+  getMessages: async (apiServer, id) => dispatch(await loadMessages(apiServer, id)),
 });
 
 

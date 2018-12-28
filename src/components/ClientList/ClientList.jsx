@@ -12,12 +12,14 @@ class ClientList extends Component {
     chats: PropTypes.object.isRequired,
     operatorFilter: PropTypes.string.isRequired,
     query: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    loadClientList: PropTypes.func.isRequired,
   }
 
   componentWillMount () {
-    if (this.props.config.apiServer) {
-      loadChats(this.props.dispatch, this.props.config);
+    const { config: { apiServer }, loadClientList } = this.props;
+
+    if (apiServer) {
+      loadClientList(apiServer);
     }
   }
 
@@ -75,7 +77,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+  loadClientList: async (apiServer) => { dispatch(await loadChats(apiServer)); },
 });
 
 export default connect(

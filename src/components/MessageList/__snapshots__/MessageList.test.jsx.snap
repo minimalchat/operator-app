@@ -2,9 +2,11 @@
 
 exports[`MessageList matches snapshot 1`] = `
 <MessageList
+  activeId=""
   chat={Object {}}
+  chats={Object {}}
   config={Object {}}
-  dispatch={[MockFunction]}
+  loadMessageList={[Function]}
   messages={Array []}
   store={
     Object {
@@ -14,12 +16,40 @@ exports[`MessageList matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "messages": Array [],
+                "typing": Object {},
+              },
+              "config": Object {},
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "messages": Array [],
+                "typing": Object {},
+              },
+              "config": Object {},
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

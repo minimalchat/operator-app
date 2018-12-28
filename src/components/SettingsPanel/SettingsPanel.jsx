@@ -10,7 +10,9 @@ import '../Toggle/index.css';
 import './SettingsPanel.css';
 
 const SettingsPanel = (props) => {
-  const { notificationsEnabled, changeSettings, operator, disconnect } = props;
+  const {
+    notificationsEnabled, changeSettings, operator, disconnect,
+  } = props;
 
   return (
     <div className="Settings">
@@ -50,6 +52,11 @@ SettingsPanel.propTypes = {
   operator: PropTypes.string,
 };
 
+SettingsPanel.defaultProps = {
+  notificationsEnabled: false,
+  operator: '',
+};
+
 const mapStateToProps = state => ({
   notificationsEnabled: state.config.notificationsEnabled,
   operator: state.config.operator,
@@ -58,7 +65,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   changeSettings: newSettings => dispatch(updateSettings(newSettings)),
   disconnect: () => {
-    dispatch(updateSettings({ apiServer: '' });
+    dispatch(updateSettings({ apiServer: '' }));
     // Reload the page
     return window.location.reload();
   },

@@ -47,15 +47,14 @@ export function updateSettings (payload) {
 // Reducer
 
 function ConfigReducer (state = initialState, action) {
-  console.log('CONFIG STATE', state);
   let newSettings = {};
   switch (action.type) {
-
-    // Triggered by incoming IPC message: 'config'
-    // NOTE: payload from server should match the exact initial state in this file;
-
-    // IPC ON: 'config' <--
     case SET_CONFIG:
+      // Triggered by incoming IPC message: 'config'
+      // NOTE: payload from server should match the exact initial state in this file;
+
+      // IPC ON: 'config' <--
+
       // Attach config to window to avoid doing all the passing around of the
       //   state between reducers
       // Example: the chat reducer needs to know the config data, but that would
@@ -67,10 +66,11 @@ function ConfigReducer (state = initialState, action) {
       window.config = Object.assign({}, state, action.payload);
       return window.config;
 
-    // Sends payload to server to be written to file
 
-    // IPC SEND: 'update-settings' -->
     case UPDATE_SETTINGS:
+      // Sends payload to server to be written to file
+
+      // IPC SEND: 'update-settings' -->
       newSettings = Object.assign({}, state, action.payload);
 
       ipcRenderer.send('update-settings', newSettings);

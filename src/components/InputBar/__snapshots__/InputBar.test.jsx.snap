@@ -14,12 +14,42 @@ exports[`InputBar matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "activeId": "TEST",
+              },
+              "config": Object {
+                "operator": "TEST",
+              },
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "activeId": "TEST",
+              },
+              "config": Object {
+                "operator": "TEST",
+              },
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

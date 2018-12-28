@@ -165,12 +165,12 @@ export default function socketInit (store) {
   socket.on('pong', latency => console.debug('PONG', latency, 'ms'));
 
   // Listen for anything, useful in debugging
-  const onevent = socket.onevent;
+  const { onevent } = socket;
   socket.onevent = function onEvent (packet) {
     const args = packet.data || [];
-    onevent.call(this, packet);    // original call
+    onevent.call(this, packet); // original call
     packet.data = ['*', ...args];
-    onevent.call(this, packet);      // additional call to catch-all
+    onevent.call(this, packet); // additional call to catch-all
   };
   socket.on('*', (...args) => console.debug('SOCKET', args));
 

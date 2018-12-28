@@ -3,6 +3,7 @@
 exports[`MessageMenuBar matches snapshot 1`] = `
 <MessageMenuBar
   activeChatId="3r23fweefl"
+  activeChatIsOpen={false}
   store={
     Object {
       "dispatch": [MockFunction],
@@ -11,12 +12,36 @@ exports[`MessageMenuBar matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "activeId": "3r23fweefl",
+              },
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "activeId": "3r23fweefl",
+              },
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

@@ -29,7 +29,7 @@ module.exports = function (env) {
       path: PATHS.BUILD + '/js',
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           include: [
@@ -42,8 +42,16 @@ module.exports = function (env) {
           ],
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'stage-0', 'react'],
-            plugins: ['transform-decorators-legacy', 'transform-class-properties'],
+            presets: [ [ 'env', { // ['es2015', 'stage-0', 'react'],
+              targets: {
+                'electron': ['4'],
+              },
+              useBuiltIns: 'usage',
+            } ] ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-react-jsx',
+            ],
           },
         },
         {

@@ -24,19 +24,26 @@ class MessageList extends Component {
     chats: PropTypes.object,
     config: PropTypes.object.isRequired,
     activeId: PropTypes.string,
-    dispatch: PropTypes.func.isRequired,
+    loadMessageList: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    chats: {},
+    activeId: '',
   }
 
   componentWillMount () {
-    const { activeId } = this.props;
+    const { config: { apiServer }, activeId, loadMessageList } = this.props;
 
-    if (this.props.config.apiServer && activeId) {
-      loadMessages(this.props.dispatch, this.props.config, activeId);
+    if (apiServer && activeId) {
+      loadMessageList(apiServer, activeId);
     }
   }
 
   renderEmpty () {
-    if (Object.keys(this.props.chats).length === 0) {
+    const { chat, chats } = this.props;
+
+    if (Object.keys(chats).length === 0) {
       return (
         <div className="MessageList__empty">
           <div className="ss-icon ss-ghost lil-ghost" />
@@ -46,7 +53,7 @@ class MessageList extends Component {
       );
     }
 
-    if (this.props.chat.hasOwnProperty('open')) {
+    if (chat.hasOwnProperty('open')) {
       return (
         <div className="MessageList__empty">
           <div className="ss-icon ss-mailbox lil-mailbox" />
@@ -160,7 +167,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+  loadMessageList: async (apiServer, chatId) => dispatch(await loadMessages(apiServer, chatId)),
 });
 
 

@@ -1,4 +1,12 @@
 {
- "presets": ["es2015","stage-0","react"],
- "plugins": ["transform-decorators-legacy"],
+  "presets": [ [ "env", {
+    "targets": {
+      "electron": ["4"]
+    },
+    "useBuiltIns": "usage"
+  } ] ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-react-jsx"
+  ]
 }

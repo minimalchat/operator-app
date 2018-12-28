@@ -11,12 +11,36 @@ exports[`WelcomeScreen matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "config": Object {
+                "apiServer": "",
+              },
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "config": Object {
+                "apiServer": "",
+              },
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

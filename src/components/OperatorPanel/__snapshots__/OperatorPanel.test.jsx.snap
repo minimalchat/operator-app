@@ -10,6 +10,16 @@ exports[`OperatorPanel matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {},
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {},
+          },
+        ],
       },
       "subscribe": [MockFunction],
     }

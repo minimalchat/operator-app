@@ -32,6 +32,7 @@ const NotificationBar = (props) => {
 
 NotificationBar.defaultProps = {
   notificationIcon: 'info',
+  notificationColour: 'green',
 };
 
 NotificationBar.propTypes = {

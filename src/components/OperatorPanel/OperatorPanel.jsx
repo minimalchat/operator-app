@@ -26,6 +26,7 @@ const OperatorPanel = props => (
     <footer className="OperatorPanel__footer">
       <button
         className="OperatorPanel__settings"
+        type="button"
         onClick={() => props.toggleSettings()}
       >
         <span className="ss-icon ss-settings" />
@@ -37,7 +38,7 @@ const OperatorPanel = props => (
 );
 
 OperatorPanel.propTypes = {
-  toggleSettings: PropTypes.func,
+  toggleSettings: PropTypes.func.isRequired,
 };
 
 
