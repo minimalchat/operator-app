@@ -25,7 +25,7 @@ function initConfig (event) {
     fs.closeSync(fd);
   }
 
-  config = require(configPath);
+  config = JSON.parse(fs.readFileSync(configPath).toString());
   event.sender.send('config', config);
 }
 

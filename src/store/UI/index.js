@@ -1,4 +1,5 @@
 const initialState = {
+  welcomeScreenOpen: false,
   settingsOpen: false,
   notification: '',
   notificationIcon: null,
@@ -9,6 +10,7 @@ const initialState = {
 //
 
 const TOGGLE_SETTINGS = 'UI_TOGGLE_SETTINGS';
+const TOGGLE_WELCOME_SCREEN = 'UI_TOGGLE_WELCOME_SCREEN';
 
 const SHOW_NOTIFICATION = 'UI_SHOW_NOTIFICATION';
 const HIDE_NOTIFICATION = 'UI_HIDE_NOTIFICATION';
@@ -19,6 +21,13 @@ const HIDE_NOTIFICATION = 'UI_HIDE_NOTIFICATION';
 
 export function toggleSettings (payload) {
   return { type: TOGGLE_SETTINGS, payload };
+}
+
+export function toggleWelcomeScreen (payload) {
+  return {
+    type: TOGGLE_WELCOME_SCREEN,
+    payload,
+  };
 }
 
 export function showNotification (payload) {
@@ -41,6 +50,14 @@ export function hideNotification () {
 
 function UIReducer (state = initialState, action) {
   switch (action.type) {
+    case TOGGLE_WELCOME_SCREEN:
+      if (action.payload == null) {
+        return {
+          ...state,
+          welcomeScreenOpen: !state.welcomeScreenOpen,
+        };
+      }
+      return { ...state, welcomeScreenOpen: action.payload };
     // Can take a boolean, or no args, in which case this just toggles opposite
     //  state value from  before
     case TOGGLE_SETTINGS:

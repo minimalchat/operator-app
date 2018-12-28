@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Chat matches snapshot 1`] = `
-<Application
-  settingsOpen={false}
+exports[`WelcomeScreen matches snapshot 1`] = `
+<WelcomeScreen
+  changeSettings={[Function]}
   store={
     Object {
       "dispatch": [MockFunction],
@@ -21,6 +21,5 @@ exports[`Chat matches snapshot 1`] = `
       },
     }
   }
-  welcomeScreenOpen={false}
 />
 `;

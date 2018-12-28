@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Toggle from 'react-toggle';
 
+import Button from '../Button/Button.jsx';
 import { updateSettings } from '../../store/Config';
 
 import '../Toggle/index.css';
 import './SettingsPanel.css';
 
 const SettingsPanel = (props) => {
-  const { notificationsEnabled, changeSettings, operator } = props;
+  const { notificationsEnabled, changeSettings, operator, disconnect } = props;
 
   return (
     <div className="Settings">
@@ -32,6 +33,11 @@ const SettingsPanel = (props) => {
             onChange={() => changeSettings({ notificationsEnabled: !notificationsEnabled })}
           />
         </div>
+        <div className="Settings__single">
+          <div className="Settings__disconnect-link">
+            <Button variant="transparent" onClick={disconnect}>Disconnect from server</Button>
+          </div>
+        </div>
       </section>
     </div>
   );
@@ -40,6 +46,7 @@ const SettingsPanel = (props) => {
 SettingsPanel.propTypes = {
   notificationsEnabled: PropTypes.bool,
   changeSettings: PropTypes.func.isRequired,
+  disconnect: PropTypes.func.isRequired,
   operator: PropTypes.string,
 };
 
@@ -50,6 +57,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   changeSettings: newSettings => dispatch(updateSettings(newSettings)),
+  disconnect: () => {
+    dispatch(updateSettings({ apiServer: '' });
+    // Reload the page
+    return window.location.reload();
+  },
 });
 
 export default connect(

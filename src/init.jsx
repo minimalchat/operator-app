@@ -10,7 +10,7 @@ import { notifications } from './store/middleware';
 
 // Reducers
 import chat, { loadChats } from './store/Chat';
-import ui from './store/UI';
+import ui, { toggleWelcomeScreen } from './store/UI';
 import config, { setConfig } from './store/Config';
 import socket from './store/Socket';
 
@@ -35,6 +35,11 @@ ipcRenderer.on('config', (event, newConfig) => {
   const state = store.getState();
 
   dispatch(setConfig(newConfig));
+
+  // Is apiServer blank (erased, or a new config was just created?)
+  if (newConfig.apiServer === '') {
+    dispatch(toggleWelcomeScreen(true));
+  }
 
   // Create Socket Connection only if there is a new apiServer config
   if (newConfig.apiServer === state.config.apiServer) {
