@@ -13,12 +13,38 @@ exports[`OperatorClientMenu matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "chats": Array [],
+                "operatorFilter": "all",
+              },
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "chats": Array [],
+                "operatorFilter": "all",
+              },
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

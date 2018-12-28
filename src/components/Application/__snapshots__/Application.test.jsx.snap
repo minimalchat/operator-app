@@ -11,12 +11,38 @@ exports[`Chat matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "ui": Object {
+                "settingsOpen": false,
+                "welcomeScreenOpen": false,
+              },
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "ui": Object {
+                "settingsOpen": false,
+                "welcomeScreenOpen": false,
+              },
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

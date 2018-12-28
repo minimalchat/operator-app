@@ -16,13 +16,22 @@ class InputBar extends Component {
     dispatch: PropTypes.func.isRequired,
   }
 
+  static defaultProps = {
+    operator: '',
+    activeId: '',
+  }
+
   state = {
     chatText: '',
   }
 
   onKeyPress = (e) => {
-    const { key, keyCode, shiftKey, ctrlKey, altKey } = e;
-    const { dispatch, activeId, operator } = this.props;
+    const {
+      key, keyCode, shiftKey, ctrlKey, altKey,
+    } = e;
+    const {
+      dispatch, activeId, operator,
+    } = this.props;
     console.log(`INPUT KEYPRESS ${key} (${keyCode}), SHIFT ${shiftKey}, CTRL ${ctrlKey}, ALT ${altKey}`);
 
     if (keyCode === KEY_ENTER) {
@@ -32,7 +41,7 @@ class InputBar extends Component {
         this.sendChat();
         this.setState({ [e.target.name]: '' });
 
-        event.preventDefault();
+        e.preventDefault();
       }
     } else {
       dispatch(operatorTyping(this.formatMessage(null, operator, activeId)));
@@ -62,16 +71,17 @@ class InputBar extends Component {
   }
 
   render () {
+    const { chatText } = this.state;
     return (
       <div className="InputBar">
         <input
           onChange={this.handleChange}
           onKeyDown={this.onKeyPress}
           name="chatText"
-          value={this.state.chatText}
+          value={chatText}
           placeholder="Say something meaningful &hellip;"
         />
-        <Button variant="send" onClick={this.sendChat} >Send</Button>
+        <Button variant="send" onClick={this.sendChat}>Send</Button>
       </div>
     );
   }

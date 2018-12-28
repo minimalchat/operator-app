@@ -19,7 +19,7 @@ exports[`ClientList matches snapshot 1`] = `
     }
   }
   config={Object {}}
-  dispatch={[MockFunction]}
+  loadClientList={[Function]}
   operatorFilter="all"
   query=""
   store={
@@ -30,12 +30,66 @@ exports[`ClientList matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "chats": Object {
+                  "id-0": Object {
+                    "client": Object {
+                      "first_name": "Robert",
+                      "last_name": "waffle",
+                    },
+                  },
+                  "id-1": Object {
+                    "client": Object {
+                      "first_name": "Lisa",
+                      "last_name": "pancake",
+                    },
+                  },
+                },
+                "config": Object {},
+                "operatorFilter": "all",
+              },
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {
+                "chats": Object {
+                  "id-0": Object {
+                    "client": Object {
+                      "first_name": "Robert",
+                      "last_name": "waffle",
+                    },
+                  },
+                  "id-1": Object {
+                    "client": Object {
+                      "first_name": "Lisa",
+                      "last_name": "pancake",
+                    },
+                  },
+                },
+                "config": Object {},
+                "operatorFilter": "all",
+              },
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

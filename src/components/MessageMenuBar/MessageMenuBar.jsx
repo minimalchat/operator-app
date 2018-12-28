@@ -28,6 +28,10 @@ MessageMenuBar.propTypes = {
   toggleOpen: PropTypes.func.isRequired,
 };
 
+MessageMenuBar.defaultProps = {
+  activeChatIsOpen: false,
+};
+
 
 const mapStateToProps = state => ({
   activeChatId: state.chat.activeId,

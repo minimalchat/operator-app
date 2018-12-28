@@ -25,6 +25,10 @@ OperatorSettingsMenu.propTypes = {
   operatorName: PropTypes.string,
 };
 
+OperatorSettingsMenu.defaultProps = {
+  operatorName: '',
+};
+
 const mapStateToProps = state => ({
   operatorName: state.config.operator,
 });

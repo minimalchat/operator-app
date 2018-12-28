@@ -15,7 +15,7 @@ const OperatorClientMenu = (props) => {
   const { setFilter, operatorFilter, openChats } = props;
 
   const menuItems = [
-    /* { name: 'Assigned to Me', id: 'assigned_to_me' },*/ // 0.2
+    /* { name: 'Assigned to Me', id: 'assigned_to_me' }, */ // 0.2
     { name: 'All', id: 'all' },
     { name: `Open (${openChats})`, id: 'open' },
     { name: 'Closed', id: 'closed' },
@@ -25,13 +25,14 @@ const OperatorClientMenu = (props) => {
   const renderMenuItems = () => (
     menuItems.map((i) => {
       const classes = i.id === operatorFilter
-                    ? 'OperatorClient__selectedFilter'
-                    : 'OperatorClient__filter';
-
+        ? 'OperatorClient__selectedFilter'
+        : 'OperatorClient__filter';
 
       return (
         <li key={i.id} className="OperatorClient__Menu__item">
-          <button className={classes} onClick={() => setFilter(i.id)}> {i.name} </button>
+          <button className={classes} type="button" onClick={() => setFilter(i.id)}>
+            {i.name}
+          </button>
         </li>
       );
     })
@@ -51,14 +52,19 @@ OperatorClientMenu.propTypes = {
   openChats: PropTypes.number,
 };
 
+OperatorClientMenu.defaultProps = {
+  openChats: 0,
+  operatorFilter: '',
+};
+
 
 const mapStateToProps = state => ({
   operatorFilter: state.chat.operatorFilter,
   openChats: Object
-   .keys(state.chat.chats)
-   .map(k => state.chat.chats[k])
-   .filter(chat => chat.open)
-   .length,
+    .keys(state.chat.chats)
+    .map(k => state.chat.chats[k])
+    .filter(chat => chat.open)
+    .length,
 });
 
 const mapDispatchToProps = dispatch => ({

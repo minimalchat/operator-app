@@ -21,6 +21,7 @@
     "no-use-before-define": ["warn"],
     "react/no-multi-comp": ["warn"],
     "react/jsx-no-bind": ["warn"],
-    "react/forbid-prop-types": ["warn"]
+    "react/forbid-prop-types": ["warn"],
+    "react/button-has-type": ["warn"],
   },
 }

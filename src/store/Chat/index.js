@@ -39,38 +39,28 @@ const ADD_CHAT = 'CHAT_ADD_CHAT';
 // Actions
 
 // TODO: not sure what this is doing but it's broken?
-export function loadChats (dispatch, config) {
-  return fetch(`${config.apiServer}${API.chats}`)
+export function loadChats (host) {
+  return fetch(`${host}${API.chats}`)
     .then(res => res.json())
-    .then(data =>
-      dispatch({
-        type: LOAD_CHATS_SUCCESS,
-        payload: data.chats || [],
-      }),
-    )
-    .catch(error =>
-      dispatch({
-        type: LOAD_CHATS_FAILURE,
-        error,
-      }),
-    );
+    .then(data => ({
+      type: LOAD_CHATS_SUCCESS,
+      payload: data.chats || [],
+    })).catch(err => ({
+      type: LOAD_CHATS_FAILURE,
+      err,
+    }));
 }
 
-export function loadMessages (dispatch, config, activeId) {
-  return fetch(`${config.apiServer}${API.chat}/${activeId}/messages`)
+export function loadMessages (host, activeId) {
+  return fetch(`${host}${API.chat}/${activeId}/messages`)
     .then(res => res.json())
-    .then(data =>
-      dispatch({
-        type: LOAD_MESSAGES_SUCCESS,
-        payload: data.messages || [],
-      }),
-    )
-    .catch(error =>
-      dispatch({
-        type: LOAD_MESSAGES_FAILURE,
-        error,
-      }),
-    );
+    .then(data => ({
+      type: LOAD_MESSAGES_SUCCESS,
+      payload: data.messages || [],
+    })).catch(err => ({
+      type: LOAD_MESSAGES_FAILURE,
+      err,
+    }));
 }
 
 export function setActiveChat (payload) {
@@ -189,8 +179,8 @@ function ChatReducer (state = initialState, action) {
           // All we have to do is see if the last message has the same author
 
           if (
-            messages.length > 0 &&
-            messages[messages.length - 1].author === sortedPayload[i].author
+            messages.length > 0
+            && messages[messages.length - 1].author === sortedPayload[i].author
           ) {
             // If it is the same author, do our usual slice magic
             messages[messages.length - 1].content.push(sortedPayload[i].content);
@@ -267,9 +257,9 @@ function ChatReducer (state = initialState, action) {
 
     case SEND_MESSAGE:
       if (
-        state.messages.length > 0 &&
+        state.messages.length > 0
         // TODO: This should check if author === operator username
-        state.messages[state.messages.length - 1].author === action.payload.author
+        && state.messages[state.messages.length - 1].author === action.payload.author
       ) {
         messages = [...state.messages[state.messages.length - 1].content, action.payload.content];
 
@@ -290,9 +280,9 @@ function ChatReducer (state = initialState, action) {
     case RECEIVE_MESSAGE:
 
       if (
-        state.messages.length > 0 &&
+        state.messages.length > 0
         // TODO: This should check if the author = client ID
-        state.messages[state.messages.length - 1].author === action.payload.author
+        && state.messages[state.messages.length - 1].author === action.payload.author
       ) {
         messages = [...state.messages[state.messages.length - 1].content, action.payload.content];
 

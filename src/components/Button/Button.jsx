@@ -7,23 +7,25 @@ const iconRenderer = iconClassName => (
 );
 
 const Button = (props) => {
-  const isIconButton = props.icon != null;
+  const {
+    icon, type, variant, children, onClick, disabled,
+  } = props;
+  const isIconButton = icon != null;
 
-  const type = props.type === 'submit' ? 'submit' : 'button';
-  const content = isIconButton ? iconRenderer(props.icon) : props.children;
+  const content = isIconButton ? iconRenderer(icon) : children;
 
-  const variant = isIconButton ? 'icon' : Button.variants[props.variant];
-  const classNames = {
-    variantModifer: variant ? `Button--${variant}` : '',
-  };
+  const buttonVariant = isIconButton ? 'icon' : Button.variants[variant];
+  const buttonVariantClassName = buttonVariant ? `Button--${buttonVariant}` : '';
 
   return (
     <button
       type={type}
-      className={`Button ${classNames.variantModifer}`}
-      onClick={props.onClick}
-      disabled={props.disabled}
-    >{content}</button>
+      className={`Button ${buttonVariantClassName}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {content}
+    </button>
   );
 };
 
@@ -47,6 +49,9 @@ Button.defaultProps = {
   type: 'button',
   variant: '',
   disabled: false,
+  children: null,
+  onClick: null,
+  icon: null,
 };
 
 

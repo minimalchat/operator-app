@@ -9,12 +9,13 @@ import moment from 'moment';
 import './Message.css';
 
 const Message = (props) => {
+  let { content } = props;
+  const { author, timestamp } = props;
   const msgClass = () => (
-    props.author.indexOf('client') >= 0 ? 'Message__client' : 'Message__operator'
+    author.indexOf('client') >= 0 ? 'Message__client' : 'Message__operator'
   );
 
-  const { author, timestamp } = props;
-  const content = props.content.map((message, index) => <li key={index}>{message}</li>);
+  content = content.map((message, index) => <li key={`${author}`}>{message}</li>);
 
   let datetime = null;
 
@@ -27,9 +28,9 @@ const Message = (props) => {
     datetime = (
       <span className="Message__time">
         {
-          momentTimestamp.isBefore(moment(), 'day') ?
-            momentTimestamp.format('ddd, h:mma') :
-            momentTimestamp.fromNow()
+          momentTimestamp.isBefore(moment(), 'day')
+            ? momentTimestamp.format('ddd, h:mma')
+            : momentTimestamp.fromNow()
         }
       </span>
     );
@@ -57,6 +58,10 @@ Message.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.string,
   ),
+};
+
+Message.defaultProps = {
+  content: [],
 };
 
 

@@ -11,12 +11,32 @@ exports[`MessagePanel matches snapshot 1`] = `
           Array [],
           Array [],
         ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {},
+            },
+          },
+          Object {
+            "isThrow": false,
+            "value": Object {
+              "chat": Object {},
+            },
+          },
+        ],
       },
       "subscribe": [MockFunction] {
         "calls": Array [
           Array [
             [Function],
           ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": undefined,
+          },
         ],
       },
     }

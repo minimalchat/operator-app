@@ -30,7 +30,7 @@ const store = createStore(
 window.state = store.getState;
 
 // Configuration for the system
-ipcRenderer.on('config', (event, newConfig) => {
+ipcRenderer.on('config', async (event, newConfig) => {
   const { dispatch } = store;
   const state = store.getState();
 
@@ -48,7 +48,7 @@ ipcRenderer.on('config', (event, newConfig) => {
 
   socketInit(store);
 
-  loadChats(dispatch, newConfig);
+  dispatch(await loadChats(newConfig.apiServer));
 });
 
 ipcRenderer.send('init-config');

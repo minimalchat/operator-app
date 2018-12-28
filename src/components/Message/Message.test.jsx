@@ -14,7 +14,7 @@ const store = {
 
 describe('MessageList', () => {
   it('matches snapshot', () => {
-    const component = shallow(<Message author={'operator.steve'} content={['test message']} timestamp={new Date().toString()} />);
+    const component = shallow(<Message author="operator.steve" content={['test message']} timestamp={new Date().toString()} />);
     expect(component).toMatchSnapshot();
   });
 });

@@ -23,8 +23,11 @@ function generateUserType (chatSessionId) {
 
 class Message {
   author = null
+
   chat = null
+
   content = faker.lorem.sentence()
+
   timestamp = faker.date.recent()
 
   constructor (chatSessionId) {
@@ -43,10 +46,15 @@ class Chat {
   }
 
   creationTime = faker.date.recent()
+
   updatedTime = faker.date.recent().toISOString()
+
   id = null
+
   operator = null
+
   open = Math.random() >= 0.5
+
   constructor (chatSessionId, clientId, operator) {
     this.id = chatSessionId;
     this.client.id = clientId;
