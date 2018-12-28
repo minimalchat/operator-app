@@ -5,8 +5,8 @@ import { Provider } from 'react-redux';
 import { ipcRenderer } from 'electron';
 
 import Application from './components/Application/Application.jsx';
-import socketInit, { socketMessageHook } from './socket.js';
-import { notifications } from './store/middleware.js';
+import socketInit, { socketMessageHook } from './socket';
+import { notifications } from './store/middleware';
 
 // Reducers
 import chat, { loadChats } from './store/Chat';

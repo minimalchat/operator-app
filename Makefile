@@ -24,7 +24,7 @@ test:
 	$(NPM_CMD) test
 
 coverage:
-	@echo 'TODO: Write coverage make command'
+	$(NPM_CMD) run coverage
 
 clean:
 	rm -r $(DIST) > /dev/null 2>&1
