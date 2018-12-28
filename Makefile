@@ -27,7 +27,12 @@ coverage:
 	$(NPM_CMD) run coverage
 
 clean:
-	rm -r $(DIST) > /dev/null 2>&1
+	rm -r $(DIST) | true #2>&1 >/dev/null #> /dev/null 2>&1
+	mkdir -p $(DIST)
+	
+	rm -r $(ASSETS)/source.js* | true #2>&1 >/dev/null #> /dev/null 2>&1
+	
+	rm -r node_modules/ | true
 
 build:
 	$(NPM_CMD) run build

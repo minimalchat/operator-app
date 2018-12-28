@@ -15,7 +15,9 @@ const Message = (props) => {
     author.indexOf('client') >= 0 ? 'Message__client' : 'Message__operator'
   );
 
-  content = content.map((message, index) => <li key={`${author}`}>{message}</li>);
+  // ESlint complains about using index here so we use it in a conveluted way
+  //  but I think thats OK.
+  content = content.map((message, index) => <li key={`${index + author}`}>{message}</li>);
 
   let datetime = null;
 

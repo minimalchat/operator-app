@@ -12,7 +12,7 @@ exports[`MessageList matches snapshot 1`] = `
   <div>
     <ul>
       <li
-        key="operator.steve"
+        key="0operator.steve"
       >
         test message
       </li>
