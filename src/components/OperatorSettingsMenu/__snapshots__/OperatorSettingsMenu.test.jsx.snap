@@ -2,6 +2,7 @@
 
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
 <OperatorSettingsMenu
+  avatar={null}
   dispatch={[MockFunction]}
   operatorName=""
   store={

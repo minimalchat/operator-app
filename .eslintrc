@@ -7,6 +7,7 @@
   },
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
+    "camelcase": ["warn"],
     "class-methods-use-this": ["warn"],
     "space-before-function-paren": ["error", "always"],
     "prefer-const": ["warn"],

@@ -57,8 +57,13 @@ class WelcomeScreen extends Component {
     } = this.parseConnectionString(connString);
 
     // loadOperator()
+    console.log('NEW SETTINGS', apiServer, accessId, accessToken);
 
-    changeSettings({ apiServer: `${proto}://${apiServer}` });
+    changeSettings({
+      apiServerAccessId: accessId,
+      apiServerAccessToken: accessToken,
+      apiServer: `${proto}://${apiServer}`,
+    });
   }
 
   handleChange = (e) => {
