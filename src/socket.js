@@ -25,6 +25,10 @@ import {
   hideNotification,
 } from './store/UI';
 
+import {
+  updateSettings,
+} from './store/Config';
+
 const TYPING_TIMEOUT = 1000;
 const RECONNECTED_TIMEOUT = 3000;
 
@@ -48,11 +52,11 @@ export function socketMessageHook (store) {
 
 export default function socketInit (store) {
   const { dispatch } = store;
-  const { config } = store.getState();
-  const socketPath = config.apiServer || 'http://127.0.0.1:8000';
+  const { config: { apiServer, apiServerAccessId, apiServerAccessToken } } = store.getState();
+  const socketPath = apiServer || 'http://127.0.0.1:8000';
 
   if (!socketPath) {
-    console.error('ERROR: No API Server defined', config);
+    console.error('ERROR: No API Server defined', apiServer);
   }
 
   console.debug('CONNECTING SOCKET');
@@ -63,6 +67,8 @@ export default function socketInit (store) {
     transports: ['websocket'],
     query: {
       type: 'operator',
+      accessId: apiServerAccessId,
+      accessToken: apiServerAccessToken,
     },
   });
 
@@ -103,6 +109,44 @@ export default function socketInit (store) {
 
   socket.on('chat:new', data => dispatch(addChat(data ? JSON.parse(data) : [])));
 
+  socket.on('operator:new', (data) => {
+    const buffer = data ? JSON.parse(data) : [];
+    const { access_id, access_token } = buffer;
+
+    if (access_id === apiServerAccessId
+      && access_token === apiServerAccessToken) {
+      // Update if that operator is me!
+      //
+      const newSettings = {};
+
+      if (buffer.hasOwnProperty('avatar')) {
+        const { avatar } = buffer;
+
+        newSettings.avatar = avatar;
+      }
+
+      if (buffer.hasOwnProperty('first_name')) {
+        let fullName;
+
+        if (buffer.hasOwnProperty('last_name')) {
+          const { first_name, last_name } = buffer;
+
+          fullName = `${first_name} ${last_name}`;
+        } else {
+          const { first_name } = buffer;
+
+          fullName = first_name;
+        }
+
+        newSettings.operator = fullName;
+      }
+
+      dispatch(updateSettings(newSettings));
+    }
+
+    // TODO: In the future, we should have a separate list of what operators
+    //  are online, maybe let them converse
+  });
 
   // Connection events
   socket.on('connect', () => dispatch(socketConnected()));

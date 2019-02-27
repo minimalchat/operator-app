@@ -21,6 +21,11 @@
   box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
   width: 58px;
   height: 58px;
+  overflow: hidden;
+}
+
+.Settings__avatar img {
+  width: 100%;
 }
 
 .Settings__operator {

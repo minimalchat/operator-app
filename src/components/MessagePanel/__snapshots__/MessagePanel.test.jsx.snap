@@ -13,13 +13,13 @@ exports[`MessagePanel matches snapshot 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {
               "chat": Object {},
             },
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {
               "chat": Object {},
             },
@@ -34,7 +34,7 @@ exports[`MessagePanel matches snapshot 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": undefined,
           },
         ],

@@ -2,6 +2,7 @@
 
 exports[`OperatorSettingsMenu matches snapshot 1`] = `
 <OperatorSettingsMenu
+  avatar={null}
   dispatch={[MockFunction]}
   operatorName=""
   store={
@@ -14,13 +15,13 @@ exports[`OperatorSettingsMenu matches snapshot 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {
               "config": Object {},
             },
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {
               "config": Object {},
             },
@@ -35,7 +36,7 @@ exports[`OperatorSettingsMenu matches snapshot 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": undefined,
           },
         ],
