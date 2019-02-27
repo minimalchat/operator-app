@@ -16,7 +16,7 @@ exports[`InputBar matches snapshot 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {
               "chat": Object {
                 "activeId": "TEST",
@@ -27,7 +27,7 @@ exports[`InputBar matches snapshot 1`] = `
             },
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {
               "chat": Object {
                 "activeId": "TEST",
@@ -47,7 +47,7 @@ exports[`InputBar matches snapshot 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": undefined,
           },
         ],

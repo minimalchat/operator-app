@@ -12,11 +12,11 @@ exports[`OperatorPanel matches snapshot 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {},
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Object {},
           },
         ],
