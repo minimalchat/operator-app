@@ -123,6 +123,7 @@ class MessageList extends Component {
   render () {
     const { messages, chat, activeId } = this.props;
     const activeMsgs = messages.filter(msg => msg.chat === activeId);
+    const boxClass = ['MessageList__box', !chat.open ? 'MessageList__box--done' : ''].join(' ');
 
     // Render a map of <Message> components with their contents.
     const renderView = () => {
@@ -143,7 +144,7 @@ class MessageList extends Component {
 
     return (
       <div className="MessageList">
-        <ul className="MessageList__box">
+        <ul className={boxClass}>
           { renderView() }
           <li style={{ display: chat.typing ? 'block' : 'none' }} className="Message__client typing">
             {this.renderTyping()}

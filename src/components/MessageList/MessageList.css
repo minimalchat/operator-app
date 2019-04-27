@@ -33,6 +33,10 @@
   padding-bottom: 12px;
 }
 
+.MessageList__box--done {
+  opacity: 0.5;
+}
+
 .MessageList__status {
   position: absolute;
   bottom: 60px;
