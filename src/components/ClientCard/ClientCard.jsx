@@ -73,6 +73,11 @@ class ClientCard extends Component {
     return activeId === chat.id;
   }
 
+  isDone () {
+    const { chat } = this.props;
+    return !chat.open;
+  }
+
   renderLastMessage () {
     const lastMessage = this.getLastMessage();
 
@@ -112,7 +117,8 @@ class ClientCard extends Component {
     } = this.props;
     const classes = [
       'ClientCard',
-      this.isActive() ? 'ClientCard--active' : '',
+      (this.isActive() && !this.isDone()) ? 'ClientCard--active' : '',
+      this.isDone() ? 'ClientCard--done' : '',
     ];
     const statusClasses = [
       'ClientCard__status',

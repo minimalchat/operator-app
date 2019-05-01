@@ -27,6 +27,18 @@
   color: rgba(52, 152, 219, 1.0);
 }
 
+.ClientCard--done .ClientCard__btn,
+.ClientCard--done .ClientCard__btn:hover {
+  background: transparent;
+  opacity: 0.5;
+}
+
+.ClientCard--done .ClientCard__btn .ClientCard__icon,
+.ClientCard--done .ClientCard__btn:hover .ClientCard__icon {
+  color: #ccc;
+}
+
+
 .ClientCard__icon {
   flex-grow: 1;
   height: 100%;
