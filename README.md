@@ -13,6 +13,7 @@ We're glad you're interested in contributing, feel free to create an [issue](htt
 Screenshot
 ---
 ![operator-screenshot-1](https://user-images.githubusercontent.com/563301/32144257-84f8533e-bc8c-11e7-8875-48cb49c92a78.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fminimalchat%2Foperator-app.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fminimalchat%2Foperator-app?ref=badge_shield)
 
 ---
 
@@ -28,3 +29,7 @@ To have the operator communicate with your local [daemon]() requires some confir
 
 1. Once you've run the application once, find the `config.json` file.
 2. Open `config.json`, edit the `"apiServer"`, set this to the IP and port that the daemon is running on. (e.g. `http://localhost:8000`, the default setting)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fminimalchat%2Foperator-app.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fminimalchat%2Foperator-app?ref=badge_large)
