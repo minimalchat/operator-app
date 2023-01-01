@@ -61,7 +61,7 @@
   "dependencies": {
     "electron": "4.0.0",
     "faker": "^4.1.0",
-    "file-loader": "^0.11.2",
+    "file-loader": "^6.2.0",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.3.2",
@@ -81,9 +81,9 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.0",
     "babel-jest": "^24.1.0",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.3.0",
     "babel-preset-env": "^1.7.0",
-    "css-loader": "^2.0.0",
+    "css-loader": "^6.7.3",
     "electron-packager": "^13.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-15": "^1.2.0",
@@ -99,9 +99,9 @@
     "react-addons-css-transition-group": "^15.3.2",
     "react-addons-test-utils": "^15.4.1",
     "react-test-renderer": "^15.4.1",
-    "style-loader": "^0.13.1",
-    "webpack": "^4.0.0",
-    "webpack-cli": "^3.1.2"
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.1",
